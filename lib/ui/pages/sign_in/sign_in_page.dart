@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/constants/assets.dart';
-import '../widgets/custom_suffix_icon.dart';
+import '../../../utils/constants/assets.dart';
+import '../../widgets/custom_suffix_icon.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -74,16 +74,10 @@ class _SignInPageState extends State<SignInPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text('Not a member yet? '),
-                              GestureDetector(
-                                child: const Text(
-                                  'Sign up',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                                onTap: () {
-                                  //TODO: Navigate to sign up screen
+                              TextButton(
+                                child: const Text('Sign up'),
+                                onPressed: () {
+                                  //TODO: Implement sign up logic
                                 },
                               ),
                             ],

@@ -19,7 +19,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:lettutor_advanced_mobile/ui/pages/sign_in_page.dart';
+import 'package:lettutor_advanced_mobile/ui/pages/sign_in/sign_in_page.dart';
 
 void main() {
   runApp(const MyApp());
