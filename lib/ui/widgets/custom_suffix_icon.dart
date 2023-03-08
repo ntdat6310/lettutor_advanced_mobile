@@ -7,7 +7,7 @@ class CustomSuffixIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
+      padding: const EdgeInsets.fromLTRB(0, 20, 20, 20),
       child: Icon(icon),
     );
   }
