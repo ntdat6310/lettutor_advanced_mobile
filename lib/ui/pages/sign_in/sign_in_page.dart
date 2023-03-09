@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_advanced_mobile/ui/pages/home/home_page.dart';
 
 import '../../../utils/constants/assets.dart';
 import '../../widgets/custom_suffix_icon.dart';
@@ -101,6 +102,8 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           onPressed: () {
                             //TODO: Implement login logic
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => HomePage()));
                           },
                         ),
                         Container(
