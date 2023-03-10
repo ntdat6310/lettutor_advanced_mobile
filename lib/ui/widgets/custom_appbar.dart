@@ -8,6 +8,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      elevation: 5,
+      shadowColor: Colors.black38,
       title: Text(
         title,
         style: const TextStyle(color: Colors.blue),
@@ -21,13 +24,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ],
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      elevation: 0,
     );
   }
 
-  @override
   // TODO: implement preferredSize
+  @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   Widget? get child => null;

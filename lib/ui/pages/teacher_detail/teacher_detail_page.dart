@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_advanced_mobile/data/fake_data.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher/components/teacher_detail_card.dart';
+import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/booking_button.dart';
+import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/message_favorite_report.dart';
 
 import '../../../data/models/teacher.dart';
+import '../../widgets/custom_appbar.dart';
+import '../../widgets/rating_star.dart';
 
 class TeacherDetail extends StatelessWidget {
   const TeacherDetail({Key? key, required this.teacher}) : super(key: key);
@@ -11,12 +14,51 @@ class TeacherDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const CustomAppBar(title: "",),
       body: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(20),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              TeacherDetailCard(teacher: teacher)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const CircleAvatar(
+                    backgroundImage: AssetImage('assets/images/avatar.jpg'),
+                    radius: 60,
+                  ),
+                  Container(
+                      margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.fromLTRB(4, 0, 0, 8),
+                            child: Text(
+                              teacher.name,
+                              style: const TextStyle(
+                                  fontSize: 24, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const RatingStar(rating: 5),
+                          Container(
+                            margin: const EdgeInsets.fromLTRB(4, 8, 0, 0),
+                            child: const Text(
+                              "Vietnam",
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          )
+                        ],
+                      ))
+                ],
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 20),
+                child: const MessageFavoriteReport(),
+              ),
+              BookingButton(),
             ],
           ),
         ),
