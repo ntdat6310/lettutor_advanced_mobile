@@ -12,14 +12,14 @@ class ReviewList extends StatelessWidget {
   final TextStyle titleStyle = const TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.bold,
-    color: Colors.blue
+    // color: Colors.blue
   );
 
   @override
   Widget build(BuildContext context) {
     return  Column(
       mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Divider(
           color: Colors.grey,
@@ -28,7 +28,7 @@ class ReviewList extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          "Reviews",
+          "Reviews (${reviewList.length})",
           style: titleStyle,
         ),
         const SizedBox(height: 10),
