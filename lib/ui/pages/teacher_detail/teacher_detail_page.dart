@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher/components/teacher_detail_card.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/booking_button.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/message_favorite_report.dart';
+import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/teacher_desc.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/video_intro.dart';
 
 import '../../../data/models/teacher.dart';
@@ -61,7 +62,8 @@ class TeacherDetail extends StatelessWidget {
                 child: const MessageFavoriteReport(),
               ),
               BookingButton(),
-              
+              const SizedBox(height: 20),
+              const TeacherDescription(),
             ],
           ),
         ),
