@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher/components/teacher_detail_card.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/booking_button.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/message_favorite_report.dart';
+import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/video_intro.dart';
 
 import '../../../data/models/teacher.dart';
 import '../../widgets/custom_appbar.dart';
@@ -20,6 +21,7 @@ class TeacherDetail extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              const VideoIntro(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,6 +61,7 @@ class TeacherDetail extends StatelessWidget {
                 child: const MessageFavoriteReport(),
               ),
               BookingButton(),
+              
             ],
           ),
         ),
