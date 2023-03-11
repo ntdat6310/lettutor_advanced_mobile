@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TeachingExperience extends StatelessWidget {
-  const TeachingExperience(
-      {Key? key, required this.teachingExperience})
+  const TeachingExperience({Key? key, required this.teachingExperience})
       : super(key: key);
 
   final String? teachingExperience;

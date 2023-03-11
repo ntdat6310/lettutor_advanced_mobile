@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/booking_button.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/chip_info.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/message_favorite_report.dart';
+import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/review_list.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/teacher_desc.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/teaching_experience.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/video_intro.dart';
@@ -71,12 +72,22 @@ class TeacherDetail extends StatelessWidget {
                 title: "Languages",
                 chipList: teacher.languages,
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 20,
+              ),
               ChipInfo(chipList: teacher.specialties, title: "Specialties"),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 20,
+              ),
               ChipInfo(chipList: teacher.interests, title: "Interests"),
-              const SizedBox(height: 10,),
-              TeachingExperience(teachingExperience: teacher.experience)
+              const SizedBox(
+                height: 20,
+              ),
+              TeachingExperience(teachingExperience: teacher.experience),
+              const SizedBox(
+                height: 20,
+              ),
+              ReviewList(),
             ],
           ),
         ),

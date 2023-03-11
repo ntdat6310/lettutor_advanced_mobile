@@ -1,3 +1,4 @@
+import 'models/review.dart';
 import 'models/teacher.dart';
 
 class FakeData {
@@ -48,6 +49,92 @@ class FakeData {
           experience: "7 years of English tutor.",
           interests: ["Fighting", "Sleeping"],
           languages: ["English", "Japanese"]),
+    ];
+  }
+
+  List<Review> getReviews() {
+    return [
+      Review(
+        id: 0,
+        studentName: "Nguyễn Thành Đạt",
+        teacherId: 0,
+        studentId: 0,
+        ratingStar: 5,
+        date: DateTime.now(),
+        comment: "Very good good!",
+      ),
+      Review(
+        id: 0,
+        studentName: "Nguyễn Văn A",
+        teacherId: 0,
+        studentId: 0,
+        ratingStar: 3,
+        date: DateTime.now(),
+        comment: "Very good!",
+      ),
+      Review(
+        id: 0,
+        studentName: "Nguyễn Văn B",
+        teacherId: 0,
+        studentId: 0,
+        ratingStar: 4,
+        date: DateTime.now(),
+        comment: "Very good good good!",
+      ),
+      Review(
+        id: 0,
+        studentName: "Nguyễn Thành Đạt",
+        teacherId: 0,
+        studentId: 0,
+        ratingStar: 5,
+        date: DateTime.now(),
+        comment: "Very good good!",
+      ),
+      Review(
+        id: 0,
+        studentName: "Nguyễn Văn A",
+        teacherId: 0,
+        studentId: 0,
+        ratingStar: 3,
+        date: DateTime.now(),
+        comment: "Very good!",
+      ),
+      Review(
+        id: 0,
+        studentName: "Nguyễn Văn B",
+        teacherId: 0,
+        studentId: 0,
+        ratingStar: 4,
+        date: DateTime.now(),
+        comment: "Very good good good!",
+      ),
+      Review(
+        id: 0,
+        studentName: "Nguyễn Thành Đạt",
+        teacherId: 0,
+        studentId: 0,
+        ratingStar: 5,
+        date: DateTime.now(),
+        comment: "Very good good!",
+      ),
+      Review(
+        id: 0,
+        studentName: "Nguyễn Văn A",
+        teacherId: 0,
+        studentId: 0,
+        ratingStar: 3,
+        date: DateTime.now(),
+        comment: "Very good!",
+      ),
+      Review(
+        id: 0,
+        studentName: "Nguyễn Văn B",
+        teacherId: 0,
+        studentId: 0,
+        ratingStar: 4,
+        date: DateTime.now(),
+        comment: "Very good good good!",
+      ),
     ];
   }
 }
