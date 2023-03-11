@@ -12,12 +12,12 @@ class _TeacherDescriptionState extends State<TeacherDescription> {
   bool _isShowFullText = false;
 
   TextStyle normalStyle = const TextStyle(
-    fontSize: 20,
+    fontSize: 17,
     color: Colors.black54,
   );
 
   TextStyle toggleStyle = const TextStyle(
-    fontSize: 20,
+    fontSize: 17,
     color: Colors.blueAccent,
   );
 

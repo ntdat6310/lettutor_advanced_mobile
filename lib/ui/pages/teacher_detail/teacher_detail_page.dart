@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_advanced_mobile/ui/pages/teacher/components/teacher_detail_card.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/booking_button.dart';
+import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/chip_info.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/message_favorite_report.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/teacher_desc.dart';
+import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/teaching_experience.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/components/video_intro.dart';
 
 import '../../../data/models/teacher.dart';
@@ -16,7 +17,9 @@ class TeacherDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "",),
+      appBar: const CustomAppBar(
+        title: "",
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: SingleChildScrollView(
@@ -64,6 +67,16 @@ class TeacherDetail extends StatelessWidget {
               BookingButton(),
               const SizedBox(height: 20),
               const TeacherDescription(),
+              ChipInfo(
+                title: "Languages",
+                chipList: teacher.languages,
+              ),
+              const SizedBox(height: 10,),
+              ChipInfo(chipList: teacher.specialties, title: "Specialties"),
+              const SizedBox(height: 10,),
+              ChipInfo(chipList: teacher.interests, title: "Interests"),
+              const SizedBox(height: 10,),
+              TeachingExperience(teachingExperience: teacher.experience)
             ],
           ),
         ),

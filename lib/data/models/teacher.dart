@@ -5,9 +5,9 @@ class Teacher {
   String? urlVideo;
   String description;
   String? country;
-  List<String>? languages;
+  List<String> languages;
   List<String> specialties;
-  String? interests;
+  List<String> interests;
   String? experience;
   double? rating;
 
@@ -18,9 +18,9 @@ class Teacher {
     this.urlVideo,
     this.country,
     required this.description,
-    this.languages,
+    required this.languages,
     required this.specialties,
-    this.interests,
+    required this.interests,
     this.experience,
     this.rating = 0,
   });

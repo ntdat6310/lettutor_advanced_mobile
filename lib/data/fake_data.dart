@@ -15,6 +15,8 @@ class FakeData {
           country: "Philippines",
           specialties: ["English for Business", "IELTS", "PET", "KET"],
           rating: 5.0,
+          experience: "7 years of English tutor.",
+          interests: ["Fighting", "Sleeping"],
           languages: ["English", "Japanese"]),
       Teacher(
           id: 1,
@@ -28,6 +30,8 @@ class FakeData {
           country: "Philippines",
           specialties: ["English for Business", "IELTS", "PET", "KET"],
           rating: 5.0,
+          experience: "7 years of English tutor.",
+          interests: ["Fighting", "Sleeping"],
           languages: ["English", "Japanese"]),
       Teacher(
           id: 2,
@@ -41,6 +45,8 @@ class FakeData {
           country: "Philippines",
           specialties: ["English for Business", "IELTS", "PET", "KET"],
           rating: 5.0,
+          experience: "7 years of English tutor.",
+          interests: ["Fighting", "Sleeping"],
           languages: ["English", "Japanese"]),
     ];
   }
