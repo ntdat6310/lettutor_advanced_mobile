@@ -1,5 +1,6 @@
 import 'models/review.dart';
 import 'models/teacher.dart';
+import 'models/schedule.dart';
 
 class FakeData {
   List<Teacher> getTeachers() {
@@ -90,6 +91,15 @@ class FakeData {
         date: DateTime.now(),
         comment: "Very good good!",
       ),
+    ];
+  }
+
+  List<Schedule> getSchedules(){
+    return [
+      Schedule(teacher: FakeData().getTeachers()[0], fromTime: DateTime(2023, 3, 13, 15), toTime: DateTime(2021, 3, 13, 15, 30)),
+      Schedule(teacher: FakeData().getTeachers()[0], fromTime: DateTime(2023, 3, 14, 16), toTime: DateTime(2021, 3, 13, 16, 30)),
+      Schedule(teacher: FakeData().getTeachers()[0], fromTime: DateTime(2023, 3, 15, 17), toTime: DateTime(2021, 3, 13, 17, 30)),
+      Schedule(teacher: FakeData().getTeachers()[0], fromTime: DateTime(2023, 3, 16, 18), toTime: DateTime(2021, 3, 13, 18, 30)),
     ];
   }
 }
