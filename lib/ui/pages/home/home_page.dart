@@ -17,38 +17,49 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Home",),
-      body: ListView(
-        children: [
-          const UpcomingLesson(),
-          Container(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-            child: Column(
-              children: [
-                const FindATutor(),
-                const SizedBox(height: 10),
-                const SpecialityList(specialities: [
-                  'All',
-                  'Kids',
-                  'STARTERS',
-                  'TOEFL',
-                  'Business',
-                  'STARTERS',
-                  'Conversational',
-                  'IELTS',
-                  'PET',
-                  'MOVERS',
-                  'KET'
-                ]),
-                const RecommendedTutor(),
-                Column(
-                  children: List.generate(teacherList.length,
-                      (index) => TeacherCard(teacher: teacherList[index])),
+      appBar: const CustomAppBar(
+        title: "Home",
+      ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: SizedBox(
+          width: double.infinity,
+          child: Column(
+            children: [
+              const SizedBox(
+                width: double.infinity,
+                child: UpcomingLesson(),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+                child: Column(
+                  children: [
+                    const FindATutor(),
+                    const SizedBox(height: 10),
+                    const SpecialityList(specialities: [
+                      'All',
+                      'Kids',
+                      'STARTERS',
+                      'TOEFL',
+                      'Business',
+                      'STARTERS',
+                      'Conversational',
+                      'IELTS',
+                      'PET',
+                      'MOVERS',
+                      'KET'
+                    ]),
+                    const RecommendedTutor(),
+                    Column(
+                      children: List.generate(teacherList.length,
+                          (index) => TeacherCard(teacher: teacherList[index])),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          )
-        ],
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

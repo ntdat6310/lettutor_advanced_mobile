@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_advanced_mobile/data/models/teacher.dart';
-import 'package:lettutor_advanced_mobile/ui/pages/teacher/components/speciality_list.dart';
+import 'package:lettutor_advanced_mobile/ui/pages/teacher/components/speciality_list_horizontal.dart';
 import 'package:lettutor_advanced_mobile/ui/widgets/rating_star.dart';
 
 class TeacherCard extends StatelessWidget {
@@ -42,7 +42,7 @@ class TeacherCard extends StatelessWidget {
                             const RatingStar(rating: 5),
                             Container(
                               margin: const EdgeInsets.only(left: 4),
-                              child: SpecialityList(specialities: teacher.specialties),
+                              child: SpecialityListHorizontal(specialities: teacher.specialties),
                             ),
                           ],
                         ),

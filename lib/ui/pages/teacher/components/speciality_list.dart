@@ -7,20 +7,17 @@ class SpecialityList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Wrap(
-        spacing: 5,
-        children: List.generate(
-          specialities.length,
-          (index) => InkWell(
-            onTap: (){},
-            child: Chip(
-              label: Text(specialities[index]),
-              labelStyle: const TextStyle(color: Colors.blue),
-              backgroundColor: Colors.white,
-              shape: StadiumBorder(side: BorderSide(color: Colors.blue.shade500)),
-            ),
+    return Wrap(
+      spacing: 5,
+      children: List.generate(
+        specialities.length,
+        (index) => InkWell(
+          onTap: () {},
+          child: Chip(
+            label: Text(specialities[index]),
+            labelStyle: const TextStyle(color: Colors.blue),
+            backgroundColor: Colors.white,
+            shape: StadiumBorder(side: BorderSide(color: Colors.blue.shade500)),
           ),
         ),
       ),

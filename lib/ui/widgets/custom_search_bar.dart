@@ -39,8 +39,8 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
         borderRadius: BorderRadius.circular(20),
         color: Colors.white,
         border: Border.all(
-          color: Colors.blue,
-          width: 1,
+          color: Colors.blueAccent,
+          width: 1.3,
         ),
       ),
       child: Row(
