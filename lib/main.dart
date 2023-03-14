@@ -25,6 +25,7 @@ import 'package:lettutor_advanced_mobile/ui/pages/course/course_page.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/course_detail/CourseDetailPage.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/course_lesson/course_lesson_page.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/home/home_page.dart';
+import 'package:lettutor_advanced_mobile/ui/pages/meeting/meeting.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/schedule/schedule_page.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/schedule_history/schedule_history_page.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/sign_in/sign_in_page.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
       title: 'Let-tutor',
       // home: TeacherPage(),
       // home: HomePage(),
-      home: CourseLesson(),
+      home: MeetingVideoConferencePage(),
     );
   }
 }
