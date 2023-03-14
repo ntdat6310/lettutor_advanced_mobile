@@ -21,6 +21,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_advanced_mobile/data/fake_data.dart';
 import 'package:lettutor_advanced_mobile/data/models/teacher.dart';
+import 'package:lettutor_advanced_mobile/ui/pages/course/course_page.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/home/home_page.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/schedule/schedule_page.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/schedule_history/schedule_history_page.dart';
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
       title: 'Let-tutor',
       // home: TeacherPage(),
       // home: HomePage(),
-      home: ScheduleHistoryPage(),
+      home: CoursePage(),
     );
   }
 }
