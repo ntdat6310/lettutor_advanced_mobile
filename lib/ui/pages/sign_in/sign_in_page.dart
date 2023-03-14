@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/home/home_page.dart';
 
 import '../../../utils/constants/assets.dart';
@@ -114,15 +115,19 @@ class _SignInPageState extends State<SignInPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             IconButton(
-                              icon: const Icon(Icons.facebook),
+                              icon: SvgPicture.asset(
+                                'assets/icons/facebook_icon.svg',
+                                height: 45,
+                              ),
                               onPressed: () {
                                 //TODO: Implement Facebook login logic
                               },
                             ),
+                            const SizedBox(width: 20),
                             IconButton(
-                              icon: const Icon(
-                                Icons.facebook_rounded,
-                                color: Colors.blue,
+                              icon: SvgPicture.asset(
+                                'assets/icons/google_icon.svg',
+                                height: 45,
                               ),
                               onPressed: () {
                                 //TODO: Implement Google login logic

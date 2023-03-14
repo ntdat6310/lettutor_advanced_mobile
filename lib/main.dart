@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
       title: 'Let-tutor',
       // home: TeacherPage(),
       // home: HomePage(),
-      home: MeetingVideoConferencePage(),
+      home: SignInPage(),
     );
   }
 }
