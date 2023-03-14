@@ -23,6 +23,7 @@ import 'package:lettutor_advanced_mobile/data/fake_data.dart';
 import 'package:lettutor_advanced_mobile/data/models/teacher.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/course/course_page.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/course_detail/CourseDetailPage.dart';
+import 'package:lettutor_advanced_mobile/ui/pages/course_lesson/course_lesson_page.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/home/home_page.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/schedule/schedule_page.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/schedule_history/schedule_history_page.dart';
@@ -41,11 +42,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Let-tutor',
       // home: TeacherPage(),
       // home: HomePage(),
-      home: CourseDetailPage(),
+      home: CourseLesson(),
     );
   }
 }

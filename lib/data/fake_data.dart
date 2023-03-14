@@ -150,22 +150,22 @@ class FakeData {
             "This course covers vocabulary at the CEFR A2 level. You will build confidence while learning to speak about a variety of common, everyday topics. In addition, you will build implicit grammar knowledge as your tutor models correct answers and corrects your mistakes.",
         category: 'English For Beginners',
         topics: [
-          {'topic': 'Foods You Love', 'pdfPath': 'assets/pdf/topic1.pdf'},
-          {'topic': 'Your Job', 'pdfPath': 'assets/pdf/topic2.pdf'},
+          {'topic': 'Foods You Love', 'pdfPath': 'assets/pdf/pdf_01.pdf'},
+          {'topic': 'Your Job', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
           {
             'topic': 'Playing and Watching Sports',
-            'pdfPath': 'assets/pdf/topic3.pdf'
+            'pdfPath': 'assets/pdf/pdf_03.pdf'
           },
-          {'topic': 'The Best Pet', 'pdfPath': 'assets/pdf/topic3.pdf'},
+          {'topic': 'The Best Pet', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
           {
             'topic': 'Having Fun in Your Free Time',
-            'pdfPath': 'assets/pdf/topic3.pdf'
+            'pdfPath': 'assets/pdf/pdf_01.pdf'
           },
-          {'topic': 'Your Daily Routine', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Childhood Memories', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Your Family Members', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Your Hometown', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Shopping Habits', 'pdfPath': 'assets/pdf/topic3.pdf'},
+          {'topic': 'Your Daily Routine', 'pdfPath': 'assets/pdf/pdf_01.pdf'},
+          {'topic': 'Childhood Memories', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
+          {'topic': 'Your Family Members', 'pdfPath': 'assets/pdf/pdf_03.pdf'},
+          {'topic': 'Your Hometown', 'pdfPath': 'assets/pdf/pdf_01.pdf'},
+          {'topic': 'Shopping Habits', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
         ],
       ),
       Course(
@@ -180,22 +180,22 @@ class FakeData {
             "This course covers vocabulary at the CEFR A2 level. You will build confidence while learning to speak about a variety of common, everyday topics. In addition, you will build implicit grammar knowledge as your tutor models correct answers and corrects your mistakes.",
         category: 'English For Beginners',
         topics: [
-          {'topic': 'Foods You Love', 'pdfPath': 'assets/pdf/topic1.pdf'},
-          {'topic': 'Your Job', 'pdfPath': 'assets/pdf/topic2.pdf'},
+          {'topic': 'Foods You Love', 'pdfPath': 'assets/pdf/pdf_01.pdf'},
+          {'topic': 'Your Job', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
           {
             'topic': 'Playing and Watching Sports',
-            'pdfPath': 'assets/pdf/topic3.pdf'
+            'pdfPath': 'assets/pdf/pdf_03.pdf'
           },
-          {'topic': 'The Best Pet', 'pdfPath': 'assets/pdf/topic3.pdf'},
+          {'topic': 'The Best Pet', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
           {
             'topic': 'Having Fun in Your Free Time',
-            'pdfPath': 'assets/pdf/topic3.pdf'
+            'pdfPath': 'assets/pdf/pdf_01.pdf'
           },
-          {'topic': 'Your Daily Routine', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Childhood Memories', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Your Family Members', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Your Hometown', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Shopping Habits', 'pdfPath': 'assets/pdf/topic3.pdf'},
+          {'topic': 'Your Daily Routine', 'pdfPath': 'assets/pdf/pdf_01.pdf'},
+          {'topic': 'Childhood Memories', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
+          {'topic': 'Your Family Members', 'pdfPath': 'assets/pdf/pdf_03.pdf'},
+          {'topic': 'Your Hometown', 'pdfPath': 'assets/pdf/pdf_01.pdf'},
+          {'topic': 'Shopping Habits', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
         ],
       ),
       Course(
@@ -210,22 +210,22 @@ class FakeData {
             "This course covers vocabulary at the CEFR A2 level. You will build confidence while learning to speak about a variety of common, everyday topics. In addition, you will build implicit grammar knowledge as your tutor models correct answers and corrects your mistakes.",
         category: 'English For Beginners',
         topics: [
-          {'topic': 'Foods You Love', 'pdfPath': 'assets/pdf/topic1.pdf'},
-          {'topic': 'Your Job', 'pdfPath': 'assets/pdf/topic2.pdf'},
+          {'topic': 'Foods You Love', 'pdfPath': 'assets/pdf/pdf_01.pdf'},
+          {'topic': 'Your Job', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
           {
             'topic': 'Playing and Watching Sports',
-            'pdfPath': 'assets/pdf/topic3.pdf'
+            'pdfPath': 'assets/pdf/pdf_03.pdf'
           },
-          {'topic': 'The Best Pet', 'pdfPath': 'assets/pdf/topic3.pdf'},
+          {'topic': 'The Best Pet', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
           {
             'topic': 'Having Fun in Your Free Time',
-            'pdfPath': 'assets/pdf/topic3.pdf'
+            'pdfPath': 'assets/pdf/pdf_01.pdf'
           },
-          {'topic': 'Your Daily Routine', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Childhood Memories', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Your Family Members', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Your Hometown', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Shopping Habits', 'pdfPath': 'assets/pdf/topic3.pdf'},
+          {'topic': 'Your Daily Routine', 'pdfPath': 'assets/pdf/pdf_01.pdf'},
+          {'topic': 'Childhood Memories', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
+          {'topic': 'Your Family Members', 'pdfPath': 'assets/pdf/pdf_03.pdf'},
+          {'topic': 'Your Hometown', 'pdfPath': 'assets/pdf/pdf_01.pdf'},
+          {'topic': 'Shopping Habits', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
         ],
       ),
       Course(
@@ -240,22 +240,22 @@ class FakeData {
             "This course covers vocabulary at the CEFR A2 level. You will build confidence while learning to speak about a variety of common, everyday topics. In addition, you will build implicit grammar knowledge as your tutor models correct answers and corrects your mistakes.",
         category: 'English For Beginners',
         topics: [
-          {'topic': 'Foods You Love', 'pdfPath': 'assets/pdf/topic1.pdf'},
-          {'topic': 'Your Job', 'pdfPath': 'assets/pdf/topic2.pdf'},
+          {'topic': 'Foods You Love', 'pdfPath': 'assets/pdf/pdf_01.pdf'},
+          {'topic': 'Your Job', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
           {
             'topic': 'Playing and Watching Sports',
-            'pdfPath': 'assets/pdf/topic3.pdf'
+            'pdfPath': 'assets/pdf/pdf_03.pdf'
           },
-          {'topic': 'The Best Pet', 'pdfPath': 'assets/pdf/topic3.pdf'},
+          {'topic': 'The Best Pet', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
           {
             'topic': 'Having Fun in Your Free Time',
-            'pdfPath': 'assets/pdf/topic3.pdf'
+            'pdfPath': 'assets/pdf/pdf_01.pdf'
           },
-          {'topic': 'Your Daily Routine', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Childhood Memories', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Your Family Members', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Your Hometown', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Shopping Habits', 'pdfPath': 'assets/pdf/topic3.pdf'},
+          {'topic': 'Your Daily Routine', 'pdfPath': 'assets/pdf/pdf_01.pdf'},
+          {'topic': 'Childhood Memories', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
+          {'topic': 'Your Family Members', 'pdfPath': 'assets/pdf/pdf_03.pdf'},
+          {'topic': 'Your Hometown', 'pdfPath': 'assets/pdf/pdf_01.pdf'},
+          {'topic': 'Shopping Habits', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
         ],
       ),
       Course(
@@ -270,22 +270,22 @@ class FakeData {
             "This course covers vocabulary at the CEFR A2 level. You will build confidence while learning to speak about a variety of common, everyday topics. In addition, you will build implicit grammar knowledge as your tutor models correct answers and corrects your mistakes.",
         category: 'English For Beginners',
         topics: [
-          {'topic': 'Foods You Love', 'pdfPath': 'assets/pdf/topic1.pdf'},
-          {'topic': 'Your Job', 'pdfPath': 'assets/pdf/topic2.pdf'},
+          {'topic': 'Foods You Love', 'pdfPath': 'assets/pdf/pdf_01.pdf'},
+          {'topic': 'Your Job', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
           {
             'topic': 'Playing and Watching Sports',
-            'pdfPath': 'assets/pdf/topic3.pdf'
+            'pdfPath': 'assets/pdf/pdf_03.pdf'
           },
-          {'topic': 'The Best Pet', 'pdfPath': 'assets/pdf/topic3.pdf'},
+          {'topic': 'The Best Pet', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
           {
             'topic': 'Having Fun in Your Free Time',
-            'pdfPath': 'assets/pdf/topic3.pdf'
+            'pdfPath': 'assets/pdf/pdf_01.pdf'
           },
-          {'topic': 'Your Daily Routine', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Childhood Memories', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Your Family Members', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Your Hometown', 'pdfPath': 'assets/pdf/topic3.pdf'},
-          {'topic': 'Shopping Habits', 'pdfPath': 'assets/pdf/topic3.pdf'},
+          {'topic': 'Your Daily Routine', 'pdfPath': 'assets/pdf/pdf_01.pdf'},
+          {'topic': 'Childhood Memories', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
+          {'topic': 'Your Family Members', 'pdfPath': 'assets/pdf/pdf_03.pdf'},
+          {'topic': 'Your Hometown', 'pdfPath': 'assets/pdf/pdf_01.pdf'},
+          {'topic': 'Shopping Habits', 'pdfPath': 'assets/pdf/pdf_02.pdf'},
         ],
       ),
     ];
