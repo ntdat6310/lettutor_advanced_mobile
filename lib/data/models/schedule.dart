@@ -4,7 +4,8 @@ class Schedule {
   late Teacher teacher;
   late DateTime fromTime;
   late DateTime toTime;
+  late int studentId;
 
   Schedule(
-      {required this.teacher, required this.fromTime, required this.toTime});
+      {required this.teacher, required this.studentId, required this.fromTime, required this.toTime});
 }

@@ -1,4 +1,5 @@
 import 'models/review.dart';
+import 'models/schedule_history.dart';
 import 'models/teacher.dart';
 import 'models/schedule.dart';
 
@@ -96,10 +97,19 @@ class FakeData {
 
   List<Schedule> getSchedules(){
     return [
-      Schedule(teacher: FakeData().getTeachers()[0], fromTime: DateTime(2023, 3, 13, 15), toTime: DateTime(2021, 3, 13, 15, 30)),
-      Schedule(teacher: FakeData().getTeachers()[0], fromTime: DateTime(2023, 3, 14, 16), toTime: DateTime(2021, 3, 13, 16, 30)),
-      Schedule(teacher: FakeData().getTeachers()[0], fromTime: DateTime(2023, 3, 15, 17), toTime: DateTime(2021, 3, 13, 17, 30)),
-      Schedule(teacher: FakeData().getTeachers()[0], fromTime: DateTime(2023, 3, 16, 18), toTime: DateTime(2021, 3, 13, 18, 30)),
+      Schedule(teacher: FakeData().getTeachers()[0], studentId: 0, fromTime: DateTime(2023, 3, 13, 15), toTime: DateTime(2021, 3, 13, 15, 30)),
+      Schedule(teacher: FakeData().getTeachers()[0], studentId: 0,fromTime: DateTime(2023, 3, 14, 16), toTime: DateTime(2021, 3, 13, 16, 30)),
+      Schedule(teacher: FakeData().getTeachers()[0], studentId: 0, fromTime: DateTime(2023, 3, 15, 17), toTime: DateTime(2021, 3, 13, 17, 30)),
+      Schedule(teacher: FakeData().getTeachers()[0], studentId: 0, fromTime: DateTime(2023, 3, 16, 18), toTime: DateTime(2021, 3, 13, 18, 30)),
+    ];
+  }
+
+  List<ScheduleHistory> getScheduleHistories(){
+    return [
+      ScheduleHistory(schedule: FakeData().getSchedules()[0], teacherComment: ''),
+      ScheduleHistory(schedule: FakeData().getSchedules()[1], teacherComment: 'Learn well'),
+      ScheduleHistory(schedule: FakeData().getSchedules()[2], teacherComment: 'A good student'),
+      ScheduleHistory(schedule: FakeData().getSchedules()[3], teacherComment: 'A bad student'),
     ];
   }
 }
