@@ -31,6 +31,7 @@ import 'package:lettutor_advanced_mobile/ui/pages/schedule_history/schedule_hist
 import 'package:lettutor_advanced_mobile/ui/pages/sign_in/sign_in_page.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher/teacher_page.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher_detail/teacher_detail_page.dart';
+import 'package:lettutor_advanced_mobile/ui/pages/my_tab_bar.dart';
 
 void main() {
   runApp(MyApp());

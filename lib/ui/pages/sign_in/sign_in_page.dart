@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/home/home_page.dart';
+import 'package:lettutor_advanced_mobile/ui/pages/my_tab_bar.dart';
 
 import '../../../utils/constants/assets.dart';
 import '../../widgets/custom_suffix_icon.dart';
@@ -104,7 +105,7 @@ class _SignInPageState extends State<SignInPage> {
                           onPressed: () {
                             //TODO: Implement login logic
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => HomePage()));
+                                builder: (context) => const MyBottomNavigationBar()));
                           },
                         ),
                         Container(

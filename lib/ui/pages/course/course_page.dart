@@ -16,7 +16,7 @@ class CoursePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(
-        title: 'Schedule',
+        title: 'Courses',
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
