@@ -104,8 +104,11 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           onPressed: () {
                             //TODO: Implement login logic
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const MyBottomNavigationBar()));
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const MyBottomNavigationBar()),
+                                (Route<dynamic> route) => false);
                           },
                         ),
                         Container(

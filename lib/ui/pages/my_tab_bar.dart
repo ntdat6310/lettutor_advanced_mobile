@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/course/course_page.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/home/home_page.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/schedule/schedule_page.dart';
+import 'package:lettutor_advanced_mobile/ui/pages/schedule_history/schedule_history_page.dart';
 import 'package:lettutor_advanced_mobile/ui/pages/teacher/teacher_page.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
@@ -17,7 +18,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
 
   final List<Widget> _pages = [
     HomePage(),
-    HomePage(),
+    ScheduleHistoryPage(),
     SchedulePage(),
     const TeacherPage(),
     CoursePage(),
@@ -44,8 +45,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: 'Chat',
+            icon: Icon(Icons.history),
+            label: 'History',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today),
