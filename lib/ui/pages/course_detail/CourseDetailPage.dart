@@ -7,11 +7,11 @@ import 'package:lettutor_advanced_mobile/ui/widgets/custom_appbar.dart';
 import 'components/list_topics.dart';
 
 class CourseDetailPage extends StatelessWidget {
-  // const CourseDetailPage({Key? key, required this.course}) : super(key: key);
-  // final Course course;
+  const CourseDetailPage({Key? key, required this.course}) : super(key: key);
+  final Course course;
 
-  CourseDetailPage({Key? key}) : super(key: key);
-  Course course = FakeData().getCourses()[0];
+  // CourseDetailPage({Key? key}) : super(key: key);
+  // Course course = FakeData().getCourses()[0];
 
   final TextStyle heading1Style = const TextStyle(
     fontSize: 20,
@@ -41,7 +41,7 @@ class CourseDetailPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CourseCard(course: course),
+            CourseCard(course: course, from: 'COURSE_DETAIL_PAGE',),
             const SizedBox(height: 10),
             Text("Overview", style: heading1Style),
             const SizedBox(height: 10),

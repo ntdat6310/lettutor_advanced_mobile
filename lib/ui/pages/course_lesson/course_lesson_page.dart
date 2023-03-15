@@ -6,14 +6,14 @@ import '../../../data/models/course.dart';
 import '../../widgets/custom_appbar.dart';
 
 class CourseLesson extends StatefulWidget {
-  const CourseLesson({Key? key}) : super(key: key);
+  const CourseLesson({Key? key, required this.course}) : super(key: key);
 
+  final Course course;
   @override
   State<CourseLesson> createState() => _CourseLessonState();
 }
 
 class _CourseLessonState extends State<CourseLesson> {
-  Course course = FakeData().getCourses()[0];
   int _selectedTopicIndex = -1;
 
   void _onTopicSelected(int index) {
@@ -33,7 +33,7 @@ class _CourseLessonState extends State<CourseLesson> {
   );
 
   Widget _buildTopicItem(int index) {
-    final topic = course.topics[index];
+    final topic = widget.course.topics[index];
     return GestureDetector(
       onTap: () => _onTopicSelected(index),
       child: Container(
@@ -85,22 +85,22 @@ class _CourseLessonState extends State<CourseLesson> {
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
                 child: Image.network(
-                  course.imageUrl,
+                  widget.course.imageUrl,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             const SizedBox(height: 20),
-            Text(course.name, style: headingStyle),
+            Text(widget.course.name, style: headingStyle),
             const SizedBox(height: 10),
-            Text(course.shortDesc, style: textStyle),
+            Text(widget.course.shortDesc, style: textStyle),
             const SizedBox(height: 20),
             Text("List Topics", style: headingStyle),
             const SizedBox(height: 20),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: List.generate(course.topics.length, (index) {
+              children: List.generate(widget.course.topics.length, (index) {
                 return _buildTopicItem(index);
               }),
             ),

@@ -89,6 +89,7 @@ class CoursePage extends StatelessWidget {
                         courses.length,
                         (index) => CourseCard(
                               course: courses[index],
+                              from: 'FROM_COURSE_PAGE',
                             )),
                   ),
                 ],

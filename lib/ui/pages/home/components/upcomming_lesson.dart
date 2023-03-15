@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_advanced_mobile/ui/pages/meeting/meeting.dart';
 
 class UpcomingLesson extends StatelessWidget {
   const UpcomingLesson({Key? key}) : super(key: key);
@@ -15,7 +16,6 @@ class UpcomingLesson extends StatelessWidget {
             style: TextStyle(color: Colors.white, fontSize: 24),
           ),
           const SizedBox(height: 20),
-
           const Text(
             'Wed, 08 Mar 23 11:30 - 11:55',
             style: TextStyle(color: Colors.white, fontSize: 16),
@@ -30,10 +30,15 @@ class UpcomingLesson extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const MeetingVideoConferencePage()));
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
-              
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),

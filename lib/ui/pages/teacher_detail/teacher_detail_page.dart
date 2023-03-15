@@ -31,10 +31,12 @@ class TeacherDetail extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  const SizedBox(width: 20),
                   const CircleAvatar(
                     backgroundImage: AssetImage('assets/images/avatar.jpg'),
-                    radius: 60,
+                    radius: 45,
                   ),
+                  const SizedBox(width: 10),
                   Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                       child: Column(

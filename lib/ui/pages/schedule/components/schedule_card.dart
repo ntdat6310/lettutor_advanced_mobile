@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lettutor_advanced_mobile/data/models/schedule.dart';
+import 'package:lettutor_advanced_mobile/ui/pages/meeting/meeting.dart';
 
 class ScheduleCard extends StatelessWidget {
   const ScheduleCard({Key? key, required this.schedule}) : super(key: key);
@@ -105,7 +106,11 @@ class ScheduleCard extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        // TODO: add button press logic here
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const MeetingVideoConferencePage()));
                       },
                       child: const Text('Go to Meeting'),
                     ),
