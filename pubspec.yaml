@@ -27,6 +27,8 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+get_cli:
+  sub_folder: false
 dependencies:
   flutter:
     sdk: flutter
@@ -38,6 +40,7 @@ dependencies:
   intl: ^0.18.0
   flutter_pdfview: ^1.2.5
   flutter_svg: ^2.0.3
+  get: ^4.6.5
 
 dev_dependencies:
   flutter_test:
