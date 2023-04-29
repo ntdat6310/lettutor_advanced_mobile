@@ -5,10 +5,26 @@ abstract class Routes {
   Routes._();
   static const HOME = _Paths.HOME;
   static const TEACHER = _Paths.TEACHER;
+  static const COURSE = _Paths.COURSE;
+  static const COURSE_DETAIL = _Paths.COURSE_DETAIL;
+  static const COURSE_LESSON = _Paths.COURSE_LESSON;
+  static const TEACHER_DETAIL = _Paths.TEACHER_DETAIL;
+  static const SIGN_IN = _Paths.SIGN_IN;
+  static const SCHEDULE_HISTORY = _Paths.SCHEDULE_HISTORY;
+  static const SCHEDULE = _Paths.SCHEDULE;
+  static const MEETING_VIDEO_CONFERENCE = _Paths.MEETING_VIDEO_CONFERENCE;
 }
 
 abstract class _Paths {
   _Paths._();
   static const HOME = '/home';
   static const TEACHER = '/teacher';
+  static const COURSE = '/course';
+  static const COURSE_DETAIL = '/course-detail';
+  static const COURSE_LESSON = '/course-lesson';
+  static const TEACHER_DETAIL = '/teacher-detail';
+  static const SIGN_IN = '/sign-in';
+  static const SCHEDULE_HISTORY = '/schedule-history';
+  static const SCHEDULE = '/schedule';
+  static const MEETING_VIDEO_CONFERENCE = '/meeting-video-conference';
 }

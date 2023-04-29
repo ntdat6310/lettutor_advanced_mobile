@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_advanced_mobile/data/fake_data.dart';
-import 'package:lettutor_advanced_mobile/data/models/teacher.dart';
-import 'modules/sign_in/sign_in_page.dart';
+import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/modules/sign_in/sign_in_view.dart';
+import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
+
+import 'app/data/fake_data.dart';
+import 'app/data/models/teacher.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,11 +17,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return GetMaterialApp(
       title: 'Let-tutor',
-      // home: TeacherPage(),
-      // home: HomePage(),
-      home: SignInPage(),
+      initialRoute: AppPages.INITIAL,
+      getPages: AppPages.routes,
     );
   }
 }
