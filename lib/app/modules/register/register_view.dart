@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'package:get/get.dart';
-import 'package:lettutor_advanced_mobile/app/modules/my_tab_bar/my_tab_bar_view.dart';
 import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 
 import '../../utils/constants/assets.dart';
-import '../my_tab_bar.dart';
 import '../widgets/custom_suffix_icon.dart';
-import 'sign_in_controller.dart';
+import 'register_controller.dart';
 
-class SignInView extends GetView<SignInController> {
-  SignInView({Key? key}) : super(key: key);
-
+class RegisterView extends GetView<RegisterController> {
+  RegisterView({Key? key}) : super(key: key);
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -24,7 +20,7 @@ class SignInView extends GetView<SignInController> {
       },
       child: Scaffold(
           appBar: AppBar(
-            title: const Text('Sign In'),
+            title: const Text('Register'),
             centerTitle: true,
           ),
           body: SafeArea(
@@ -69,67 +65,47 @@ class SignInView extends GetView<SignInController> {
                             obscureText: true,
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextButton(
-                              child: const Text('Forgot Password?'),
-                              onPressed: () {
-                                //TODO: Implement forgot password logic
-                              },
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text('Not a member yet? '),
-                                TextButton(
-                                  child: const Text('Sign up'),
-                                  onPressed: () {
-                                    Get.toNamed(Routes.REGISTER);
-                                  },
-                                ),
-                              ],
-                            ),
-                          ],
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 20),
+                          child: TextField(
+                            controller: _passwordController,
+                            decoration: const InputDecoration(
+                                labelText: 'Confirm password',
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.auto,
+                                suffixIcon: CustomSuffixIcon(
+                                    icon: Icons.password_rounded)),
+                            obscureText: true,
+                          ),
                         ),
+
                         ElevatedButton(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: const <Widget>[
                               Icon(Icons.login),
                               SizedBox(width: 10),
-                              Text("Sign In"),
+                              Text("Register"),
                             ],
                           ),
                           onPressed: () {
-                            Get.offAll(() => MyTabBarView());
+                            Get.offAll(Routes.MY_TAB_BAR);
                           },
                         ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(vertical: 20),
-                          child: const Text('Or continue with'),
-                        ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            IconButton(
-                              icon: SvgPicture.asset(
-                                'assets/icons/facebook_icon.svg',
-                                height: 45,
-                              ),
-                              onPressed: () {
-                                //TODO: Implement Facebook login logic
-                              },
-                            ),
-                            const SizedBox(width: 20),
-                            IconButton(
-                              icon: SvgPicture.asset(
-                                'assets/icons/google_icon.svg',
-                                height: 45,
-                              ),
-                              onPressed: () {
-                                //TODO: Implement Google login logic
-                              },
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text('Already have an account?'),
+                                TextButton(
+                                  child: const Text('Sign in'),
+                                  onPressed: () {
+                                    //TODO: Implement sign up logic
+                                  },
+                                ),
+                              ],
                             ),
                           ],
                         ),

@@ -13,6 +13,8 @@ abstract class Routes {
   static const SCHEDULE_HISTORY = _Paths.SCHEDULE_HISTORY;
   static const SCHEDULE = _Paths.SCHEDULE;
   static const MEETING_VIDEO_CONFERENCE = _Paths.MEETING_VIDEO_CONFERENCE;
+  static const REGISTER = _Paths.REGISTER;
+  static const MY_TAB_BAR = _Paths.MY_TAB_BAR;
 }
 
 abstract class _Paths {
@@ -27,4 +29,6 @@ abstract class _Paths {
   static const SCHEDULE_HISTORY = '/schedule-history';
   static const SCHEDULE = '/schedule';
   static const MEETING_VIDEO_CONFERENCE = '/meeting-video-conference';
+  static const REGISTER = '/register';
+  static const MY_TAB_BAR = '/my-tab-bar';
 }
