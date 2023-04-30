@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../../data/models/teacher.dart';
+import '../../data/models/teacher/teacher.dart';
 
 class TeacherDetailController extends GetxController {
   //TODO: Implement TeacherDetailController

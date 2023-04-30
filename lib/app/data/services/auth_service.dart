@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:lettutor_advanced_mobile/app/core/constants/backend_environment.dart';
-import 'package:lettutor_advanced_mobile/app/data/models/login_email_request.dart';
+import 'package:lettutor_advanced_mobile/app/data/models/auth/login_email_request.dart';
 
-import '../models/login_response.dart';
-import '../models/register_email_request.dart';
+import '../models/auth/login_response.dart';
+import '../models/auth/register_email_request.dart';
 import '../providers/api_provider.dart';
 
 class AuthService {

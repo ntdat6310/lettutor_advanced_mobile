@@ -2,7 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lettutor_advanced_mobile/app/data/models/login_email_request.dart';
+import 'package:lettutor_advanced_mobile/app/data/models/auth/login_email_request.dart';
 import 'package:lettutor_advanced_mobile/app/data/services/auth_service.dart';
 import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 
@@ -29,7 +29,7 @@ class SignInController extends GetxController {
         ));
         if(responseStatusCode == 200){
           // Navigate to the next screen after successful login
-          Get.offAll(() => MyTabBarView());
+          // Get.offAll(() => MyTabBarView());
         }else{
           Get.snackbar("Sign in failed", "Incorrect email or password",
           backgroundColor: Colors.green,

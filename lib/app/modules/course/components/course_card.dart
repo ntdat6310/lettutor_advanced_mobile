@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 
-import '../../../data/models/course.dart';
+import '../../../data/models/course/course.dart';
 
 class CourseCard extends StatelessWidget {
   const CourseCard({Key? key, required this.course, required this.from})
@@ -58,7 +58,7 @@ class CourseCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Text(course.shortDesc),
+                    Text(course.description),
                     const SizedBox(height: 8),
                     // const Text("Beginner - 5 lessons"),
                     Text("${course.level} - ${course.topics.length} lessons"),
