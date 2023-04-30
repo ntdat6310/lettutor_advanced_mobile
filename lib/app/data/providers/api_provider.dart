@@ -38,10 +38,14 @@ abstract class APIHandlerInterface {
   Future<void> storeRefreshToken(String token);
   Future<void> storeAccessToken(String token);
   Future<void> storeIdentity(String token);
+  Future<void> storeAccessTokenExpires(String accessTokenExpires);
+  Future<void> storeRefreshTokenExpires(String refreshTokenExpires);
 
   Future<String?> getRefreshToken();
   Future<String?> getAccessToken();
   Future<String?> getIdentity();
+  Future<String?> getAccessTokenExpires();
+  Future<String?> getRefreshTokenExpires();
   Future<void> deleteToken();
 }
 
@@ -242,5 +246,27 @@ class APIHandlerImp implements APIHandlerInterface {
   @override
   Future<void> deleteToken() async {
     await SecureStorage.storage.deleteAll();
+  }
+
+  @override
+  Future<String?> getAccessTokenExpires() async {
+    return await SecureStorage.storage.read(key: 'accessTokenExpires');
+  }
+
+  @override
+  Future<String?> getRefreshTokenExpires() async {
+    return await SecureStorage.storage.read(key: 'refreshTokenExpires');
+  }
+
+  @override
+  Future<void> storeAccessTokenExpires(String accessTokenExpires) async {
+    await SecureStorage.storage
+        .write(key: "accessTokenExpires", value: accessTokenExpires);
+  }
+
+  @override
+  Future<void> storeRefreshTokenExpires(String refreshTokenExpires) async {
+    await SecureStorage.storage
+        .write(key: "refreshTokenExpires", value: refreshTokenExpires);
   }
 }
