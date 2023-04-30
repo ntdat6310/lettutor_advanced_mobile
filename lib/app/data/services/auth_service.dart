@@ -10,16 +10,20 @@ import '../providers/api_provider.dart';
 class AuthService {
   Future<int> login({required LoginByEmailRequest body}) async {
     try {
-      Response response =
-          await APIHandlerImp.instance.post(body: body, endpoint: 'auth/login');
+      Response response = await APIHandlerImp.instance.post(
+        body: body.toJson(),
+        endpoint: BackendEnvironment.loginByEmailEndpoint,
+      );
+      debugPrint("response: ${response.toString()}");
       if (response.statusCode == 200) {
         Map<String, dynamic> jsonResponse = {
           'accountId': response.data['user']['id'],
           'accessToken': response.data['tokens']['access']['token'],
           'refreshToken': response.data['tokens']['refresh']['token'],
-          'accessTokenExpire': response.data['tokens']['access']['expires'],
-          'refreshTokenExpire': response.data['tokens']['refresh']['expires'],
+          'accessTokenExpires': response.data['tokens']['access']['expires'],
+          'refreshTokenExpires': response.data['tokens']['refresh']['expires'],
         };
+        debugPrint("jsonResponse: ${jsonResponse.toString()}");
         LoginResponseBody body = LoginResponseBody.fromJson(jsonResponse);
         await _storeAllIdentity(body);
         return 200;
@@ -33,10 +37,11 @@ class AuthService {
     return 400;
   }
 
-  Future<int> registerByEmail({required RegisterByEmailRequest body}) async{
+  Future<int> registerByEmail({required RegisterByEmailRequest body}) async {
     try {
-      Response response =
-      await APIHandlerImp.instance.post(body: body, endpoint: BackendEnvironment.registerByEmailEndpoint);
+      Response response = await APIHandlerImp.instance.post(
+          body: body.toJson(),
+          endpoint: BackendEnvironment.registerByEmailEndpoint);
       if (response.statusCode == 201) {
         // Success
         return 201;

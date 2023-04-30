@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'package:get/get.dart';
 import 'package:lettutor_advanced_mobile/app/modules/my_tab_bar/my_tab_bar_view.dart';
 import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 
 import '../../utils/constants/assets.dart';
-import '../my_tab_bar.dart';
 import '../widgets/custom_suffix_icon.dart';
 import 'sign_in_controller.dart';
 
 class SignInView extends GetView<SignInController> {
   SignInView({Key? key}) : super(key: key);
 
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final SignInController _signInController = Get.put(SignInController());
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +32,11 @@ class SignInView extends GetView<SignInController> {
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
                           margin: const EdgeInsets.symmetric(vertical: 20),
+                          alignment: Alignment.center,
                           child: const SizedBox(
                               height: 150,
                               child: Image(
@@ -47,7 +46,7 @@ class SignInView extends GetView<SignInController> {
                         Container(
                           margin: const EdgeInsets.only(bottom: 12),
                           child: TextField(
-                            controller: _emailController,
+                            controller: _signInController.emailController,
                             decoration: const InputDecoration(
                                 labelText: 'Email',
                                 floatingLabelBehavior:
@@ -56,10 +55,18 @@ class SignInView extends GetView<SignInController> {
                                     icon: Icons.email_rounded)),
                           ),
                         ),
+                        Obx(() => Visibility(
+                              visible:
+                                  _signInController.emailError.value.isNotEmpty,
+                              child: Text(
+                                _signInController.emailError.value,
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            )),
                         Container(
                           margin: const EdgeInsets.only(bottom: 20),
                           child: TextField(
-                            controller: _passwordController,
+                            controller: _signInController.passwordController,
                             decoration: const InputDecoration(
                                 labelText: 'Password',
                                 floatingLabelBehavior:
@@ -69,14 +76,20 @@ class SignInView extends GetView<SignInController> {
                             obscureText: true,
                           ),
                         ),
+                        Obx(() => Visibility(
+                              visible: _signInController
+                                  .passwordError.value.isNotEmpty,
+                              child: Text(
+                                _signInController.passwordError.value,
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            )),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextButton(
                               child: const Text('Forgot Password?'),
-                              onPressed: () {
-                                //TODO: Implement forgot password logic
-                              },
+                              onPressed: () {},
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -84,27 +97,36 @@ class SignInView extends GetView<SignInController> {
                                 const Text('Not a member yet? '),
                                 TextButton(
                                   child: const Text('Sign up'),
-                                  onPressed: () {
-                                    Get.toNamed(Routes.REGISTER);
-                                  },
+                                  onPressed: () {},
                                 ),
                               ],
                             ),
                           ],
                         ),
-                        ElevatedButton(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const <Widget>[
-                              Icon(Icons.login),
-                              SizedBox(width: 10),
-                              Text("Sign In"),
-                            ],
-                          ),
-                          onPressed: () {
-                            Get.offAll(() => MyTabBarView());
-                          },
-                        ),
+                        Obx(() {
+                          if (_signInController.isLoading.value) {
+                            return Container(
+                              alignment: Alignment.center,
+                              child: const CircularProgressIndicator(
+                                color: Colors.blueAccent,
+                              ),
+                            );
+                          } else {
+                            return ElevatedButton(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const <Widget>[
+                                  Icon(Icons.login),
+                                  SizedBox(width: 10),
+                                  Text("Sign In"),
+                                ],
+                              ),
+                              onPressed: () {
+                                _signInController.validateAndSubmitSignIn();
+                              },
+                            );
+                          }
+                        }),
                         Container(
                           margin: const EdgeInsets.symmetric(vertical: 20),
                           child: const Text('Or continue with'),
