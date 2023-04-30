@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:lettutor_advanced_mobile/app/core/constants/backend_environment.dart';
 import 'package:lettutor_advanced_mobile/app/data/models/login_email_request.dart';
 
 import '../models/login_response.dart';
+import '../models/register_email_request.dart';
 import '../providers/api_provider.dart';
 
 class AuthService {
@@ -31,7 +33,22 @@ class AuthService {
     return 400;
   }
 
-
+  Future<int> registerByEmail({required RegisterByEmailRequest body}) async{
+    try {
+      Response response =
+      await APIHandlerImp.instance.post(body: body, endpoint: BackendEnvironment.registerByEmailEndpoint);
+      if (response.statusCode == 201) {
+        // Success
+        return 201;
+      } else {
+        debugPrint(
+            "REGISTER BY EMAIL: FAILED - response.statusCode ${response.statusCode}, ${response.data.toString()}");
+      }
+    } catch (e) {
+      debugPrint("REGISTER BY EMAIL: FAILED ${e.toString()}");
+    }
+    return 400;
+  }
 }
 
 Future<void> _storeAllIdentity(LoginResponseBody body) async {
