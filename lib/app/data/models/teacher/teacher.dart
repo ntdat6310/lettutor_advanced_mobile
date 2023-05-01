@@ -32,7 +32,6 @@ class Teacher {
     this.country,
     this.phone,
     this.birthday,
-    // List<RatingComment>? feedbacks,
     this.feedbacks,
     this.video,
     this.bio,
@@ -41,7 +40,6 @@ class Teacher {
     this.languages,
     this.specialties,
     this.resume,
-    // double? rating,
     this.rating,
   });
 

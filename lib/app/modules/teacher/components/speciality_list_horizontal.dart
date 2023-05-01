@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 
 class SpecialityListHorizontal extends StatelessWidget {
-  const SpecialityListHorizontal({Key? key, required this.specialities})
+  const SpecialityListHorizontal({Key? key, required this.specialitiesStr})
       : super(key: key);
-  final List<String> specialities;
+  final String specialitiesStr;
+
+  List<String> formatInput(String input) {
+    return input
+        .split(',')
+        .map((str) => str
+            .split('-')
+            .map((e) => e[0].toUpperCase() + e.substring(1))
+            .join(' '))
+        .toList();
+  }
 
   @override
   Widget build(BuildContext context) {
+    List<String> specialities = formatInput(specialitiesStr);
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Wrap(

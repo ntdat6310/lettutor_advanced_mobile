@@ -4,8 +4,6 @@ import 'package:lettutor_advanced_mobile/app/core/constants/backend_environment.
 import 'package:lettutor_advanced_mobile/app/data/models/teacher/teacher.dart';
 import 'package:lettutor_advanced_mobile/app/data/providers/api_provider.dart';
 
-import '../models/teacher/rating_comment.dart';
-
 class TeacherService {
   Future<List<Teacher>?> getListTutorWithPagination({
     int perPage = 3,

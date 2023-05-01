@@ -35,11 +35,11 @@ class AppPages {
   static const INITIAL = Routes.SIGN_IN;
 
   static final routes = [
-    // GetPage(
-    //   name: _Paths.HOME,
-    //   page: () => HomeView(),
-    //   binding: HomeBinding(),
-    // ),
+    GetPage(
+      name: _Paths.HOME,
+      page: () => HomeView(),
+      binding: HomeBinding(),
+    ),
     // GetPage(
     //   name: _Paths.TEACHER,
     //   page: () => TeacherView(),
