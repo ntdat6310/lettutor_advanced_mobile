@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../data/fake_data.dart';
-import '../../data/models/teacher/teacher.dart';
 import '../teacher/components/speciality_list.dart';
 import '../teacher/components/teacher_card.dart';
 import '../widgets/custom_appbar.dart';
@@ -52,9 +50,14 @@ class HomeView extends GetView<HomeController> {
                     ]),
                     const RecommendedTutor(),
                     Obx(() => Column(
-                      children: List.generate(c.teachers.value.length,
-                              (index) => TeacherCard(teacher: c.teachers.value[index])),
-                    )),
+                          children: List.generate(
+                              c.teacherController.teachers.value.length,
+                              (index) => TeacherCard(
+                                    teacherId: c.teacherController.teachers
+                                        .value[index].userId!,
+                                    isFavoriteTeacherList: true,
+                                  )),
+                        )),
                   ],
                 ),
               )

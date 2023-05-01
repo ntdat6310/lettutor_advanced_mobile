@@ -4,4 +4,5 @@ class BackendEnvironment {
   static String loginByEmailEndpoint = '/auth/login';
   static String registerByEmailEndpoint = '/auth/register';
   static String getListTutorWithPagination = '/tutor/more';
+  static String toggleFavoriteTutor = '/user/manageFavoriteTutor';
 }

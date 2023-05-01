@@ -1,12 +1,28 @@
 import 'package:get/get.dart';
 
-class TeacherController extends GetxController {
-  //TODO: Implement TeacherController
+import '../../data/models/teacher/teacher.dart';
+import '../../data/services/teacher_service.dart';
 
-  final count = 0.obs;
+class TeacherController extends GetxController {
+  TeacherService teacherService = Get.put(TeacherService());
+  RxList<Teacher> teachers = RxList<Teacher>([]);
+
+  Teacher? getTeacherById({required String id}) {
+    for (var teacher in teachers) {
+      if (teacher.userId == id) {
+        return teacher;
+      }
+    }
+    return null;
+  }
+
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    List<Teacher>? results = await teacherService.getListTutorWithPagination();
+    if (results != null) {
+      teachers.addAll(results);
+    }
   }
 
   @override
@@ -19,5 +35,12 @@ class TeacherController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  void toggleFavoriteTeacher(String teacherId) {
+    for (var teacher in teachers) {
+      if (teacher.userId == teacherId) {
+        teacher.isFavorite.value = !teacher.isFavorite.value;
+        teacherService.toggleFavoriteTutor(tutorId: teacherId);
+      }
+    }
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:lettutor_advanced_mobile/app/data/models/teacher/rating_comment.dart';
+import 'package:get/get.dart';
 
 part 'teacher.g.dart';
 
@@ -22,6 +23,8 @@ class Teacher {
   String? specialties;
   String? resume;
   double? rating;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  RxBool isFavorite = false.obs;
 
   Teacher({
     this.userId,
@@ -48,3 +51,4 @@ class Teacher {
 
   Map<String, dynamic> toJson() => _$TeacherToJson(this);
 }
+
