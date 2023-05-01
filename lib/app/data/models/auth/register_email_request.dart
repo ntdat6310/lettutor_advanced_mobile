@@ -12,8 +12,8 @@ class RegisterByEmailRequest {
     required this.password,
   });
 
-  factory RegisterByEmailRequest.fromJson(Map<String, dynamic> json)
-  => _$RegisterByEmailRequestFromJson(json);
+  factory RegisterByEmailRequest.fromJson(Map<String, dynamic> json) =>
+      _$RegisterByEmailRequestFromJson(json);
 
   Map<String, dynamic> toJson() => _$RegisterByEmailRequestToJson(this);
 }

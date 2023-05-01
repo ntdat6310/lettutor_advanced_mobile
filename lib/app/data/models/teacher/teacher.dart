@@ -32,7 +32,8 @@ class Teacher {
     this.country,
     this.phone,
     this.birthday,
-    List<RatingComment>? feedbacks,
+    // List<RatingComment>? feedbacks,
+    this.feedbacks,
     this.video,
     this.bio,
     this.experience,
@@ -40,7 +41,8 @@ class Teacher {
     this.languages,
     this.specialties,
     this.resume,
-    double? rating,
+    // double? rating,
+    this.rating,
   });
 
   factory Teacher.fromJson(Map<String, dynamic> json)

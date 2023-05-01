@@ -23,6 +23,7 @@ class TestApiView extends GetView<TestApiController> {
               onPressed: () {
                 //  Call API Here
                 debugPrint("Button clicked...");
+                c.getListTeacher();
               },
               child: const Text(
                 'Click here',

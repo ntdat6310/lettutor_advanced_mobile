@@ -81,7 +81,14 @@ class APIHandlerImp implements APIHandlerInterface {
         baseHeader["Authorization"] = "Bearer $token";
       }
     }
+    debugPrint("baseHeader ${baseHeader.toString()}");
     return baseHeader;
+  }
+
+  static Uri buildUrlWithQuery(String endpoint, Map<String, dynamic>? query) {
+    return query == null
+        ? Uri.parse(host + endpoint)
+        : Uri.parse(host + endpoint).replace(queryParameters: query);
   }
 
   @override
@@ -91,10 +98,18 @@ class APIHandlerImp implements APIHandlerInterface {
     Map<String, dynamic>? query,
     useToken = false,
   }) async {
-    Response response = await client.get(host + endpoint,
-        queryParameters: query,
-        data: jsonEncode(body),
-        options: Options(headers: await _buildHeader(useToken: useToken)));
+    String url = buildUrlWithQuery(endpoint, query).toString();
+    debugPrint("APIHandlerImp get");
+    debugPrint("URL $url");
+    debugPrint("host + endpoint ${host + endpoint}");
+    debugPrint("data ${jsonEncode(body)}");
+    debugPrint("query ${query.toString()}");
+
+    Response response = await client.get(
+      url,
+      data: body != null ? jsonEncode(body) : null,
+      options: Options(headers: await _buildHeader(useToken: useToken)),
+    );
 
     if (response.statusCode == 401) {
       if (useToken) {

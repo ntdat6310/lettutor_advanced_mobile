@@ -3,4 +3,5 @@ class BackendEnvironment {
   static String refreshTokenEndpoint = "/auth/refresh-token";
   static String loginByEmailEndpoint = '/auth/login';
   static String registerByEmailEndpoint = '/auth/register';
+  static String getListTutorWithPagination = '/tutor/more';
 }

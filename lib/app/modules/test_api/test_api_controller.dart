@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/data/models/teacher/teacher.dart';
+import 'package:lettutor_advanced_mobile/app/data/services/teacher_service.dart';
 
 class TestApiController extends GetxController {
-  //TODO: Implement TestApiController
+  TeacherService teacherService = Get.put(TeacherService());
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +21,14 @@ class TestApiController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  void getListTeacher() async {
+    debugPrint("CALL API getListTeacher");
+    List<Teacher>? teachers = await teacherService.getListTutorWithPagination();
+    if (teachers == null) {
+      debugPrint(
+          "TestApiController: teacherService.getListTutorWithPagination - NULL");
+    } else {
+      debugPrint(teachers.length.toString());
+    }
+  }
 }
