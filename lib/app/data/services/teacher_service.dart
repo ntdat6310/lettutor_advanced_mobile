@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:lettutor_advanced_mobile/app/core/constants/backend_environment.dart';
+import 'package:lettutor_advanced_mobile/app/data/models/teacher/rating_comment.dart';
 import 'package:lettutor_advanced_mobile/app/data/models/teacher/teacher.dart';
 import 'package:lettutor_advanced_mobile/app/data/providers/api_provider.dart';
 
@@ -51,8 +52,43 @@ class TeacherService {
     });
   }
 
+  Future<List<RatingComment>?> getFeedbacksByTeacherId({
+    required String teacherId,
+    int perPage = 12,
+    int page = 1,
+  }) async {
+    try {
+      Response response = await APIHandlerImp.instance.get(
+        endpoint:
+            BackendEnvironment.getFeedbacksByTeacherId(teacherId: teacherId),
+        query: {'perPage': '$perPage', 'page': '$page'},
+        useToken: true,
+      );
+      if (response.statusCode == 200 && response.data['message'] == 'Success') {
+        List<dynamic> feedbacksJson = response.data['data']['rows'];
+        List<RatingComment>? feedbacks = feedbacksJson.map<RatingComment>((feedbackJson){
+          return RatingComment.fromJson(feedbackJson);
+        }).toList();
+        debugPrint("feedbacks---------------------------");
+        debugPrint(feedbacks[0].student?.name.toString());
+        debugPrint(feedbacks[0].rating.toString());
+        return feedbacks;
+      } else if (response.statusCode == 401) {
+        // Login again!
+        return null;
+      } else {
+        debugPrint(
+            "TeacherService.getFeedbacksByTeacherId: Failed with status code ${response.statusCode}");
+        return null;
+      }
+    } catch (e) {
+      debugPrint("TeacherService.getFeedbacksByTeacherId: ${e.toString()}");
+    }
+    return null;
+  }
+
   Future<List<Teacher>?> getListTutorWithPagination({
-    int perPage = 10,
+    int perPage = 12,
     int page = 1,
   }) async {
     Map<String, String> query = {'perPage': '$perPage', 'page': '$page'};

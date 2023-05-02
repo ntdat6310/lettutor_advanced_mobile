@@ -5,26 +5,26 @@ part 'rating_comment.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class RatingComment {
-  String id;
-  int rating;
-  String content;
+  String? id;
+  int? rating;
+  String? content;
 
   @JsonKey(name: 'updatedAt')
-  String time;
+  String? time;
 
   @JsonKey(name: 'firstInfo')
-  Profile student;
+  Profile? student;
 
   RatingComment({
-    required this.id,
-    required this.rating,
-    required this.content,
-    required this.time,
-    required this.student,
+    this.id,
+    this.rating,
+    this.content,
+    this.time,
+    this.student,
   });
 
-  factory RatingComment.fromJson(Map<String, dynamic> json)
-  => _$RatingCommentFromJson(json);
+  factory RatingComment.fromJson(Map<String, dynamic> json) =>
+      _$RatingCommentFromJson(json);
 
   Map<String, dynamic> toJson() => _$RatingCommentToJson(this);
 }

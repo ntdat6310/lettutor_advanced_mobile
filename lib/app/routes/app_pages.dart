@@ -40,11 +40,11 @@ class AppPages {
       page: () => HomeView(),
       binding: HomeBinding(),
     ),
-    // GetPage(
-    //   name: _Paths.TEACHER,
-    //   page: () => TeacherView(),
-    //   binding: TeacherBinding(),
-    // ),
+    GetPage(
+      name: _Paths.TEACHER,
+      page: () => TeacherView(),
+      binding: TeacherBinding(),
+    ),
     // GetPage(
     //   name: _Paths.COURSE,
     //   page: () => CourseView(),

@@ -22,7 +22,7 @@ class TeacherController extends GetxController {
     List<Teacher>? results = await teacherService.getListTutorWithPagination();
     if (results != null) {
       teachers.addAll(results);
-      // teacherService.sortTeachersByFavoriteAndRating(teachers: teachers);
+      teacherService.sortTeachersByFavoriteAndRating(teachers: teachers);
     }
   }
 
