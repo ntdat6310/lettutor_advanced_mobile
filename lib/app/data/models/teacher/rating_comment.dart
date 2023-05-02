@@ -5,7 +5,9 @@ part 'rating_comment.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class RatingComment {
-  String? id;
+  String? bookingId;
+  @JsonKey(name: 'secondId')
+  String? teacherId;
   int? rating;
   String? content;
 
@@ -16,7 +18,8 @@ class RatingComment {
   Profile? student;
 
   RatingComment({
-    this.id,
+    this.bookingId,
+    this.teacherId,
     this.rating,
     this.content,
     this.time,

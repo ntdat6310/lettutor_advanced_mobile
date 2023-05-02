@@ -8,7 +8,8 @@ part of 'rating_comment.dart';
 
 RatingComment _$RatingCommentFromJson(Map<String, dynamic> json) =>
     RatingComment(
-      id: json['id'] as String?,
+      bookingId: json['bookingId'] as String?,
+      teacherId: json['secondId'] as String?,
       rating: json['rating'] as int?,
       content: json['content'] as String?,
       time: json['updatedAt'] as String?,
@@ -19,7 +20,8 @@ RatingComment _$RatingCommentFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$RatingCommentToJson(RatingComment instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      'bookingId': instance.bookingId,
+      'secondId': instance.teacherId,
       'rating': instance.rating,
       'content': instance.content,
       'updatedAt': instance.time,

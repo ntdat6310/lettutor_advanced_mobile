@@ -1,6 +1,5 @@
-import 'package:json_annotation/json_annotation.dart';
-import 'package:lettutor_advanced_mobile/app/data/models/teacher/rating_comment.dart';
 import 'package:get/get.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'teacher.g.dart';
 
@@ -14,7 +13,6 @@ class Teacher {
   String? country;
   String? phone;
   String? birthday;
-  List<RatingComment>? feedbacks;
   String? video;
   String? bio;
   String? experience;
@@ -23,7 +21,8 @@ class Teacher {
   String? specialties;
   String? resume;
   double? rating;
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(name: 'isfavoritetutor')
+  @RxBoolConverter()
   RxBool isFavorite = false.obs;
 
   Teacher({
@@ -35,7 +34,6 @@ class Teacher {
     this.country,
     this.phone,
     this.birthday,
-    this.feedbacks,
     this.video,
     this.bio,
     this.experience,
@@ -44,6 +42,7 @@ class Teacher {
     this.specialties,
     this.resume,
     this.rating,
+    required this.isFavorite,
   });
 
   factory Teacher.fromJson(Map<String, dynamic> json)
@@ -52,3 +51,16 @@ class Teacher {
   Map<String, dynamic> toJson() => _$TeacherToJson(this);
 }
 
+class RxBoolConverter implements JsonConverter<RxBool, bool> {
+  const RxBoolConverter();
+
+  @override
+  RxBool fromJson(bool json) {
+    return json.obs;
+  }
+
+  @override
+  bool toJson(RxBool object) {
+    return object.value;
+  }
+}

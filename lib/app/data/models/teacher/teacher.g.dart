@@ -15,9 +15,6 @@ Teacher _$TeacherFromJson(Map<String, dynamic> json) => Teacher(
       country: json['country'] as String?,
       phone: json['phone'] as String?,
       birthday: json['birthday'] as String?,
-      feedbacks: (json['feedbacks'] as List<dynamic>?)
-          ?.map((e) => RatingComment.fromJson(e as Map<String, dynamic>))
-          .toList(),
       video: json['video'] as String?,
       bio: json['bio'] as String?,
       experience: json['experience'] as String?,
@@ -26,6 +23,8 @@ Teacher _$TeacherFromJson(Map<String, dynamic> json) => Teacher(
       specialties: json['specialties'] as String?,
       resume: json['resume'] as String?,
       rating: (json['rating'] as num?)?.toDouble(),
+      isFavorite:
+          const RxBoolConverter().fromJson(json['isfavoritetutor'] as bool),
     );
 
 Map<String, dynamic> _$TeacherToJson(Teacher instance) => <String, dynamic>{
@@ -37,7 +36,6 @@ Map<String, dynamic> _$TeacherToJson(Teacher instance) => <String, dynamic>{
       'country': instance.country,
       'phone': instance.phone,
       'birthday': instance.birthday,
-      'feedbacks': instance.feedbacks,
       'video': instance.video,
       'bio': instance.bio,
       'experience': instance.experience,
@@ -46,4 +44,5 @@ Map<String, dynamic> _$TeacherToJson(Teacher instance) => <String, dynamic>{
       'specialties': instance.specialties,
       'resume': instance.resume,
       'rating': instance.rating,
+      'isfavoritetutor': const RxBoolConverter().toJson(instance.isFavorite),
     };

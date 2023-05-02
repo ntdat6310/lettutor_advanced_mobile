@@ -23,7 +23,7 @@ class TestApiController extends GetxController {
 
   void getListTeacher() async {
     debugPrint("CALL API getListTeacher");
-    List<Teacher>? teachers = await teacherService.getListTutorWithPagination();
+    List<Teacher>? teachers = await teacherService.getListTutorWithSearchAndFilterAndPagination();
     if (teachers == null) {
       debugPrint(
           "TestApiController: teacherService.getListTutorWithPagination - NULL");

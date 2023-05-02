@@ -19,7 +19,7 @@ class TeacherController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    List<Teacher>? results = await teacherService.getListTutorWithPagination();
+    List<Teacher>? results = await teacherService.getListTutorWithSearchAndFilterAndPagination();
     if (results != null) {
       teachers.addAll(results);
       teacherService.sortTeachersByFavoriteAndRating(teachers: teachers);

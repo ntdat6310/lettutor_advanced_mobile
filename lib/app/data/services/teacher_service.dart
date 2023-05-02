@@ -6,15 +6,6 @@ import 'package:lettutor_advanced_mobile/app/data/models/teacher/teacher.dart';
 import 'package:lettutor_advanced_mobile/app/data/providers/api_provider.dart';
 
 class TeacherService {
-  void updateFavoriteStatus({
-    required List<Teacher> teachers,
-    required List<String> favoriteTeacherIds,
-  }) {
-    for (var teacher in teachers) {
-      teacher.isFavorite.value = favoriteTeacherIds.contains(teacher.userId);
-    }
-  }
-
   Future<bool> toggleFavoriteTutor({required String tutorId}) async {
     try {
       Response response = await APIHandlerImp.instance.post(
@@ -66,7 +57,8 @@ class TeacherService {
       );
       if (response.statusCode == 200 && response.data['message'] == 'Success') {
         List<dynamic> feedbacksJson = response.data['data']['rows'];
-        List<RatingComment>? feedbacks = feedbacksJson.map<RatingComment>((feedbackJson){
+        List<RatingComment>? feedbacks =
+            feedbacksJson.map<RatingComment>((feedbackJson) {
           return RatingComment.fromJson(feedbackJson);
         }).toList();
         debugPrint("feedbacks---------------------------");
@@ -87,47 +79,37 @@ class TeacherService {
     return null;
   }
 
-  Future<List<Teacher>?> getListTutorWithPagination({
+  Future<List<Teacher>?> getListTutorWithSearchAndFilterAndPagination({
     int perPage = 12,
     int page = 1,
+    String searchKey = '',
+    List<String>? specialties,
   }) async {
-    Map<String, String> query = {'perPage': '$perPage', 'page': '$page'};
-
+    Map<String, dynamic> body = {
+      "search": searchKey,
+      "page": 1,
+      "perPage": 12,
+    };
+    if (specialties != null) {
+      body['filters'] = {"specialties": specialties};
+    }
     try {
-      Response response = await APIHandlerImp.instance.get(
-        endpoint: BackendEnvironment.getListTutorWithPagination,
+      Response response = await APIHandlerImp.instance.post(
+        body: body,
+        endpoint:
+            BackendEnvironment.getListTutorWithSearchAndFilterAndPagination,
         useToken: true,
-        query: query,
       );
       if (response.statusCode == 200) {
-        List<dynamic> teachersJson = response.data['tutors']['rows'];
-        List<dynamic> favoriteTeachersJson = response.data['favoriteTutor'];
-        List<String> favoriteTeacherIds = [];
-        for (var favoriteTeacherJson in favoriteTeachersJson) {
-          String? favoriteTeacherId = favoriteTeacherJson['secondId'];
-          if (favoriteTeacherId != null) {
-            favoriteTeacherIds.add(favoriteTeacherId);
-          }
-        }
+        List<dynamic> teachersJson = response.data['rows'];
         List<Teacher> teachers = (teachersJson.map<Teacher>((teacherJson) {
+          if (teacherJson['isfavoritetutor'] == "1") {
+            teacherJson['isfavoritetutor'] = true;
+          }else{
+            teacherJson['isfavoritetutor'] = false;
+          }
           return Teacher.fromJson(teacherJson);
         })).toList();
-        updateFavoriteStatus(
-            teachers: teachers, favoriteTeacherIds: favoriteTeacherIds);
-        // debugPrint("teachers.teachers.toString ${teachers.toString()}");
-        // debugPrint("teachers.userId ${teachers[0].userId}");
-        // debugPrint("teachers.email ${teachers[0].email}");
-        // debugPrint("teachers.phone ${teachers[0].phone}");
-        // debugPrint("teachers.languages ${teachers[0].languages}");
-        // debugPrint("teachers.name ${teachers[0].name}");
-        // debugPrint("teachers.level ${teachers[0].level}");
-        // debugPrint("teachers.experience ${teachers[0].experience}");
-        // debugPrint("teachers.rating ${teachers[0].rating}");
-        // debugPrint("teachers.country ${teachers[0].country}");
-        // debugPrint("teachers.birthday ${teachers[0].birthday}");
-        debugPrint("teachers---------------------------");
-        debugPrint(teachers[0].feedbacks?.length.toString());
-        debugPrint(teachers[0].isFavorite.value.toString());
         return teachers;
       } else if (response.statusCode == 401) {
         // Login again!
