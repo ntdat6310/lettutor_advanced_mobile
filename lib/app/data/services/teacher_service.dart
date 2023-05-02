@@ -33,8 +33,26 @@ class TeacherService {
     return false;
   }
 
+  void sortTeachersByFavoriteAndRating({required List<Teacher> teachers}) {
+    teachers.sort((a, b) {
+      if (a.isFavorite != b.isFavorite) {
+        return a.isFavorite.value ? -1 : 1;
+      } else {
+        if (a.rating == null && b.rating == null) {
+          return 0;
+        } else if (a.rating == null) {
+          return 1;
+        } else if (b.rating == null) {
+          return -1;
+        } else {
+          return b.rating!.compareTo(a.rating!);
+        }
+      }
+    });
+  }
+
   Future<List<Teacher>?> getListTutorWithPagination({
-    int perPage = 5,
+    int perPage = 10,
     int page = 1,
   }) async {
     Map<String, String> query = {'perPage': '$perPage', 'page': '$page'};

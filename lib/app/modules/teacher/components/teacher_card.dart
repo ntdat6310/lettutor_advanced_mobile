@@ -18,7 +18,7 @@ class TeacherCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if(!isFavoriteTeacherList){
+      if (!isFavoriteTeacherList) {
         return GestureDetector(
           onTap: () {
             debugPrint("TeacherCard onTap");
@@ -38,8 +38,8 @@ class TeacherCard extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             backgroundImage: NetworkImage(c
-                                .getTeacherById(id: teacherId)
-                                ?.avatar ??
+                                    .getTeacherById(id: teacherId)
+                                    ?.avatar ??
                                 'https://img.freepik.com/free-icon/user_318-804790.jpg?w=2000'),
                             radius: 30,
                           ),
@@ -48,16 +48,13 @@ class TeacherCard extends StatelessWidget {
                               margin: const EdgeInsets.only(left: 10),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
-                                    margin: const EdgeInsets.fromLTRB(
-                                        4, 0, 0, 4),
+                                    margin:
+                                        const EdgeInsets.fromLTRB(4, 0, 0, 4),
                                     child: Text(
-                                      c
-                                          .getTeacherById(id: teacherId)
-                                          ?.name ??
+                                      c.getTeacherById(id: teacherId)?.name ??
                                           '',
                                       style: const TextStyle(fontSize: 17),
                                     ),
@@ -67,9 +64,8 @@ class TeacherCard extends StatelessWidget {
                                     margin: const EdgeInsets.only(left: 4),
                                     child: SpecialityListHorizontal(
                                         specialitiesStr: c
-                                            .getTeacherById(
-                                            id: teacherId)
-                                            ?.specialties ??
+                                                .getTeacherById(id: teacherId)
+                                                ?.specialties ??
                                             ''),
                                   ),
                                 ],
@@ -87,8 +83,7 @@ class TeacherCard extends StatelessWidget {
                   ),
                   IconButton(
                     icon: Icon(
-                      c.getTeacherById(id: teacherId)?.isFavorite.value ==
-                          true
+                      c.getTeacherById(id: teacherId)?.isFavorite.value == true
                           ? Icons.favorite
                           : Icons.favorite_outline,
                       color: Colors.redAccent,
@@ -104,95 +99,104 @@ class TeacherCard extends StatelessWidget {
             ),
           ),
         );
-      }else{
+      } else {
         return isFavoriteTeacherList &&
-            isFavoriteTeacherList ==
-                c.getTeacherById(id: teacherId)?.isFavorite.value
+                isFavoriteTeacherList ==
+                    c.getTeacherById(id: teacherId)?.isFavorite.value
             ? GestureDetector(
-          onTap: () {
-            debugPrint("TeacherCard onTap");
-            // Navigate to TeacherDetail
-          },
-          child: Card(
-            margin: const EdgeInsets.only(bottom: 20),
-            elevation: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Stack(
-                alignment: Alignment.topRight,
-                children: [
-                  Column(
-                    children: [
-                      Row(
-                        children: [
-                          CircleAvatar(
-                            backgroundImage: NetworkImage(c
-                                .getTeacherById(id: teacherId)
-                                ?.avatar ??
-                                'https://img.freepik.com/free-icon/user_318-804790.jpg?w=2000'),
-                            radius: 30,
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(left: 10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.fromLTRB(
-                                        4, 0, 0, 4),
-                                    child: Text(
-                                      c
+                onTap: () {
+                  debugPrint("TeacherCard onTap");
+                  // Navigate to TeacherDetail
+                },
+                child: Card(
+                  margin: const EdgeInsets.only(bottom: 20),
+                  elevation: 5,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Stack(
+                      alignment: Alignment.topRight,
+                      children: [
+                        Column(
+                          children: [
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage: NetworkImage(c
                                           .getTeacherById(id: teacherId)
-                                          ?.name ??
-                                          '',
-                                      style: const TextStyle(fontSize: 17),
+                                          ?.avatar ??
+                                      'https://img.freepik.com/free-icon/user_318-804790.jpg?w=2000'),
+                                  radius: 30,
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    margin: const EdgeInsets.only(left: 10),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          margin: const EdgeInsets.fromLTRB(
+                                              4, 0, 0, 4),
+                                          child: Text(
+                                            c
+                                                    .getTeacherById(
+                                                        id: teacherId)
+                                                    ?.name ??
+                                                '',
+                                            style:
+                                                const TextStyle(fontSize: 17),
+                                          ),
+                                        ),
+                                        RatingStar(
+                                            rating: c
+                                                    .getTeacherById(
+                                                        id: teacherId)
+                                                    ?.rating ??
+                                                0),
+                                        Container(
+                                          margin:
+                                              const EdgeInsets.only(left: 4),
+                                          child: SpecialityListHorizontal(
+                                              specialitiesStr: c
+                                                      .getTeacherById(
+                                                          id: teacherId)
+                                                      ?.specialties ??
+                                                  ''),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  const RatingStar(rating: 5),
-                                  Container(
-                                    margin: const EdgeInsets.only(left: 4),
-                                    child: SpecialityListHorizontal(
-                                        specialitiesStr: c
-                                            .getTeacherById(
-                                            id: teacherId)
-                                            ?.specialties ??
-                                            ''),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
+                            Text(
+                              c.getTeacherById(id: teacherId)?.bio ?? '',
+                              maxLines: 4,
+                              overflow: TextOverflow.ellipsis,
+                            )
+                          ],
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            c.getTeacherById(id: teacherId)?.isFavorite.value ==
+                                    true
+                                ? Icons.favorite
+                                : Icons.favorite_outline,
+                            color: Colors.redAccent,
+                            size: 35,
                           ),
-                        ],
-                      ),
-                      Text(
-                        c.getTeacherById(id: teacherId)?.bio ?? '',
-                        maxLines: 4,
-                        overflow: TextOverflow.ellipsis,
-                      )
-                    ],
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      c.getTeacherById(id: teacherId)?.isFavorite.value ==
-                          true
-                          ? Icons.favorite
-                          : Icons.favorite_outline,
-                      color: Colors.redAccent,
-                      size: 35,
+                          onPressed: () {
+                            debugPrint("TeacherCard IconButton onClicked");
+                            c.toggleFavoriteTeacher(teacherId);
+                          },
+                        ),
+                      ],
                     ),
-                    onPressed: () {
-                      debugPrint("TeacherCard IconButton onClicked");
-                      c.toggleFavoriteTeacher(teacherId);
-                    },
                   ),
-                ],
-              ),
-            ),
-          ),
-        )
+                ),
+              )
             : const SizedBox.shrink();
       }
     });
