@@ -1,5 +1,6 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:dio/dio.dart' as dio;
 import 'package:lettutor_advanced_mobile/app/core/constants/backend_environment.dart';
 import 'package:lettutor_advanced_mobile/app/data/models/teacher/rating_comment.dart';
 import 'package:lettutor_advanced_mobile/app/data/models/teacher/teacher.dart';
@@ -8,7 +9,7 @@ import 'package:lettutor_advanced_mobile/app/data/providers/api_provider.dart';
 class TeacherService {
   Future<bool> toggleFavoriteTutor({required String tutorId}) async {
     try {
-      Response response = await APIHandlerImp.instance.post(
+      dio.Response response = await APIHandlerImp.instance.post(
         body: {"tutorId": tutorId},
         endpoint: BackendEnvironment.toggleFavoriteTutor,
         useToken: true,
@@ -25,7 +26,7 @@ class TeacherService {
     return false;
   }
 
-  void sortTeachersByFavoriteAndRating({required List<Teacher> teachers}) {
+  void sortTeachersByFavoriteAndRating({required RxList<Teacher> teachers}) {
     teachers.sort((a, b) {
       if (a.isFavorite != b.isFavorite) {
         return a.isFavorite.value ? -1 : 1;
@@ -49,7 +50,7 @@ class TeacherService {
     int page = 1,
   }) async {
     try {
-      Response response = await APIHandlerImp.instance.get(
+      dio.Response response = await APIHandlerImp.instance.get(
         endpoint:
             BackendEnvironment.getFeedbacksByTeacherId(teacherId: teacherId),
         query: {'perPage': '$perPage', 'page': '$page'},
@@ -94,7 +95,7 @@ class TeacherService {
       body['filters'] = {"specialties": specialties};
     }
     try {
-      Response response = await APIHandlerImp.instance.post(
+      dio.Response response = await APIHandlerImp.instance.post(
         body: body,
         endpoint:
             BackendEnvironment.getListTutorWithSearchAndFilterAndPagination,

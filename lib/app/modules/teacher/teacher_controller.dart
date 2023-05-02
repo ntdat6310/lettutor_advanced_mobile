@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../data/models/teacher/teacher.dart';
@@ -41,7 +42,10 @@ class TeacherController extends GetxController {
       if (teacher.userId == teacherId) {
         teacher.isFavorite.value = !teacher.isFavorite.value;
         teacherService.toggleFavoriteTutor(tutorId: teacherId);
+        break;
       }
     }
+    teacherService.sortTeachersByFavoriteAndRating(teachers: teachers);
+    teachers.refresh();
   }
 }

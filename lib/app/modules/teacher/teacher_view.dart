@@ -52,13 +52,13 @@ class TeacherView extends GetView<TeacherController> {
               const SizedBox(height: 10),
               const CustomDivider(),
               const SizedBox(height: 20),
-              Column(
+              Obx(() => Column(
                 children: List.generate(
                     c.teachers.length,
-                    (index) => TeacherCard(
-                          teacherId: c.teachers[index].userId ?? '',
-                        )),
-              ),
+                        (index) => TeacherCard(
+                      teacherId: c.teachers[index].userId ?? '',
+                    )),
+              )),
             ],
           ),
         ),
