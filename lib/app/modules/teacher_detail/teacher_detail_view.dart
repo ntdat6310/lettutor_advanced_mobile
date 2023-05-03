@@ -75,11 +75,15 @@ class TeacherDetailView extends GetView<TeacherDetailController> {
                     ),
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 20),
-                      child: const MessageFavoriteReport(),
+                      child: MessageFavoriteReport(
+                        teacherId: c.teacher.userId ?? '',
+                      ),
                     ),
                     BookingButton(),
                     const SizedBox(height: 20),
-                    const TeacherDescription(),
+                    TeacherDescription(
+                      description: c.teacher.bio ?? '',
+                    ),
                     ChipInfo(
                       title: "Languages",
                       chipList: c.languageNames,
@@ -87,16 +91,23 @@ class TeacherDetailView extends GetView<TeacherDetailController> {
                     const SizedBox(
                       height: 20,
                     ),
-                    // ChipInfo(chipList: c.teacher.specialties, title: "Specialties"),
+                    ChipInfo(
+                      title: "Specialties",
+                      chipList: c.specialtyValues,
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
                     // ChipInfo(chipList: c.teacher.interests, title: "Interests"),
+                    SectionWithTitleAndContent(
+                        content: c.teacher.interests ?? 'No',
+                        title: 'Interests'),
                     const SizedBox(
                       height: 20,
                     ),
-                    TeachingExperience(
-                        teachingExperience: c.teacher.experience),
+                    SectionWithTitleAndContent(
+                        title: 'Teaching Experience',
+                        content: c.teacher.experience ?? 'No experience'),
                     const SizedBox(
                       height: 20,
                     ),

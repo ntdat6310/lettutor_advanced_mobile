@@ -2,7 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class TeacherDescription extends StatefulWidget {
-  const TeacherDescription({Key? key}) : super(key: key);
+  const TeacherDescription({Key? key, required this.description})
+      : super(key: key);
+  final String description;
 
   @override
   State<TeacherDescription> createState() => _TeacherDescriptionState();
@@ -32,7 +34,7 @@ class _TeacherDescriptionState extends State<TeacherDescription> {
     return Column(
       children: [
         Text(
-          "Hello! My name is April Baldo, you can just call me Teacher April. I am an English teacher and currently teaching in senior high school. I have been teaching grammar and literature for almost 10 years. I am fond of reading and teaching literature as one way of knowing one’s beliefs and culture. I am friendly and full of positivity. I love teaching because I know each student has something to bring on. Molding them to become an individual is a great success.",
+          widget.description,
           maxLines: _isShowFullText ? 1000 : 2,
           overflow: TextOverflow.ellipsis,
           style: normalStyle,

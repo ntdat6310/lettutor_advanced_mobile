@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-class TeachingExperience extends StatelessWidget {
-  const TeachingExperience({Key? key, required this.teachingExperience})
+class SectionWithTitleAndContent extends StatelessWidget {
+  const SectionWithTitleAndContent(
+      {Key? key, required this.content, required this.title})
       : super(key: key);
 
-  final String? teachingExperience;
+  final String title;
+  final String content;
   final TextStyle titleStyle = const TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.bold,
@@ -21,14 +23,14 @@ class TeachingExperience extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
-          "Teaching experience",
+          title,
           style: titleStyle,
           textAlign: TextAlign.start,
         ),
         Container(
           margin: const EdgeInsets.fromLTRB(12, 10, 0, 0),
           child: Text(
-            teachingExperience ?? "No experience.",
+            content,
             style: teachingExperienceStyle,
           ),
         )

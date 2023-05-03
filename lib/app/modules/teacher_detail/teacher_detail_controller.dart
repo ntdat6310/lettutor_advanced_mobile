@@ -9,6 +9,7 @@ import '../../data/models/teacher/teacher.dart';
 class TeacherDetailController extends GetxController {
   late Teacher teacher;
   RxList<String> languageNames = <String>[].obs;
+  RxList<String> specialtyValues = <String>[].obs;
   final TeacherService teacherService = Get.find();
   RxBool isLoading = true.obs;
   RxList<RatingComment> feedbacks = RxList<RatingComment>();
@@ -18,8 +19,10 @@ class TeacherDetailController extends GetxController {
     teacher = Get.find<Teacher>(tag: 'selectedTeacher');
     languageNames
         .addAll(await Helper.getLanguageNames(teacher.languages ?? ''));
-    List<RatingComment>? results = await teacherService
-        .getFeedbacksByTeacherId(teacherId: teacher.userId ?? '');
+    specialtyValues.addAll(
+        await Helper.getSpecialties(specialtiesStr: teacher.specialties ?? ''));
+    List<RatingComment>? results = await teacherService.getFeedbacksByTeacherId(
+        teacherId: teacher.userId ?? '');
     if (results != null) {
       feedbacks.addAll(results);
       debugPrint(
