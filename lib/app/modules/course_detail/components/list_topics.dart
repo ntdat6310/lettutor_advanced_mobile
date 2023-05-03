@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_advanced_mobile/app/data/models/course/course_topic.dart';
 
 class ListTopics extends StatelessWidget {
   const ListTopics({Key? key, required this.topics, required this.style})
       : super(key: key);
 
-  final List<Map<String, String>> topics;
+  final List<CourseTopic> topics;
   final TextStyle style;
 
   @override
@@ -12,10 +13,6 @@ class ListTopics extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: List.generate(topics.length, (index) {
-        Map<String, String> topic = topics[index];
-        String topicName = topic['topic']!;
-        // String pdfPath = topic['pdfPath']!;
-
         return Container(
           margin: const EdgeInsets.only(bottom: 20),
           child: Row(
@@ -23,7 +20,7 @@ class ListTopics extends StatelessWidget {
             children: [
               Text("$index", style: style),
               const SizedBox(width: 10),
-              Text(topicName, style: style)
+              Text(topics[index].name ?? '', style: style)
             ],
           ),
         );

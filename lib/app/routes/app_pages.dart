@@ -50,11 +50,14 @@ class AppPages {
       page: () => CourseView(),
       binding: CourseBinding(),
     ),
-    // GetPage(
-    //   name: _Paths.COURSE_DETAIL,
-    //   page: () => CourseDetailView(),
-    //   binding: CourseDetailBinding(),
-    // ),
+    GetPage(
+      name: _Paths.COURSE_DETAIL,
+      page: () {
+        CourseDetailView courseDetail = Get.arguments;
+        return courseDetail;
+      },
+      binding: CourseDetailBinding(),
+    ),
     // GetPage(
     //   name: _Paths.COURSE_LESSON,
     //   page: () => CourseLessonView(),

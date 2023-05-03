@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lettutor_advanced_mobile/app/modules/course/course_controller.dart';
+import 'package:lettutor_advanced_mobile/app/modules/course_detail/course_detail_view.dart';
 import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 
 import '../../../data/models/course/course.dart';
@@ -9,7 +9,11 @@ class CourseCard extends StatelessWidget {
   const CourseCard({Key? key, required this.course}) : super(key: key);
   final Course course;
 
-  void _onCourseCardTap() {}
+  void _onCourseCardTap() {
+    debugPrint("CourseCard tap");
+    Get.toNamed(Routes.COURSE_DETAIL,
+        arguments: CourseDetailView(course: course));
+  }
 
   @override
   Widget build(BuildContext context) {
