@@ -1,27 +1,38 @@
 import 'package:flutter/material.dart';
 
 class CustomSearchBar extends StatefulWidget {
-  const CustomSearchBar(
-      {Key? key, required this.onChanged, required this.searchHint})
-      : super(key: key);
+  const CustomSearchBar({
+    Key? key,
+    required this.onChanged,
+    required this.searchHint,
+    required this.onSubmit,
+    required this.initValue,
+  }) : super(key: key);
 
   final ValueChanged<String> onChanged;
+  final ValueChanged<String> onSubmit;
   final String searchHint;
+  final String initValue;
 
   @override
   State<CustomSearchBar> createState() => _CustomSearchBarState();
 }
 
 class _CustomSearchBarState extends State<CustomSearchBar> {
-  final TextEditingController _searchController = TextEditingController();
+  late final TextEditingController _searchController;
 
   void _onSearchChanged() {
     widget.onChanged(_searchController.text);
   }
 
+  void _onSearchSubmit(String value) {
+    widget.onSubmit(value);
+  }
+
   @override
   void initState() {
     super.initState();
+    _searchController = TextEditingController(text: widget.initValue);
     _searchController.addListener(_onSearchChanged);
   }
 
@@ -58,6 +69,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                   hintText: widget.searchHint,
                   border: InputBorder.none,
                 ),
+                onSubmitted: _onSearchSubmit,
               ),
             ),
           ),

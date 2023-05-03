@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/modules/widgets/no_data_found.dart';
 
 import '../home/components/find_tutor.dart';
 import '../widgets/custom_appbar.dart';
@@ -28,8 +29,14 @@ class TeacherView extends GetView<TeacherController> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               CustomSearchBar(
+                initValue: c.searchKeyForTeachers,
                 onChanged: (String value) {
                   print(value);
+                },
+                onSubmit: (String value) {
+                  // Handle search here
+                  debugPrint("TeacherView CustomSearchBar OnSubmit $value");
+                  c.searchTeachers(searchKey: value);
                 },
                 searchHint: 'Enter tutor\'s name',
               ),
@@ -52,13 +59,23 @@ class TeacherView extends GetView<TeacherController> {
               const SizedBox(height: 10),
               const CustomDivider(),
               const SizedBox(height: 20),
-              Obx(() => Column(
-                children: List.generate(
-                    c.teachers.length,
+              Obx(() {
+                if (c.isLoadingTeachers.value) {
+                  return const CircularProgressIndicator(
+                    color: Colors.blueAccent,
+                  );
+                } else if (c.teachers.isEmpty) {
+                  return const NoDataFound();
+                } else {
+                  return Column(
+                    children: List.generate(
+                        c.teachers.length,
                         (index) => TeacherCard(
-                      teacherId: c.teachers[index].userId ?? '',
-                    )),
-              )),
+                              teacherId: c.teachers[index].userId ?? '',
+                            )),
+                  );
+                }
+              }),
             ],
           ),
         ),

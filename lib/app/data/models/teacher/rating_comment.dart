@@ -1,29 +1,33 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lettutor_advanced_mobile/app/data/models/profile/profile.dart';
 
 part 'rating_comment.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class RatingComment {
+  String? id;
   String? bookingId;
+  @JsonKey(name: 'firstId')
+  String? studentId;
   @JsonKey(name: 'secondId')
   String? teacherId;
   int? rating;
   String? content;
-
-  @JsonKey(name: 'updatedAt')
-  String? time;
-
-  @JsonKey(name: 'firstInfo')
-  Profile? student;
+  String? updatedAt;
+  @JsonKey(name: 'name')
+  String? studentName;
+  @JsonKey(name: 'avatar')
+  String? studentAvatar;
 
   RatingComment({
+    this.id,
     this.bookingId,
+    this.studentId,
     this.teacherId,
     this.rating,
     this.content,
-    this.time,
-    this.student,
+    this.updatedAt,
+    this.studentName,
+    this.studentAvatar,
   });
 
   factory RatingComment.fromJson(Map<String, dynamic> json) =>

@@ -7,6 +7,28 @@ import '../../data/services/teacher_service.dart';
 class TeacherController extends GetxController {
   TeacherService teacherService = Get.put(TeacherService());
   RxList<Teacher> teachers = RxList<Teacher>([]);
+  RxBool isLoadingTeachers = false.obs;
+  String searchKeyForTeachers = '';
+
+  Future<bool> searchTeachers({String searchKey = ''}) async {
+    isLoadingTeachers.value = true;
+    searchKeyForTeachers = searchKey;
+    List<Teacher>? results =
+        await teacherService.getListTutorWithSearchAndFilterAndPagination(
+      searchKey: searchKey,
+    );
+    if (results != null && results.isNotEmpty) {
+      teachers.clear();
+      teachers.addAll(results);
+      teacherService.sortTeachersByFavoriteAndRating(teachers: teachers);
+      isLoadingTeachers.value = false;
+      return true;
+    }else{
+      teachers.clear();
+      isLoadingTeachers.value = false;
+      return false;
+    }
+  }
 
   Teacher? getTeacherById({required String id}) {
     for (var teacher in teachers) {
@@ -20,11 +42,7 @@ class TeacherController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    List<Teacher>? results = await teacherService.getListTutorWithSearchAndFilterAndPagination();
-    if (results != null) {
-      teachers.addAll(results);
-      teacherService.sortTeachersByFavoriteAndRating(teachers: teachers);
-    }
+    searchTeachers();
   }
 
   @override

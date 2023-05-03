@@ -60,11 +60,10 @@ class TeacherService {
         List<dynamic> feedbacksJson = response.data['data']['rows'];
         List<RatingComment>? feedbacks =
             feedbacksJson.map<RatingComment>((feedbackJson) {
+              feedbackJson['name'] = feedbackJson['firstInfo']['name'];
+              feedbackJson['avatar'] = feedbackJson['firstInfo']['avatar'];
           return RatingComment.fromJson(feedbackJson);
         }).toList();
-        debugPrint("feedbacks---------------------------");
-        debugPrint(feedbacks[0].student?.name.toString());
-        debugPrint(feedbacks[0].rating.toString());
         return feedbacks;
       } else if (response.statusCode == 401) {
         // Login again!
@@ -106,7 +105,7 @@ class TeacherService {
         List<Teacher> teachers = (teachersJson.map<Teacher>((teacherJson) {
           if (teacherJson['isfavoritetutor'] == "1") {
             teacherJson['isfavoritetutor'] = true;
-          }else{
+          } else {
             teacherJson['isfavoritetutor'] = false;
           }
           return Teacher.fromJson(teacherJson);
