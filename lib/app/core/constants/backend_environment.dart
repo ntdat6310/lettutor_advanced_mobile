@@ -6,7 +6,7 @@ class BackendEnvironment {
   static String getListTutorWithSearchAndFilterAndPagination = '/tutor/search';
   static String toggleFavoriteTutor = '/user/manageFavoriteTutor';
   static String getFeedbacksByTeacherId({required String teacherId}) {
-    return 'feedback/v2/$teacherId';
+    return '/feedback/v2/$teacherId';
   }
 
   static Map<String, String> specialties = {

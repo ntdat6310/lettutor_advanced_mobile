@@ -60,11 +60,11 @@ class AppPages {
     //   page: () => CourseLessonView(),
     //   binding: CourseLessonBinding(),
     // ),
-    // GetPage(
-    //   name: _Paths.TEACHER_DETAIL,
-    //   page: () => TeacherDetailView(),
-    //   binding: TeacherDetailBinding(),
-    // ),
+    GetPage(
+      name: _Paths.TEACHER_DETAIL,
+      page: () => TeacherDetailView(),
+      binding: TeacherDetailBinding(),
+    ),
     GetPage(
       name: _Paths.SIGN_IN,
       page: () => SignInView(),

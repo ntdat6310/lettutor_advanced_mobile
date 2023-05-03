@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ChipInfo extends StatelessWidget {
   const ChipInfo({Key? key, required this.chipList, required this.title})
@@ -25,18 +26,18 @@ class ChipInfo extends StatelessWidget {
         const SizedBox(height: 10),
         Container(
           margin: const EdgeInsets.only(left: 12),
-          child: Wrap(
+          child: Obx(() => Wrap(
             spacing: 10,
             children: List.generate(
                 chipList.length,
                     (index) => Chip(
-                      label: Text(chipList[index]),
-                      labelStyle: const TextStyle(color: Colors.blue),
-                      backgroundColor: Colors.white,
-                      shape: StadiumBorder(
-                          side: BorderSide(color: Colors.blue.shade500)),
-                    )),
-          ),
+                  label: Text(chipList[index]),
+                  labelStyle: const TextStyle(color: Colors.blue),
+                  backgroundColor: Colors.white,
+                  shape: StadiumBorder(
+                      side: BorderSide(color: Colors.blue.shade500)),
+                )),
+          )),
         )
       ],
     );

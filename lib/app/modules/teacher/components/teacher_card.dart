@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lettutor_advanced_mobile/app/modules/teacher/components/speciality_list_horizontal.dart';
 import 'package:lettutor_advanced_mobile/app/modules/teacher/teacher_controller.dart';
+import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 
+import '../../../data/models/teacher/teacher.dart';
 import '../../widgets/rating_star.dart';
 
 class TeacherCard extends StatelessWidget {
@@ -23,8 +25,12 @@ class TeacherCard extends StatelessWidget {
     } else {
       return GestureDetector(
         onTap: () {
-          debugPrint("TeacherCard onTap");
-          // Navigate to TeacherDetail
+          Teacher? teacher = c.getTeacherById(id: teacherId);
+          if (teacher != null) {
+            Get.put<Teacher>(teacher, tag: 'selectedTeacher');
+            // Navigate to TeacherDetail
+            Get.toNamed(Routes.TEACHER_DETAIL);
+          }
         },
         child: Card(
           margin: const EdgeInsets.only(bottom: 20),
