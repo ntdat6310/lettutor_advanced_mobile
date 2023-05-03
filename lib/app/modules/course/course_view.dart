@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/modules/widgets/no_data_found.dart';
 
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_search_bar.dart';
@@ -87,17 +88,21 @@ class CourseView extends GetView<CourseController> {
                   ),
                   const SizedBox(height: 20),
                   Obx(() {
-                    return _courseController.isLoading.value
-                        ? const CircularProgressIndicator(
-                            color: Colors.blueAccent)
-                        : Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: List.generate(
-                                _courseController.courses.length,
-                                (index) => CourseCard(
-                                      course: _courseController.courses[index],
-                                    )),
-                          );
+                    if (_courseController.isLoading.value) {
+                      return const CircularProgressIndicator(
+                          color: Colors.blueAccent);
+                    } else if (_courseController.courses.isEmpty) {
+                      return const NoDataFound();
+                    } else {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: List.generate(
+                            _courseController.courses.length,
+                            (index) => CourseCard(
+                                  course: _courseController.courses[index],
+                                )),
+                      );
+                    }
                   }),
                 ],
               ),
