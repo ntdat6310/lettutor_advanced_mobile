@@ -1,29 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/modules/course/course_controller.dart';
 import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 
 import '../../../data/models/course/course.dart';
 
 class CourseCard extends StatelessWidget {
-  const CourseCard({Key? key, required this.course, required this.from})
-      : super(key: key);
-
-  final String FROM_COURSE_PAGE = 'FROM_COURSE_PAGE';
-  final String FROM_COURSE_DETAIL_PAGE = 'FROM_COURSE_DETAIL_PAGE';
-
-  final String from;
+  const CourseCard({Key? key, required this.course}) : super(key: key);
   final Course course;
+
+  void _onCourseCardTap() {}
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        if (from == FROM_COURSE_PAGE) {
-          Get.toNamed(Routes.COURSE_DETAIL, arguments: {'course': course});
-        } else {
-          Get.toNamed(Routes.COURSE_LESSON, arguments: {'course': course});
-        }
-      },
+      onTap: _onCourseCardTap,
       child: Container(
         margin: const EdgeInsets.only(bottom: 20),
         child: Card(
@@ -40,7 +31,7 @@ class CourseCard extends StatelessWidget {
                   borderRadius:
                       const BorderRadius.vertical(top: Radius.circular(20)),
                   child: Image.network(
-                    course.imageUrl,
+                    course.imageUrl ?? '',
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -51,17 +42,18 @@ class CourseCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      course.name,
+                      course.name ?? '',
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Text(course.description),
+                    Text(course.description ?? ''),
                     const SizedBox(height: 8),
                     // const Text("Beginner - 5 lessons"),
-                    Text("${course.level} - ${course.topics.length} lessons"),
+                    Text(
+                        "${course.level} - ${course.topics != null ? course.topics!.length : '0'} lessons"),
                   ],
                 ),
               ),

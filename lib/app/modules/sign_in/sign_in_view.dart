@@ -140,7 +140,6 @@ class SignInView extends GetView<SignInController> {
                                 height: 45,
                               ),
                               onPressed: () {
-                                //TODO: Implement Facebook login logic
                               },
                             ),
                             const SizedBox(width: 20),
@@ -150,7 +149,6 @@ class SignInView extends GetView<SignInController> {
                                 height: 45,
                               ),
                               onPressed: () {
-                                //TODO: Implement Google login logic
                               },
                             ),
                           ],

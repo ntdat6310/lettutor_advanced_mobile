@@ -45,11 +45,11 @@ class AppPages {
       page: () => TeacherView(),
       binding: TeacherBinding(),
     ),
-    // GetPage(
-    //   name: _Paths.COURSE,
-    //   page: () => CourseView(),
-    //   binding: CourseBinding(),
-    // ),
+    GetPage(
+      name: _Paths.COURSE,
+      page: () => CourseView(),
+      binding: CourseBinding(),
+    ),
     // GetPage(
     //   name: _Paths.COURSE_DETAIL,
     //   page: () => CourseDetailView(),

@@ -30,7 +30,7 @@ class SignInController extends GetxController {
         if(responseStatusCode == 200){
           // Navigate to the next screen after successful login
           // Get.offAll(() => MyTabBarView());
-          Get.offAllNamed(Routes.HOME);
+          Get.offAllNamed(Routes.COURSE);
         }else{
           Get.snackbar("Sign in failed", "Incorrect email or password",
           backgroundColor: Colors.green,

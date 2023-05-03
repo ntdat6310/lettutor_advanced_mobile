@@ -8,6 +8,7 @@ class BackendEnvironment {
   static String getFeedbacksByTeacherId({required String teacherId}) {
     return '/feedback/v2/$teacherId';
   }
+  static String getListCourseWithSearchAndFilterAndPagination = '/course';
 
   static Map<String, String> specialties = {
     'all': 'All',
