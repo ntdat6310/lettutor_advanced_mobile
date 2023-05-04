@@ -14,12 +14,16 @@ import '../modules/meeting_video_conference/meeting_video_conference_binding.dar
 import '../modules/meeting_video_conference/meeting_video_conference_view.dart';
 import '../modules/my_tab_bar/my_tab_bar_binding.dart';
 import '../modules/my_tab_bar/my_tab_bar_view.dart';
+import '../modules/profile_setting/profile_setting_binding.dart';
+import '../modules/profile_setting/profile_setting_view.dart';
 import '../modules/register/register_binding.dart';
 import '../modules/register/register_view.dart';
 import '../modules/schedule/schedule_binding.dart';
 import '../modules/schedule/schedule_view.dart';
 import '../modules/schedule_history/schedule_history_binding.dart';
 import '../modules/schedule_history/schedule_history_view.dart';
+import '../modules/setting/setting_binding.dart';
+import '../modules/setting/setting_view.dart';
 import '../modules/sign_in/sign_in_binding.dart';
 import '../modules/sign_in/sign_in_view.dart';
 import '../modules/teacher/teacher_binding.dart';
@@ -34,7 +38,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SIGN_IN;
+  static const INITIAL = Routes.SETTING;
 
   static final routes = [
     GetPage(
@@ -109,6 +113,16 @@ class AppPages {
       name: _Paths.FORGOT_PASSWORD,
       page: () => ForgotPasswordView(),
       binding: ForgotPasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.SETTING,
+      page: () => const SettingView(),
+      binding: SettingBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE_SETTING,
+      page: () => const ProfileSettingView(),
+      binding: ProfileSettingBinding(),
     ),
   ];
 }

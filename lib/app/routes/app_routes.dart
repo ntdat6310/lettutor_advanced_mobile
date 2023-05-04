@@ -17,6 +17,8 @@ abstract class Routes {
   static const MY_TAB_BAR = _Paths.MY_TAB_BAR;
   static const TEST_API = _Paths.TEST_API;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
+  static const SETTING = _Paths.SETTING;
+  static const PROFILE_SETTING = _Paths.PROFILE_SETTING;
 }
 
 abstract class _Paths {
@@ -35,4 +37,6 @@ abstract class _Paths {
   static const MY_TAB_BAR = '/my-tab-bar';
   static const TEST_API = '/test-api';
   static const FORGOT_PASSWORD = '/forgot-password';
+  static const SETTING = '/setting';
+  static const PROFILE_SETTING = '/profile-setting';
 }
