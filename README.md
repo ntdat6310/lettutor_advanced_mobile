@@ -19,7 +19,7 @@ This project is a mobile application developed in Flutter for the Advanced Mobil
 *   UI mockup
 *   Navigation
 
-### Video Demo : 
+### Video Demo :
 
 *   Link video demo : [https://youtu.be/ARJ06hxZDVw](https://youtu.be/ARJ06hxZDVw)
 
@@ -27,3 +27,11 @@ This project is a mobile application developed in Flutter for the Advanced Mobil
 
 *   Link widget tree : [https://drive.google.com/file/d/1764eWoQd4BUs0lLgXtPEXPm9F8oySD1Z/view?usp=share_link](https://drive.google.com/file/d/1764eWoQd4BUs0lLgXtPEXPm9F8oySD1Z/view?usp=share_link)
 *   Note : Thầy nhớ tải về cho dễ zoom nha thầy 😁
+
+---
+
+## 🛫 Milestone 2 : Basic online app
+
+### Video Demo :
+
+*   Link video demo : [https://youtu.be/cIkJJl1_PZw](https://youtu.be/cIkJJl1_PZw)
