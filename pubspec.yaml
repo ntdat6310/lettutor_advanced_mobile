@@ -48,6 +48,7 @@ dependencies:
   json_serializable: ^6.6.1
   build_runner: ^2.3.3
   email_validator: ^2.1.17
+  flutter_syntax_view: ^4.0.0
 
 dev_dependencies:
   flutter_test:

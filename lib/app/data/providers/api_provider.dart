@@ -7,6 +7,7 @@ import 'package:get/route_manager.dart';
 import 'package:lettutor_advanced_mobile/app/core/constants/backend_environment.dart';
 import 'package:lettutor_advanced_mobile/app/modules/sign_in/sign_in_view.dart';
 
+import '../../core/constants/constants.dart';
 import '../../core/utils/secure_storage.dart';
 
 enum HttpMethod {
@@ -63,6 +64,32 @@ class APIHandlerImp implements APIHandlerInterface {
 
   factory APIHandlerImp() {
     return _singleton;
+  }
+
+  Future<Map<String, String>> _buildChatGPTHeader() async {
+    var baseHeader = {
+      HttpHeaders.acceptHeader: "application/json",
+      HttpHeaders.contentTypeHeader: "application/json; charset=utf-8",
+      HttpHeaders.authorizationHeader: "Bearer $apiSecretKey",
+    };
+    debugPrint("_buildChatGPTHeader ${baseHeader.toString()}");
+    return baseHeader;
+  }
+
+  Future<Response> postChatGPT({
+    required body,
+    required String url,
+  }) async {
+    Response response = await client.post(
+      url,
+      data: json.encode(body),
+      options: Options(headers: await _buildChatGPTHeader()),
+    );
+    if (response.statusCode == 401) {
+      debugPrint(
+          "APIHandlerImp.postChatGPT failed with statusCode ${response.statusCode}");
+    }
+    return response;
   }
 
   Future<Map<String, String>> _buildHeader({

@@ -5,6 +5,7 @@ class BackendEnvironment {
   static String registerByEmailEndpoint = '/auth/register';
   static String getListTutorWithSearchAndFilterAndPagination = '/tutor/search';
   static String toggleFavoriteTutor = '/user/manageFavoriteTutor';
+  static String urlFetchChatGPTResponse = 'https://api.openai.com/v1/chat/completions';
   static String getFeedbacksByTeacherId({required String teacherId}) {
     return '/feedback/v2/$teacherId';
   }

@@ -19,6 +19,7 @@ abstract class Routes {
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
   static const SETTING = _Paths.SETTING;
   static const PROFILE_SETTING = _Paths.PROFILE_SETTING;
+  static const CHAT_WITH_AI = _Paths.CHAT_WITH_AI;
 }
 
 abstract class _Paths {
@@ -39,4 +40,5 @@ abstract class _Paths {
   static const FORGOT_PASSWORD = '/forgot-password';
   static const SETTING = '/setting';
   static const PROFILE_SETTING = '/profile-setting';
+  static const CHAT_WITH_AI = '/chat-with-ai';
 }

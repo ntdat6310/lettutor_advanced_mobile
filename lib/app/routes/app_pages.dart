@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/chat_with_ai/chat_with_ai_binding.dart';
+import '../modules/chat_with_ai/chat_with_ai_view.dart';
 import '../modules/course/course_binding.dart';
 import '../modules/course/course_view.dart';
 import '../modules/course_detail/course_detail_binding.dart';
@@ -38,7 +40,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SETTING;
+  static const INITIAL = Routes.CHAT_WITH_AI;
 
   static final routes = [
     GetPage(
@@ -123,6 +125,11 @@ class AppPages {
       name: _Paths.PROFILE_SETTING,
       page: () => const ProfileSettingView(),
       binding: ProfileSettingBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHAT_WITH_AI,
+      page: () => ChatWithAiView(),
+      binding: ChatWithAiBinding(),
     ),
   ];
 }
