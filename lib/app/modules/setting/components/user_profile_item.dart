@@ -35,18 +35,18 @@ class UserProfileItem extends StatelessWidget {
         children: [
           const CircleAvatar(
             backgroundImage: NetworkImage(
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"),
+                "https://sandbox.api.lettutor.com/avatar/f569c202-7bbf-4620-af77-ecc1419a6b28avatar1683190179862.jpeg"),
             radius: 40,
           ),
           const SizedBox(height: 8),
           Text(
-            "Danilo Tanic",
+            "Testing",
             style: nameStyle,
           ),
           const SizedBox(height: 4),
 
           Text(
-            "danilo@uscreen.tv",
+            "student@lettutor.com",
             style: emailStyle,
           ),
           const SizedBox(height: 8),

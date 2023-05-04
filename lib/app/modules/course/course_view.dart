@@ -11,7 +11,7 @@ import 'course_controller.dart';
 class CourseView extends GetView<CourseController> {
   CourseView({Key? key}) : super(key: key);
 
-  final CourseController _courseController = Get.find();
+  final CourseController _courseController = Get.put(CourseController());
   void _onSearchSubmitted(String value) {
     _courseController.searchCourses(searchKey: value);
   }

@@ -40,7 +40,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.CHAT_WITH_AI;
+  static const INITIAL = Routes.SIGN_IN;
 
   static final routes = [
     GetPage(
@@ -101,11 +101,11 @@ class AppPages {
       page: () => RegisterView(),
       binding: RegisterBinding(),
     ),
-    // GetPage(
-    //   name: _Paths.MY_TAB_BAR,
-    //   page: () => MyTabBarView(),
-    //   binding: MyTabBarBinding(),
-    // ),
+    GetPage(
+      name: _Paths.MY_TAB_BAR,
+      page: () => MyTabBarView(),
+      binding: MyTabBarBinding(),
+    ),
     GetPage(
       name: _Paths.TEST_API,
       page: () => TestApiView(),

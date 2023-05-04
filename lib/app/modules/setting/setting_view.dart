@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lettutor_advanced_mobile/app/modules/setting/components/setting_item.dart';
 import 'package:lettutor_advanced_mobile/app/modules/setting/components/user_profile_item.dart';
+import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 
 import 'setting_controller.dart';
 
@@ -29,18 +30,14 @@ class SettingView extends GetView<SettingController> {
                 SettingItem(
                   icon: Icons.chat_outlined,
                   title: "Chat with AI",
-                  onClick: () {},
+                  onClick: () {
+                    Get.toNamed(Routes.CHAT_WITH_AI);
+                  },
                   bottomSpace: 12,
                 ),
                 SettingItem(
                   icon: Icons.verified_user_outlined,
                   title: "Become a tutor",
-                  onClick: () {},
-                  bottomSpace: 12,
-                ),
-                SettingItem(
-                  icon: Icons.favorite_border,
-                  title: "Favorite tutors",
                   onClick: () {},
                   bottomSpace: 12,
                 ),
