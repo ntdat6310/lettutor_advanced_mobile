@@ -6,6 +6,8 @@ import '../modules/course_detail/course_detail_binding.dart';
 import '../modules/course_detail/course_detail_view.dart';
 import '../modules/course_lesson/course_lesson_binding.dart';
 import '../modules/course_lesson/course_lesson_view.dart';
+import '../modules/forgot_password/forgot_password_binding.dart';
+import '../modules/forgot_password/forgot_password_view.dart';
 import '../modules/home/home_binding.dart';
 import '../modules/home/home_view.dart';
 import '../modules/meeting_video_conference/meeting_video_conference_binding.dart';
@@ -102,6 +104,11 @@ class AppPages {
       name: _Paths.TEST_API,
       page: () => TestApiView(),
       binding: TestApiBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORGOT_PASSWORD,
+      page: () => ForgotPasswordView(),
+      binding: ForgotPasswordBinding(),
     ),
   ];
 }

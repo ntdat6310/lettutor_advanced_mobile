@@ -9,6 +9,7 @@ class BackendEnvironment {
     return '/feedback/v2/$teacherId';
   }
   static String getListCourseWithSearchAndFilterAndPagination = '/course';
+  static String resetPasswordByEmail = '/user/forgotPassword';
 
   static Map<String, String> specialties = {
     'all': 'All',

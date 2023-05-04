@@ -16,6 +16,7 @@ abstract class Routes {
   static const REGISTER = _Paths.REGISTER;
   static const MY_TAB_BAR = _Paths.MY_TAB_BAR;
   static const TEST_API = _Paths.TEST_API;
+  static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
 }
 
 abstract class _Paths {
@@ -33,4 +34,5 @@ abstract class _Paths {
   static const REGISTER = '/register';
   static const MY_TAB_BAR = '/my-tab-bar';
   static const TEST_API = '/test-api';
+  static const FORGOT_PASSWORD = '/forgot-password';
 }

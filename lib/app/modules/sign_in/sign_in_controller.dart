@@ -27,14 +27,26 @@ class SignInController extends GetxController {
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         ));
-        if(responseStatusCode == 200){
+        if (responseStatusCode == 200) {
           // Navigate to the next screen after successful login
           // Get.offAll(() => MyTabBarView());
           Get.offAllNamed(Routes.COURSE);
-        }else{
-          Get.snackbar("Sign in failed", "Incorrect email or password",
-          backgroundColor: Colors.green,
-          colorText: Colors.white);
+        } else if (responseStatusCode == 400) {
+          Get.snackbar(
+            "Sign in failed : Incorrect email or password",
+            "Please retype your email or password",
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+            duration: const Duration(seconds: 5),
+          );
+        } else if (responseStatusCode == 500) {
+          Get.snackbar(
+            "Your email has not activated",
+            "Please activate your email before login",
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+            duration: const Duration(seconds: 5),
+          );
         }
       } catch (e) {
         // Show an error message if the sign-in fails

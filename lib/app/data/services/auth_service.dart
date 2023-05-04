@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter/cupertino.dart';
 import 'package:lettutor_advanced_mobile/app/core/constants/backend_environment.dart';
 import 'package:lettutor_advanced_mobile/app/data/models/auth/login_email_request.dart';
@@ -10,7 +10,7 @@ import '../providers/api_provider.dart';
 class AuthService {
   Future<int> login({required LoginByEmailRequest body}) async {
     try {
-      Response response = await APIHandlerImp.instance.post(
+      dio.Response response = await APIHandlerImp.instance.post(
         body: body.toJson(),
         endpoint: BackendEnvironment.loginByEmailEndpoint,
       );
@@ -33,13 +33,14 @@ class AuthService {
       }
     } catch (e) {
       debugPrint("LOGIN: FAILED ${e.toString()}");
+      return 500;
     }
     return 400;
   }
 
   Future<int> registerByEmail({required RegisterByEmailRequest body}) async {
     try {
-      Response response = await APIHandlerImp.instance.post(
+      dio.Response response = await APIHandlerImp.instance.post(
           body: body.toJson(),
           endpoint: BackendEnvironment.registerByEmailEndpoint);
       if (response.statusCode == 201) {
@@ -47,10 +48,30 @@ class AuthService {
         return 201;
       } else {
         debugPrint(
-            "REGISTER BY EMAIL: FAILED - response.statusCode ${response.statusCode}, ${response.data.toString()}");
+            "AuthService.registerByEmail - response.statusCode ${response.statusCode}, ${response.data.toString()}");
       }
     } catch (e) {
-      debugPrint("REGISTER BY EMAIL: FAILED ${e.toString()}");
+      debugPrint("AuthService.registerByEmail ${e.toString()}");
+    }
+    return 400;
+  }
+
+  Future<int> resetPasswordByEmail({required String email}) async {
+    try {
+      dio.Response response = await APIHandlerImp.instance.post(
+        endpoint: BackendEnvironment.resetPasswordByEmail,
+        body: {"email": email},
+      );
+      if (response.statusCode == 200) {
+        // Email sent success
+        return 200;
+      }
+      if (response.statusCode == 400) {
+        // Email doesn't exist
+        return 400;
+      }
+    } catch (e) {
+      debugPrint("AuthService.resetPasswordByEmail ${e.toString()}");
     }
     return 400;
   }

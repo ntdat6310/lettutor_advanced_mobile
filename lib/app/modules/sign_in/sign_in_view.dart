@@ -89,7 +89,9 @@ class SignInView extends GetView<SignInController> {
                           children: [
                             TextButton(
                               child: const Text('Forgot Password?'),
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.toNamed(Routes.FORGOT_PASSWORD);
+                              },
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -97,7 +99,9 @@ class SignInView extends GetView<SignInController> {
                                 const Text('Not a member yet? '),
                                 TextButton(
                                   child: const Text('Sign up'),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Get.toNamed(Routes.REGISTER);
+                                  },
                                 ),
                               ],
                             ),

@@ -9,8 +9,7 @@ import 'register_controller.dart';
 
 class RegisterView extends GetView<RegisterController> {
   RegisterView({Key? key}) : super(key: key);
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final RegisterController _registerController = Get.put(RegisterController());
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,7 @@ class RegisterView extends GetView<RegisterController> {
                         Container(
                           margin: const EdgeInsets.only(bottom: 12),
                           child: TextField(
-                            controller: _emailController,
+                            controller: _registerController.emailController,
                             decoration: const InputDecoration(
                                 labelText: 'Email',
                                 floatingLabelBehavior:
@@ -52,10 +51,18 @@ class RegisterView extends GetView<RegisterController> {
                                     icon: Icons.email_rounded)),
                           ),
                         ),
+                        Obx(() => Visibility(
+                              visible: _registerController
+                                  .emailError.value.isNotEmpty,
+                              child: Text(
+                                _registerController.emailError.value,
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            )),
                         Container(
                           margin: const EdgeInsets.only(bottom: 20),
                           child: TextField(
-                            controller: _passwordController,
+                            controller: _registerController.passwordController,
                             decoration: const InputDecoration(
                                 labelText: 'Password',
                                 floatingLabelBehavior:
@@ -65,10 +72,19 @@ class RegisterView extends GetView<RegisterController> {
                             obscureText: true,
                           ),
                         ),
+                        Obx(() => Visibility(
+                              visible: _registerController
+                                  .passwordError.value.isNotEmpty,
+                              child: Text(
+                                _registerController.passwordError.value,
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            )),
                         Container(
                           margin: const EdgeInsets.only(bottom: 20),
                           child: TextField(
-                            controller: _passwordController,
+                            controller:
+                                _registerController.confirmPasswordController,
                             decoration: const InputDecoration(
                                 labelText: 'Confirm password',
                                 floatingLabelBehavior:
@@ -78,20 +94,38 @@ class RegisterView extends GetView<RegisterController> {
                             obscureText: true,
                           ),
                         ),
-
-                        ElevatedButton(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const <Widget>[
-                              Icon(Icons.login),
-                              SizedBox(width: 10),
-                              Text("Register"),
-                            ],
-                          ),
-                          onPressed: () {
-                            Get.offAll(Routes.MY_TAB_BAR);
-                          },
-                        ),
+                        Obx(() => Visibility(
+                              visible: _registerController
+                                  .confirmPasswordError.value.isNotEmpty,
+                              child: Text(
+                                _registerController.confirmPasswordError.value,
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            )),
+                        Obx(() {
+                          if (_registerController.isLoading.value) {
+                            return Container(
+                              alignment: Alignment.center,
+                              child: const CircularProgressIndicator(
+                                color: Colors.blueAccent,
+                              ),
+                            );
+                          } else {
+                            return ElevatedButton(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const <Widget>[
+                                  Icon(Icons.login),
+                                  SizedBox(width: 10),
+                                  Text("Register"),
+                                ],
+                              ),
+                              onPressed: () {
+                                _registerController.validateAndSubmitRegister();
+                              },
+                            );
+                          }
+                        }),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -102,7 +136,7 @@ class RegisterView extends GetView<RegisterController> {
                                 TextButton(
                                   child: const Text('Sign in'),
                                   onPressed: () {
-                                    //TODO: Implement sign up logic
+                                    Get.back();
                                   },
                                 ),
                               ],
