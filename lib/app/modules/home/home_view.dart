@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/modules/chat_with_ai/components/loading.dart';
+import 'package:lettutor_advanced_mobile/app/modules/controllers/teacher_toggle_favorite_controller.dart';
+import 'package:lettutor_advanced_mobile/app/modules/home/home_controller.dart';
 
-import '../teacher/components/speciality_list.dart';
-import '../teacher/components/teacher_card.dart';
+import '../teachers/components/speciality_list.dart';
+import '../teachers/components/teacher_card.dart';
 import '../widgets/custom_appbar.dart';
 import 'components/find_tutor.dart';
 import 'components/recommended_tutor.dart';
 import 'components/upcomming_lesson.dart';
-import 'home_controller.dart';
 
-class HomeView extends GetView<HomeController> {
+class HomeView extends StatelessWidget {
   HomeView({Key? key}) : super(key: key);
-  HomeController c = Get.put(HomeController());
-
+  final HomeController _homeController =
+      Get.put<HomeController>(HomeController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,15 +51,30 @@ class HomeView extends GetView<HomeController> {
                       'Ket'
                     ]),
                     const RecommendedTutor(),
-                    Obx(() => Column(
+                    Obx(() {
+                      if (_homeController
+                          .teacherController.isLoadingTeachers.value) {
+                        return LoadingWidget(
+                          isLoading: _homeController
+                              .teacherController.isLoadingTeachers.value,
+                          color: Colors.blueAccent,
+                        );
+                      } else {
+                        final TeacherToggleFavoriteController teacherCardController =
+                            Get.put<TeacherToggleFavoriteController>(
+                                TeacherToggleFavoriteController());
+                        return Column(
                           children: List.generate(
-                              c.teacherController.teachers.value.length,
+                              _homeController.teacherController.teachers.length,
                               (index) => TeacherCard(
-                                    teacherId: c.teacherController.teachers
-                                        .value[index].userId!,
-                                    isFavoriteTeacherList: true,
+                                    teacher: _homeController
+                                        .teacherController.teachers[index],
+                                    teacherCardController:
+                                        teacherCardController,
                                   )),
-                        )),
+                        );
+                      }
+                    }),
                   ],
                 ),
               )

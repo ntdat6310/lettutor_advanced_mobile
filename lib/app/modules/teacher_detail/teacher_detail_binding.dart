@@ -6,7 +6,7 @@ class TeacherDetailBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<TeacherDetailController>(
-      () => TeacherDetailController(),
+      () => TeacherDetailController(teacher: Get.arguments),
     );
   }
 }

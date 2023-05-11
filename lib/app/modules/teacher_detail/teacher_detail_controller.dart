@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lettutor_advanced_mobile/app/core/utils/helpers.dart';
 import 'package:lettutor_advanced_mobile/app/data/models/teacher/rating_comment.dart';
@@ -14,9 +13,11 @@ class TeacherDetailController extends GetxController {
   RxBool isLoading = true.obs;
   RxList<RatingComment> feedbacks = RxList<RatingComment>();
 
+  TeacherDetailController({required this.teacher});
+
   @override
   void onInit() async {
-    teacher = Get.find<Teacher>(tag: 'selectedTeacher');
+    super.onInit();
     languageNames
         .addAll(await Helper.getLanguageNames(teacher.languages ?? ''));
     specialtyValues.addAll(
@@ -25,11 +26,8 @@ class TeacherDetailController extends GetxController {
         teacherId: teacher.userId ?? '');
     if (results != null) {
       feedbacks.addAll(results);
-      debugPrint(
-          "TeacherDetailController ${teacher.name} - ${feedbacks.length}");
     }
     isLoading.value = false;
-    super.onInit();
   }
 
   @override
@@ -39,7 +37,6 @@ class TeacherDetailController extends GetxController {
 
   @override
   void onClose() async {
-    Get.delete<Teacher>(tag: 'selectedTeacher');
     super.onClose();
   }
 }

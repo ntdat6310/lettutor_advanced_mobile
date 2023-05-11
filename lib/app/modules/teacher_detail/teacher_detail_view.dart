@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../data/models/teacher/teacher.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/rating_star.dart';
 import 'components/booking_button.dart';
@@ -12,9 +13,7 @@ import 'components/video_intro.dart';
 import 'teacher_detail_controller.dart';
 
 class TeacherDetailView extends GetView<TeacherDetailController> {
-  TeacherDetailView({Key? key}) : super(key: key);
-
-  TeacherDetailController c = Get.put(TeacherDetailController());
+  const TeacherDetailView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +21,7 @@ class TeacherDetailView extends GetView<TeacherDetailController> {
       appBar: const CustomAppBar(
         title: "",
       ),
-      body: !c.isLoading.value
+      body: !controller.isLoading.value
           ? const CircularProgressIndicator(
               color: Colors.blueAccent,
             )
@@ -38,8 +37,8 @@ class TeacherDetailView extends GetView<TeacherDetailController> {
                       children: [
                         const SizedBox(width: 20),
                         CircleAvatar(
-                          backgroundImage: c.teacher.avatar != null
-                              ? NetworkImage(c.teacher.avatar ?? '')
+                          backgroundImage: controller.teacher.avatar != null
+                              ? NetworkImage(controller.teacher.avatar ?? '')
                               : const AssetImage(
                                       'assets/images/default_user.png')
                                   as ImageProvider<Object>,
@@ -55,17 +54,18 @@ class TeacherDetailView extends GetView<TeacherDetailController> {
                                 Container(
                                   margin: const EdgeInsets.fromLTRB(4, 0, 0, 8),
                                   child: Text(
-                                    c.teacher.name ?? '',
+                                    controller.teacher.name ?? '',
                                     style: const TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                                RatingStar(rating: c.teacher.rating ?? 0),
+                                RatingStar(
+                                    rating: controller.teacher.rating ?? 0),
                                 Container(
                                   margin: const EdgeInsets.fromLTRB(4, 8, 0, 0),
                                   child: Text(
-                                    c.teacher.country ?? '',
+                                    controller.teacher.country ?? '',
                                     style: const TextStyle(fontSize: 20),
                                   ),
                                 )
@@ -76,42 +76,43 @@ class TeacherDetailView extends GetView<TeacherDetailController> {
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 20),
                       child: MessageFavoriteReport(
-                        teacherId: c.teacher.userId ?? '',
+                        teacher: controller.teacher,
                       ),
                     ),
                     BookingButton(),
                     const SizedBox(height: 20),
                     TeacherDescription(
-                      description: c.teacher.bio ?? '',
+                      description: controller.teacher.bio ?? '',
                     ),
                     ChipInfo(
                       title: "Languages",
-                      chipList: c.languageNames,
+                      chipList: controller.languageNames,
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     ChipInfo(
                       title: "Specialties",
-                      chipList: c.specialtyValues,
+                      chipList: controller.specialtyValues,
                     ),
                     const SizedBox(
                       height: 20,
                     ),
-                    // ChipInfo(chipList: c.teacher.interests, title: "Interests"),
                     SectionWithTitleAndContent(
-                        content: c.teacher.interests ?? 'No',
+                        content:
+                        controller.teacher.interests ?? 'No',
                         title: 'Interests'),
                     const SizedBox(
                       height: 20,
                     ),
                     SectionWithTitleAndContent(
                         title: 'Teaching Experience',
-                        content: c.teacher.experience ?? 'No experience'),
+                        content: controller.teacher.experience ??
+                            'No experience'),
                     const SizedBox(
                       height: 20,
                     ),
-                    ReviewList(reviews: c.feedbacks),
+                    ReviewList(reviews: controller.feedbacks),
                   ],
                 ),
               ),

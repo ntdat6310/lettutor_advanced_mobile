@@ -8,8 +8,7 @@ import '../widgets/custom_suffix_icon.dart';
 import 'register_controller.dart';
 
 class RegisterView extends GetView<RegisterController> {
-  RegisterView({Key? key}) : super(key: key);
-  final RegisterController _registerController = Get.put(RegisterController());
+  const RegisterView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +41,7 @@ class RegisterView extends GetView<RegisterController> {
                         Container(
                           margin: const EdgeInsets.only(bottom: 12),
                           child: TextField(
-                            controller: _registerController.emailController,
+                            controller: controller.emailController,
                             decoration: const InputDecoration(
                                 labelText: 'Email',
                                 floatingLabelBehavior:
@@ -52,17 +51,16 @@ class RegisterView extends GetView<RegisterController> {
                           ),
                         ),
                         Obx(() => Visibility(
-                              visible: _registerController
-                                  .emailError.value.isNotEmpty,
+                              visible: controller.emailError.value.isNotEmpty,
                               child: Text(
-                                _registerController.emailError.value,
+                                controller.emailError.value,
                                 style: const TextStyle(color: Colors.red),
                               ),
                             )),
                         Container(
                           margin: const EdgeInsets.only(bottom: 20),
                           child: TextField(
-                            controller: _registerController.passwordController,
+                            controller: controller.passwordController,
                             decoration: const InputDecoration(
                                 labelText: 'Password',
                                 floatingLabelBehavior:
@@ -73,18 +71,17 @@ class RegisterView extends GetView<RegisterController> {
                           ),
                         ),
                         Obx(() => Visibility(
-                              visible: _registerController
-                                  .passwordError.value.isNotEmpty,
+                              visible:
+                                  controller.passwordError.value.isNotEmpty,
                               child: Text(
-                                _registerController.passwordError.value,
+                                controller.passwordError.value,
                                 style: const TextStyle(color: Colors.red),
                               ),
                             )),
                         Container(
                           margin: const EdgeInsets.only(bottom: 20),
                           child: TextField(
-                            controller:
-                                _registerController.confirmPasswordController,
+                            controller: controller.confirmPasswordController,
                             decoration: const InputDecoration(
                                 labelText: 'Confirm password',
                                 floatingLabelBehavior:
@@ -95,15 +92,15 @@ class RegisterView extends GetView<RegisterController> {
                           ),
                         ),
                         Obx(() => Visibility(
-                              visible: _registerController
+                              visible: controller
                                   .confirmPasswordError.value.isNotEmpty,
                               child: Text(
-                                _registerController.confirmPasswordError.value,
+                                controller.confirmPasswordError.value,
                                 style: const TextStyle(color: Colors.red),
                               ),
                             )),
                         Obx(() {
-                          if (_registerController.isLoading.value) {
+                          if (controller.isLoading.value) {
                             return Container(
                               alignment: Alignment.center,
                               child: const CircularProgressIndicator(
@@ -121,7 +118,7 @@ class RegisterView extends GetView<RegisterController> {
                                 ],
                               ),
                               onPressed: () {
-                                _registerController.validateAndSubmitRegister();
+                                controller.validateAndSubmitRegister();
                               },
                             );
                           }

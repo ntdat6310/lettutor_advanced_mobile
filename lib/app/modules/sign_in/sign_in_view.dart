@@ -11,8 +11,6 @@ import 'sign_in_controller.dart';
 class SignInView extends GetView<SignInController> {
   SignInView({Key? key}) : super(key: key);
 
-  final SignInController _signInController = Get.put(SignInController());
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -46,7 +44,7 @@ class SignInView extends GetView<SignInController> {
                         Container(
                           margin: const EdgeInsets.only(bottom: 12),
                           child: TextField(
-                            controller: _signInController.emailController,
+                            controller: controller.emailController,
                             decoration: const InputDecoration(
                                 labelText: 'Email',
                                 floatingLabelBehavior:
@@ -56,17 +54,16 @@ class SignInView extends GetView<SignInController> {
                           ),
                         ),
                         Obx(() => Visibility(
-                              visible:
-                                  _signInController.emailError.value.isNotEmpty,
+                              visible: controller.emailError.value.isNotEmpty,
                               child: Text(
-                                _signInController.emailError.value,
+                                controller.emailError.value,
                                 style: const TextStyle(color: Colors.red),
                               ),
                             )),
                         Container(
                           margin: const EdgeInsets.only(bottom: 20),
                           child: TextField(
-                            controller: _signInController.passwordController,
+                            controller: controller.passwordController,
                             decoration: const InputDecoration(
                                 labelText: 'Password',
                                 floatingLabelBehavior:
@@ -77,10 +74,10 @@ class SignInView extends GetView<SignInController> {
                           ),
                         ),
                         Obx(() => Visibility(
-                              visible: _signInController
-                                  .passwordError.value.isNotEmpty,
+                              visible:
+                                  controller.passwordError.value.isNotEmpty,
                               child: Text(
-                                _signInController.passwordError.value,
+                                controller.passwordError.value,
                                 style: const TextStyle(color: Colors.red),
                               ),
                             )),
@@ -108,7 +105,7 @@ class SignInView extends GetView<SignInController> {
                           ],
                         ),
                         Obx(() {
-                          if (_signInController.isLoading.value) {
+                          if (controller.isLoading.value) {
                             return Container(
                               alignment: Alignment.center,
                               child: const CircularProgressIndicator(
@@ -126,7 +123,7 @@ class SignInView extends GetView<SignInController> {
                                 ],
                               ),
                               onPressed: () {
-                                _signInController.validateAndSubmitSignIn();
+                                controller.validateAndSubmitSignIn();
                               },
                             );
                           }
@@ -143,8 +140,7 @@ class SignInView extends GetView<SignInController> {
                                 'assets/icons/facebook_icon.svg',
                                 height: 45,
                               ),
-                              onPressed: () {
-                              },
+                              onPressed: () {},
                             ),
                             const SizedBox(width: 20),
                             IconButton(
@@ -152,8 +148,7 @@ class SignInView extends GetView<SignInController> {
                                 'assets/icons/google_icon.svg',
                                 height: 45,
                               ),
-                              onPressed: () {
-                              },
+                              onPressed: () {},
                             ),
                           ],
                         ),

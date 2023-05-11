@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:lettutor_advanced_mobile/app/modules/teacher/teacher_view.dart';
 
 import '../../../routes/app_pages.dart';
 

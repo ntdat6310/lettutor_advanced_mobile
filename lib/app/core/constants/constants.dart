@@ -7,4 +7,19 @@ enum SenderType {
   bot,
 }
 
-class Constants {}
+class Constants {
+  static Map<String, String> specialties = {
+    "all": "All",
+    "business-english": "Business",
+    "conversational-english": "Conversational",
+    "english-for-kids": "Kids",
+    "ielts": "Ielts",
+    "starters": "Starters,",
+    "movers": "Movers",
+    "flyers": "Flyers",
+    "ket": "Ket",
+    "pet": "Pet",
+    "toefl": "Toefl",
+    "toeic": "Toeic",
+  };
+}

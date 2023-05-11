@@ -7,9 +7,7 @@ import '../widgets/custom_suffix_icon.dart';
 import 'forgot_password_controller.dart';
 
 class ForgotPasswordView extends GetView<ForgotPasswordController> {
-  ForgotPasswordView({Key? key}) : super(key: key);
-
-  final ForgotPasswordController _forgotPasswordController = Get.put(ForgotPasswordController());
+  const ForgotPasswordView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +42,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                         Container(
                           margin: const EdgeInsets.only(bottom: 12),
                           child: TextField(
-                            controller: _forgotPasswordController.emailController,
+                            controller: controller.emailController,
                             decoration: const InputDecoration(
                                 labelText: 'Email',
                                 floatingLabelBehavior:
@@ -54,7 +52,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                           ),
                         ),
                         Obx(() {
-                          if (_forgotPasswordController.isLoading.value) {
+                          if (controller.isLoading.value) {
                             return Container(
                               alignment: Alignment.center,
                               child: const CircularProgressIndicator(
@@ -72,7 +70,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                                 ],
                               ),
                               onPressed: () {
-                                _forgotPasswordController.resetPassword();
+                                controller.resetPassword();
                               },
                             );
                           }

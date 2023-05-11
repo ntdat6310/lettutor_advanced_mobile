@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lettutor_advanced_mobile/app/modules/teacher/teacher_controller.dart';
+import 'package:lettutor_advanced_mobile/app/data/services/teacher_service.dart';
+import 'package:lettutor_advanced_mobile/app/modules/controllers/message_favorite_report_controller.dart';
+
+import '../../../data/models/teacher/teacher.dart';
 
 class MessageFavoriteReport extends StatelessWidget {
-  MessageFavoriteReport({Key? key, required this.teacherId}) : super(key: key);
-  final String teacherId;
-  final TeacherController _teacherController = Get.find();
+  MessageFavoriteReport({Key? key, required this.teacher}) : super(key: key);
+  final Teacher teacher;
+  late final MessageFavoriteReportController controller =
+      Get.put(MessageFavoriteReportController());
 
   void _onMessageButtonPressed() {}
+
   void _onFavoriteButtonPressed() {
-    _teacherController.toggleFavoriteTeacher(teacherId);
+    controller.toggleFavorite(teacherId: teacher.userId ?? '');
   }
 
   void _onReportButtonPressed() {}
@@ -39,7 +44,7 @@ class MessageFavoriteReport extends StatelessWidget {
             Obx(() => IconButton(
                 onPressed: _onFavoriteButtonPressed,
                 icon: Icon(
-                  _teacherController.getTeacherById(id: teacherId)!.isFavorite.value
+                  teacher.isFavorite.value
                       ? Icons.favorite
                       : Icons.favorite_outline,
                   color: Colors.blueAccent,

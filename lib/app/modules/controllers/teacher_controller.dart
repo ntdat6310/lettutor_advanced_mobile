@@ -5,29 +5,38 @@ import '../../data/models/teacher/teacher.dart';
 import '../../data/services/teacher_service.dart';
 
 class TeacherController extends GetxController {
-  TeacherService teacherService = Get.put(TeacherService());
+  final TeacherService _teacherService = Get.put(TeacherService());
   RxList<Teacher> teachers = RxList<Teacher>([]);
   RxBool isLoadingTeachers = false.obs;
-  String searchKeyForTeachers = '';
+  String? storedBy;
 
-  Future<bool> searchTeachers({String searchKey = ''}) async {
+  TeacherController({this.storedBy});
+
+  Future<bool> searchTeachers({
+    String searchKey = '',
+    List<String>? specialities,
+  }) async {
     isLoadingTeachers.value = true;
-    searchKeyForTeachers = searchKey;
     List<Teacher>? results =
-        await teacherService.getListTutorWithSearchAndFilterAndPagination(
+        await _teacherService.getListTutorWithSearchAndFilterAndPagination(
       searchKey: searchKey,
+      specialties: specialities,
     );
     if (results != null && results.isNotEmpty) {
       teachers.clear();
       teachers.addAll(results);
-      teacherService.sortTeachersByFavoriteAndRating(teachers: teachers);
+      _teacherService.sortTeachersByFavoriteAndRating(teachers: teachers);
       isLoadingTeachers.value = false;
       return true;
-    }else{
+    } else {
       teachers.clear();
       isLoadingTeachers.value = false;
       return false;
     }
+  }
+
+  void filterFavoriteTeachers() {
+    teachers.removeWhere((teacher) => teacher.isFavorite.value == false);
   }
 
   Teacher? getTeacherById({required String id}) {
@@ -42,28 +51,45 @@ class TeacherController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    debugPrint("TeacherController.onInit");
     searchTeachers();
   }
 
   @override
   void onReady() {
+    debugPrint("TeacherController.onReady");
     super.onReady();
   }
 
   @override
   void onClose() {
+    debugPrint("TeacherController.onClose");
     super.onClose();
   }
 
-  void toggleFavoriteTeacher(String teacherId) {
+  void toggleFavoriteTeacherLocal({required String teacherId}) {
+    bool hasTeacherId = false;
     for (var teacher in teachers) {
       if (teacher.userId == teacherId) {
         teacher.isFavorite.value = !teacher.isFavorite.value;
-        teacherService.toggleFavoriteTutor(tutorId: teacherId);
+        hasTeacherId = true;
         break;
       }
     }
-    teacherService.sortTeachersByFavoriteAndRating(teachers: teachers);
-    teachers.refresh();
+
+    if (storedBy == "HOME") {
+      filterFavoriteTeachers();
+      return;
+    }
+
+    if (hasTeacherId) {
+      _teacherService.sortTeachersByFavoriteAndRating(teachers: teachers);
+      teachers.refresh();
+    }
+  }
+
+  /// Toggle favorite only by api
+  void toggleFavoriteTeacherApi({required String teacherId}) {
+    _teacherService.toggleFavoriteTutor(tutorId: teacherId);
   }
 }

@@ -5,34 +5,32 @@ import 'package:lettutor_advanced_mobile/app/modules/setting/setting_view.dart';
 
 import '../course/course_view.dart';
 import '../home/home_view.dart';
-import '../teacher/teacher_view.dart';
+import '../teachers/teachers_view.dart';
 import 'my_tab_bar_controller.dart';
 
 class MyTabBarView extends GetView<MyTabBarController> {
   MyTabBarView({Key? key}) : super(key: key);
 
-  MyTabBarController c = Get.put(MyTabBarController());
-
   final List<Widget> _pages = [
     HomeView(),
     // ScheduleHistoryView(),
     // ScheduleView(),
-    TeacherView(),
+    TeachersView(),
     CourseView(),
     ChatWithAiView(),
-    const SettingView(),
+    SettingView(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
-          body: _pages[c.selectedIndex.value],
+          body: _pages[controller.selectedIndex.value],
           bottomNavigationBar: BottomNavigationBar(
             selectedItemColor: Colors.blue,
             unselectedItemColor: Colors.grey,
-            currentIndex: c.selectedIndex.value,
+            currentIndex: controller.selectedIndex.value,
             onTap: (index) {
-              c.onItemTapped(index);
+              controller.onItemTapped(index);
             },
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(

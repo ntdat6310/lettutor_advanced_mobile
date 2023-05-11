@@ -8,7 +8,7 @@ import 'components/course_card.dart';
 import 'components/custom_dropdown.dart';
 import 'course_controller.dart';
 
-class CourseView extends GetView<CourseController> {
+class CourseView extends StatelessWidget {
   CourseView({Key? key}) : super(key: key);
 
   final CourseController _courseController = Get.put(CourseController());

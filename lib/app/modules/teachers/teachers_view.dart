@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/modules/controllers/teacher_toggle_favorite_controller.dart';
 import 'package:lettutor_advanced_mobile/app/modules/widgets/no_data_found.dart';
 
 import '../home/components/find_tutor.dart';
@@ -8,13 +9,12 @@ import '../widgets/custom_divider.dart';
 import '../widgets/custom_search_bar.dart';
 import 'components/speciality_list.dart';
 import 'components/teacher_card.dart';
-import 'teacher_controller.dart';
+import 'teachers_controller.dart';
 
-class TeacherView extends GetView<TeacherController> {
-  TeacherView({Key? key}) : super(key: key);
-
-  final TeacherController c = Get.find();
-
+class TeachersView extends GetView<TeachersController> {
+  TeachersView({Key? key}) : super(key: key);
+  final TeachersController _teachersController =
+      Get.put<TeachersController>(TeachersController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,14 +29,12 @@ class TeacherView extends GetView<TeacherController> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               CustomSearchBar(
-                initValue: c.searchKeyForTeachers,
-                onChanged: (String value) {
-                  print(value);
-                },
+                initValue: _teachersController.searchKeyForTeachers,
+                onChanged: (String value) {},
                 onSubmit: (String value) {
                   // Handle search here
-                  debugPrint("TeacherView CustomSearchBar OnSubmit $value");
-                  c.searchTeachers(searchKey: value);
+                  _teachersController.teacherController
+                      .searchTeachers(searchKey: value);
                 },
                 searchHint: 'Enter tutor\'s name',
               ),
@@ -60,18 +58,24 @@ class TeacherView extends GetView<TeacherController> {
               const CustomDivider(),
               const SizedBox(height: 20),
               Obx(() {
-                if (c.isLoadingTeachers.value) {
+                if (_teachersController
+                    .teacherController.isLoadingTeachers.value) {
                   return const CircularProgressIndicator(
                     color: Colors.blueAccent,
                   );
-                } else if (c.teachers.isEmpty) {
+                } else if (_teachersController
+                    .teacherController.teachers.isEmpty) {
                   return const NoDataFound();
                 } else {
+                  final TeacherToggleFavoriteController teacherCardController =
+                      Get.put<TeacherToggleFavoriteController>(TeacherToggleFavoriteController());
                   return Column(
                     children: List.generate(
-                        c.teachers.length,
+                        _teachersController.teacherController.teachers.length,
                         (index) => TeacherCard(
-                              teacherId: c.teachers[index].userId ?? '',
+                              teacher: _teachersController
+                                  .teacherController.teachers[index],
+                              teacherCardController: teacherCardController,
                             )),
                   );
                 }
