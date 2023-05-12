@@ -1,23 +1,12 @@
 import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/data/services/profile_service.dart';
 
 class ProfileSettingController extends GetxController {
-  //TODO: Implement ProfileSettingController
+  final ProfileService profileService = Get.put<ProfileService>(ProfileService());
 
-  final count = 0.obs;
+
   @override
   void onInit() {
     super.onInit();
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

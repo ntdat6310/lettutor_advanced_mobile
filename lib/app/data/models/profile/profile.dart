@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lettutor_advanced_mobile/app/data/models/profile/learn_topic.dart';
+import 'package:lettutor_advanced_mobile/app/data/models/profile/test_preparation.dart';
+
+import 'become_tutor.dart';
 
 part 'profile.g.dart';
 
@@ -7,36 +9,36 @@ part 'profile.g.dart';
 class Profile {
   String? id;
   String? email;
-  String? level;
-  String? language;
   String? name;
-  String? country;
   String? avatar;
+  String? country;
   String? phone;
+  String? language;
   String? birthday;
-  List<dynamic>? courses;
-  List<LearnTopic>? learnTopics;
-  List<LearnTopic>? testPreparations;
-  int? timezone;
+  String? studySchedule;
+  bool? isPhoneActivated;
+  String? level;
+  List<TestPreparation>? testPreparations;
+  BecomeTutor? becomeTutor;
 
   Profile({
     this.id,
     this.email,
-    this.level,
-    this.language,
     this.name,
-    this.country,
-    this.timezone,
     this.avatar,
+    this.country,
     this.phone,
+    this.language,
     this.birthday,
-    this.courses,
-    this.learnTopics,
+    this.studySchedule,
+    this.isPhoneActivated,
+    this.level,
     this.testPreparations,
+    this.becomeTutor,
   });
 
-  factory Profile.fromJson(Map<String, dynamic> json)
-  => _$ProfileFromJson(json);
+  factory Profile.fromJson(Map<String, dynamic> json) =>
+      _$ProfileFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProfileToJson(this);
 }

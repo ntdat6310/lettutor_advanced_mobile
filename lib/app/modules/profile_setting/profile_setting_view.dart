@@ -10,7 +10,7 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ProfileSettingView'),
+        title: const Text('Profile Setting'),
         centerTitle: true,
       ),
       body: const Center(

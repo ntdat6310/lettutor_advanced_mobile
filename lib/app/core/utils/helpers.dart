@@ -24,7 +24,8 @@ class Helper {
     return json.decode(jsonString).cast<String, String>();
   }
 
-  static Future<List<String>> getSpecialties({required String specialtiesStr}) async {
+  static Future<List<String>> getSpecialties(
+      {required String specialtiesStr}) async {
     Map<String, String> specialtiesMap = await _loadSpecialties();
     List<String> specialtyKeys = specialtiesStr.split(',');
     List<String> specialtyValues = [];
@@ -33,6 +34,10 @@ class Helper {
       specialtyValues.add(value);
     }
     return specialtyValues;
+  }
+
+  static Future<Map<String, String>> getLanguagesMap() async {
+    return await _loadLanguageCodes();
   }
 
   static Future<List<String>> getLanguageNames(String languages) async {

@@ -11,6 +11,9 @@ class BackendEnvironment {
   }
   static String getListCourseWithSearchAndFilterAndPagination = '/course';
   static String resetPasswordByEmail = '/user/forgotPassword';
+  static String updateProfile = '/user/info';
+  static String getProfile = '/user/info';
+  static String getTestPreparation = '/test-preparation';
 
   static Map<String, String> specialties = {
     'all': 'All',
