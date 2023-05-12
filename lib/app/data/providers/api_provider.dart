@@ -72,7 +72,6 @@ class APIHandlerImp implements APIHandlerInterface {
       HttpHeaders.contentTypeHeader: "application/json; charset=utf-8",
       HttpHeaders.authorizationHeader: "Bearer $apiSecretKey",
     };
-    debugPrint("_buildChatGPTHeader ${baseHeader.toString()}");
     return baseHeader;
   }
 
@@ -108,7 +107,6 @@ class APIHandlerImp implements APIHandlerInterface {
         baseHeader["Authorization"] = "Bearer $token";
       }
     }
-    debugPrint("baseHeader ${baseHeader.toString()}");
     return baseHeader;
   }
 
@@ -126,11 +124,6 @@ class APIHandlerImp implements APIHandlerInterface {
     useToken = false,
   }) async {
     String url = buildUrlWithQuery(endpoint, query).toString();
-    debugPrint("APIHandlerImp get");
-    debugPrint("URL $url");
-    debugPrint("host + endpoint ${host + endpoint}");
-    debugPrint("data ${jsonEncode(body)}");
-    debugPrint("query ${query.toString()}");
 
     Response response = await client.get(
       url,
@@ -200,6 +193,7 @@ class APIHandlerImp implements APIHandlerInterface {
     bool useToken = false,
     Map<String, dynamic>? query,
   }) async {
+    debugPrint("POST BODY: ${body.toString()}");
     Response response = await client.post(
       host + endpoint,
       data: json.encode(body),

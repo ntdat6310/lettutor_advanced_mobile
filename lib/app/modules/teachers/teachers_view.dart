@@ -33,27 +33,17 @@ class TeachersView extends GetView<TeachersController> {
                 onChanged: (String value) {},
                 onSubmit: (String value) {
                   // Handle search here
-                  _teachersController.teacherController
-                      .searchTeachers(searchKey: value);
+                  _teachersController.searchTeachers(key: value);
                 },
                 searchHint: 'Enter tutor\'s name',
               ),
               const SizedBox(height: 20),
               const FindATutor(),
               const SizedBox(height: 10),
-              const SpecialityList(specialities: [
-                'All',
-                'Kids',
-                'Starters',
-                'Toefl',
-                'Business',
-                'Starters',
-                'Conversational',
-                'Ielts',
-                'Pet',
-                'Movers',
-                'Ket'
-              ]),
+              SpecialityList(
+                  specialities:
+                      _teachersController.specialtiesController.specialtiesList,
+                  onSelectSpecialty: _teachersController.selectSpecialty),
               const SizedBox(height: 10),
               const CustomDivider(),
               const SizedBox(height: 20),
@@ -68,7 +58,8 @@ class TeachersView extends GetView<TeachersController> {
                   return const NoDataFound();
                 } else {
                   final TeacherToggleFavoriteController teacherCardController =
-                      Get.put<TeacherToggleFavoriteController>(TeacherToggleFavoriteController());
+                      Get.put<TeacherToggleFavoriteController>(
+                          TeacherToggleFavoriteController());
                   return Column(
                     children: List.generate(
                         _teachersController.teacherController.teachers.length,
@@ -76,6 +67,8 @@ class TeachersView extends GetView<TeachersController> {
                               teacher: _teachersController
                                   .teacherController.teachers[index],
                               teacherCardController: teacherCardController,
+                              specialtiesController:
+                                  _teachersController.specialtiesController,
                             )),
                   );
                 }

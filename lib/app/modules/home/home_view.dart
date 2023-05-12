@@ -7,6 +7,7 @@ import 'package:lettutor_advanced_mobile/app/modules/home/home_controller.dart';
 import '../teachers/components/speciality_list.dart';
 import '../teachers/components/teacher_card.dart';
 import '../widgets/custom_appbar.dart';
+import '../widgets/no_data_found.dart';
 import 'components/find_tutor.dart';
 import 'components/recommended_tutor.dart';
 import 'components/upcomming_lesson.dart';
@@ -37,30 +38,23 @@ class HomeView extends StatelessWidget {
                   children: [
                     const FindATutor(),
                     const SizedBox(height: 10),
-                    const SpecialityList(specialities: [
-                      'All',
-                      'Kids',
-                      'Starters',
-                      'Toefl',
-                      'Business',
-                      'Starters',
-                      'Conversational',
-                      'Ielts',
-                      'Pet',
-                      'Movers',
-                      'Ket'
-                    ]),
+                    SpecialityList(
+                        specialities: _homeController
+                            .specialtiesController.specialtiesList,
+                        onSelectSpecialty: _homeController.selectSpecialty),
                     const RecommendedTutor(),
                     Obx(() {
                       if (_homeController
                           .teacherController.isLoadingTeachers.value) {
-                        return LoadingWidget(
-                          isLoading: _homeController
-                              .teacherController.isLoadingTeachers.value,
+                        return const CircularProgressIndicator(
                           color: Colors.blueAccent,
                         );
+                      } else if (_homeController
+                          .teacherController.teachers.isEmpty) {
+                        return const NoDataFound();
                       } else {
-                        final TeacherToggleFavoriteController teacherCardController =
+                        final TeacherToggleFavoriteController
+                            teacherCardController =
                             Get.put<TeacherToggleFavoriteController>(
                                 TeacherToggleFavoriteController());
                         return Column(
@@ -71,6 +65,8 @@ class HomeView extends StatelessWidget {
                                         .teacherController.teachers[index],
                                     teacherCardController:
                                         teacherCardController,
+                                    specialtiesController:
+                                        _homeController.specialtiesController,
                                   )),
                         );
                       }

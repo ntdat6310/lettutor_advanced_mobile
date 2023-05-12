@@ -14,13 +14,13 @@ class TeacherController extends GetxController {
 
   Future<bool> searchTeachers({
     String searchKey = '',
-    List<String>? specialities,
+    List<String>? specialties,
   }) async {
     isLoadingTeachers.value = true;
     List<Teacher>? results =
         await _teacherService.getListTutorWithSearchAndFilterAndPagination(
       searchKey: searchKey,
-      specialties: specialities,
+      specialties: specialties,
     );
     if (results != null && results.isNotEmpty) {
       teachers.clear();

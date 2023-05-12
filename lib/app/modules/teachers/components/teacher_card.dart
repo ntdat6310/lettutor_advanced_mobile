@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/modules/controllers/specialties_controller.dart';
 import 'package:lettutor_advanced_mobile/app/modules/controllers/teacher_toggle_favorite_controller.dart';
 import 'package:lettutor_advanced_mobile/app/modules/teachers/components/speciality_list_horizontal.dart';
 import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
@@ -12,10 +13,12 @@ class TeacherCard extends StatelessWidget {
     Key? key,
     required this.teacher,
     required this.teacherCardController,
+    required this.specialtiesController,
   }) : super(key: key);
 
   final Teacher teacher;
   final TeacherToggleFavoriteController teacherCardController;
+  final SpecialtiesController specialtiesController;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +61,10 @@ class TeacherCard extends StatelessWidget {
                               Container(
                                 margin: const EdgeInsets.only(left: 4),
                                 child: SpecialityListHorizontal(
-                                    specialitiesStr: teacher.specialties ?? ''),
+                                    specialities: specialtiesController
+                                        .getSpecialtiesListTeacherCard(
+                                            teacher.specialties?.split(',') ??
+                                                [])),
                               ),
                             ],
                           ),
