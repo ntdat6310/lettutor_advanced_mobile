@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/core/constants/constants.dart';
 import 'package:lettutor_advanced_mobile/app/modules/profile_setting/components/custom_text_field.dart';
 import 'package:lettutor_advanced_mobile/app/modules/profile_setting/components/date_picker_view.dart';
 import 'package:lettutor_advanced_mobile/app/modules/profile_setting/components/dropdown_button_from_field_view.dart';
@@ -12,6 +13,10 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
 
   void _onSubmit() {
     controller.submitProfile();
+  }
+
+  void _onSelectPhotoClick(BuildContext context) {
+    controller.selectPhotoController.showSelectPhotoOptions(context);
   }
 
   @override
@@ -36,17 +41,29 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
                   alignment: Alignment.center,
                   child: Stack(
                     children: [
-                      const CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            "https://sandbox.api.lettutor.com/avatar/f569c202-7bbf-4620-af77-ecc1419a6b28avatar1683190179862.jpeg"),
-                        radius: 60,
-                      ),
+                      Obx(() {
+                        if (controller.selectPhotoController.image.value ==
+                            null) {
+                          debugPrint("AVATAR: ${controller.profile.value?.avatar}");
+                          return CircleAvatar(
+                            backgroundImage:
+                                NetworkImage(controller.profile.value?.avatar ?? Constants.defaultUserAvatarUrl),
+                            radius: 60,
+                          );
+                        } else {
+                          return CircleAvatar(
+                            backgroundImage: FileImage(
+                                controller.selectPhotoController.image.value!),
+                            radius: 60,
+                          );
+                        }
+                      }),
                       Positioned(
                         right: -3,
                         bottom: -3,
                         child: InkWell(
                           onTap: () {
-                            debugPrint("CAMERA CLICKED");
+                            _onSelectPhotoClick(context);
                           },
                           child: const Icon(
                             Icons.camera_alt,

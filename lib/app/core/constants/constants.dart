@@ -253,4 +253,7 @@ class Constants {
     'ZM': 'Zambia',
     'ZW': 'Zimbabwe',
   };
+
+  static String defaultUserAvatarUrl =
+      "https://sandbox.api.lettutor.com/avatar/f569c202-7bbf-4620-af77-ecc1419a6b28avatar1683990830859.jpg";
 }

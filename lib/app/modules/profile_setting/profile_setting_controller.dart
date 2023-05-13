@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:lettutor_advanced_mobile/app/core/utils/helpers.dart';
 import 'package:lettutor_advanced_mobile/app/data/models/profile/test_preparation.dart';
 import 'package:lettutor_advanced_mobile/app/data/services/profile_service.dart';
+import 'package:lettutor_advanced_mobile/app/modules/profile_setting/components/select_photo_controller.dart';
 
 import '../../data/models/profile/profile.dart';
 import 'components/date_picker_controller.dart';
@@ -12,6 +13,7 @@ import 'components/dropdown_button_from_field_controller.dart';
 import 'components/multi_select_controller.dart';
 
 class ProfileSettingController extends GetxController {
+  Rx<Profile?> profile = Rx<Profile?>(null);
   final profileService = Get.put<ProfileService>(ProfileService());
   final nameController = TextEditingController();
   final studyScheduleController = TextEditingController();
@@ -26,51 +28,52 @@ class ProfileSettingController extends GetxController {
   final datePickerController =
       Get.put<CustomDatePickerController>(CustomDatePickerController());
 
-  Profile? profile;
+  final selectPhotoController =
+      Get.put<SelectPhotoController>(SelectPhotoController());
 
   @override
   void onInit() async {
     super.onInit();
-    profile = await profileService.getProfile();
+    profile.value = await profileService.getProfile();
     List<TestPreparation> testPreparationList =
         await profileService.getAllTestPreparations();
 
-    if (profile == null) {
+    if (profile.value == null) {
       Get.snackbar("PROFILE IS NULL", "Please review your code!");
     } else {
-      debugPrint("PROFILE: ${profile!.toJson().toString()}");
+      debugPrint("PROFILE: ${profile.value!.toJson().toString()}");
       // Init values
-      nameController.text = profile!.name ?? '';
-      studyScheduleController.text = profile!.studySchedule ?? '';
-      emailController.text = profile!.email ?? '';
-      phoneController.text = profile!.phone ?? '';
+      nameController.text = profile.value!.name ?? '';
+      studyScheduleController.text = profile.value!.studySchedule ?? '';
+      emailController.text = profile.value!.email ?? '';
+      phoneController.text = profile.value!.phone ?? '';
 
       testPreparationController.initOptions(testPreparationList);
       List<String> testPreparationSelectedItems =
-          profile!.testPreparations?.map((e) => "${e.id}").toList() ?? [];
+          profile.value!.testPreparations?.map((e) => "${e.id}").toList() ?? [];
       testPreparationController
           .updateSelectedItems(testPreparationSelectedItems);
 
       countryController.setValue(
-          value: profile!.country?.toUpperCase() ?? 'VN');
+          value: profile.value!.country?.toUpperCase() ?? 'VN');
 
       datePickerController.setValue(
         newDate: Helper.convertDateStringToDateTime(
-          dateString: profile!.birthday,
+          dateString: profile.value!.birthday,
         ),
       );
     }
   }
 
   void submitProfile() async {
-    if (profile != null && isFormValid()) {
+    if (profile.value != null && isFormValid()) {
       Map<String, dynamic> body = {
         'name': nameController.text,
         'country': countryController.dropdownValue.value,
-        'phone': profile?.phone ?? '',
+        'phone': profile.value?.phone ?? '',
         "birthday": DateFormat('yyyy-MM-dd')
             .format(datePickerController.selectedDate.value),
-        "level": profile?.level,
+        "level": profile.value?.level,
         "studySchedule": studyScheduleController.text,
         "testPreparations": testPreparationController.selectedItems.toList()
       };
@@ -109,6 +112,7 @@ class ProfileSettingController extends GetxController {
     Get.delete<MultiSelectController>();
     Get.delete<DropdownButtonFromFieldController>();
     Get.delete<CustomDatePickerController>();
+    Get.delete<SelectPhotoController>();
     super.onClose();
   }
 }

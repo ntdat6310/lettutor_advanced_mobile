@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart' as dio;
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:lettutor_advanced_mobile/app/core/constants/backend_environment.dart';
 import 'package:lettutor_advanced_mobile/app/data/models/profile/test_preparation.dart';
@@ -61,5 +62,33 @@ class ProfileService {
       debugPrint("ProfileService.updateProfile: ${e.toString()}");
     }
     return null;
+  }
+
+  Future<bool> uploadImage({required String imagePath}) async {
+    try {
+      String imageName =
+          imagePath.substring(imagePath.lastIndexOf("/") + 1, imagePath.length);
+      var image = await MultipartFile.fromFile(imagePath, filename: imageName);
+      dio.FormData formData = dio.FormData.fromMap({
+        "avatar": image,
+      });
+
+      debugPrint("CALL API UPLOAD AVATAR...");
+      dio.Response response = await APIHandlerImp.instance.postFormData(
+        endpoint: BackendEnvironment.uploadAvatar,
+        formData: formData,
+        useToken: true,
+      );
+      debugPrint("RESULT UPLOAD AVATAR ${response.statusCode}");
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        debugPrint(
+            "ProfileService.uploadImage failed with statusCode: ${response.statusCode}");
+      }
+    } catch (e) {
+      debugPrint("ProfileService.uploadImage: ${e.toString()}");
+    }
+    return false;
   }
 }

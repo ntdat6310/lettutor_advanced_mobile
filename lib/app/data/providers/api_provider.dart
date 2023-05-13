@@ -245,6 +245,39 @@ class APIHandlerImp implements APIHandlerInterface {
     }
   }
 
+  Future<Response> postFormData({
+    required String endpoint,
+    bool useToken = false,
+    Map<String, dynamic>? query,
+    required FormData formData,
+  }) async {
+    Response response = await client.post(
+      host + endpoint,
+      data: formData,
+      queryParameters: query,
+      options: Options(headers: await _buildHeader(useToken: useToken)),
+    );
+    if (response.statusCode == 401) {
+      if (useToken) {
+        bool refreshTokenResult = await refreshToken();
+        if (refreshTokenResult) {
+          Response response = await client.post(
+            host + endpoint,
+            data: formData,
+            queryParameters: query,
+            options: Options(headers: await _buildHeader(useToken: useToken)),
+          );
+          return response;
+        } else {
+          // Login again!
+          // Nếu ở ngoài mà check có 401 nghĩa là refreshToken failed rồi => Cần login lại...
+          return response;
+        }
+      }
+    }
+    return response;
+  }
+
   void _reSignIn() {
     Get.offAll(SignInView());
   }
