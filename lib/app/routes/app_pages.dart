@@ -111,7 +111,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE_SETTING,
-      page: () => const ProfileSettingView(),
+      page: () => ProfileSettingView(),
       binding: ProfileSettingBinding(),
     ),
     GetPage(

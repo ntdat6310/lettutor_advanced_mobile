@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class Helper {
@@ -50,5 +51,18 @@ class Helper {
       languageNames.add(name);
     }
     return languageNames;
+  }
+
+  static DateTime convertDateStringToDateTime({String? dateString}) {
+    if (dateString == null) {
+      return DateTime.now();
+    }
+
+    try {
+      return DateTime.parse(dateString);
+    } catch (e) {
+      debugPrint("Helper.convertDateStringToDateTime: $e");
+      return DateTime.now();
+    }
   }
 }

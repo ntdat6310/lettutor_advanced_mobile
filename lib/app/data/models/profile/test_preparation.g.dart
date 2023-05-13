@@ -8,7 +8,7 @@ part of 'test_preparation.dart';
 
 TestPreparation _$TestPreparationFromJson(Map<String, dynamic> json) =>
     TestPreparation(
-      id: json['id'] as String,
+      id: json['id'] as int,
       key: json['key'] as String,
       name: json['name'] as String,
     );

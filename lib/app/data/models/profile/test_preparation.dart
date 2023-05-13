@@ -4,7 +4,7 @@ part 'test_preparation.g.dart';
 
 @JsonSerializable()
 class TestPreparation {
-  String id;
+  int id;
   String key;
   String name;
 
