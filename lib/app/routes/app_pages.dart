@@ -16,6 +16,7 @@ import '../modules/profile_setting/profile_setting_binding.dart';
 import '../modules/profile_setting/profile_setting_view.dart';
 import '../modules/register/register_binding.dart';
 import '../modules/register/register_view.dart';
+import '../modules/schedule/schedule_view.dart';
 import '../modules/setting/setting_binding.dart';
 import '../modules/setting/setting_view.dart';
 import '../modules/sign_in/sign_in_binding.dart';
@@ -74,11 +75,10 @@ class AppPages {
     //   page: () => ScheduleHistoryView(),
     //   binding: ScheduleHistoryBinding(),
     // ),
-    // GetPage(
-    //   name: _Paths.SCHEDULE,
-    //   page: () => ScheduleView(),
-    //   binding: ScheduleBinding(),
-    // ),
+    GetPage(
+      name: _Paths.SCHEDULE,
+      page: () => ScheduleView(),
+    ),
     GetPage(
       name: _Paths.MEETING_VIDEO_CONFERENCE,
       page: () => const MeetingVideoConferenceView(),

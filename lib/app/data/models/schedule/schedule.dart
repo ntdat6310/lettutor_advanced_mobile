@@ -11,7 +11,9 @@ class Schedule{
   String? tutorMeetingLink;
   String? studentMeetingLink;
   String? studentRequest;
+  @JsonKey(fromJson: _fromTimestamp, toJson: _toTimestamp)
   DateTime? startPeriodTimestamp;
+  @JsonKey(fromJson: _fromTimestamp, toJson: _toTimestamp)
   DateTime? endPeriodTimestamp;
   String? tutorId;
   String? tutorAvatar;
@@ -34,4 +36,12 @@ class Schedule{
   => _$ScheduleFromJson(json);
 
   Map<String, dynamic> toJson() => _$ScheduleToJson(this);
+
+  static DateTime? _fromTimestamp(int? timestamp) {
+    return timestamp != null ? DateTime.fromMillisecondsSinceEpoch(timestamp) : null;
+  }
+
+  static int? _toTimestamp(DateTime? dateTime) {
+    return dateTime?.millisecondsSinceEpoch;
+  }
 }

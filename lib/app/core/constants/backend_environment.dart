@@ -15,6 +15,7 @@ class BackendEnvironment {
   static String getProfile = '/user/info';
   static String getTestPreparation = '/test-preparation';
   static String uploadAvatar = '/user/uploadAvatar';
+  static String getUpcomingSchedules = '/booking/list/student';
 
   static Map<String, String> specialties = {
     'all': 'All',

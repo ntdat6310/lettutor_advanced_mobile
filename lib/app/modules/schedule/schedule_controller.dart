@@ -1,23 +1,22 @@
 import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/data/services/schedule_service.dart';
+
+import '../../data/models/schedule/schedule.dart';
 
 class ScheduleController extends GetxController {
-  //TODO: Implement ScheduleController
+  final scheduleService = Get.put<ScheduleService>(ScheduleService());
+  RxList<Schedule> schedules = RxList<Schedule>();
+  RxBool isLoading = false.obs;
 
-  final count = 0.obs;
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    _initData();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void _initData() async {
+    isLoading.value = true;
+    schedules.value = await scheduleService.getAllSchedules();
+    isLoading.value = false;
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }
