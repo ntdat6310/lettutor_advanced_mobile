@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+import '../../data/models/schedule/schedule.dart';
 import '../home/components/upcomming_lesson.dart';
 import '../widgets/custom_appbar.dart';
 import 'components/schedule_card.dart';
@@ -16,31 +18,24 @@ class ScheduleView extends GetView<ScheduleController> {
       appBar: const CustomAppBar(
         title: 'Schedule',
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(width: double.infinity, child: UpcomingLesson()),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-              child: Obx(() {
-                return scheduleController.isLoading.value
-                    ? const CircularProgressIndicator(
-                        color: Colors.blueAccent,
-                      )
-                    : Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: List.generate(
-                            scheduleController.schedules.value.length,
-                            (index) => ScheduleCard(
-                                schedule:
-                                    scheduleController.schedules.value[index])),
-                      );
-              }),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          const SliverToBoxAdapter(
+            child: SizedBox(width: double.infinity, child: UpcomingLesson()),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+            sliver: PagedSliverList<int, Schedule>(
+              pagingController: controller.pagingController,
+              builderDelegate: PagedChildBuilderDelegate<Schedule>(
+                itemBuilder: (context, schedule, index) => ScheduleCard(
+                  schedule: schedule,
+                  onCancelBookingClicked: controller.showCancelDialog,
+                ),
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

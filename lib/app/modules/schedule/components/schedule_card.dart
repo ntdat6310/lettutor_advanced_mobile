@@ -6,9 +6,14 @@ import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 import '../../../data/models/schedule/schedule.dart';
 
 class ScheduleCard extends StatelessWidget {
-  const ScheduleCard({Key? key, required this.schedule}) : super(key: key);
+  const ScheduleCard({
+    Key? key,
+    required this.schedule,
+    this.onCancelBookingClicked,
+  }) : super(key: key);
 
   final Schedule schedule;
+  final Function(Schedule)? onCancelBookingClicked;
 
   Widget _showAvatar() {
     if (schedule.tutorAvatar != null) {
@@ -22,6 +27,20 @@ class ScheduleCard extends StatelessWidget {
         backgroundImage: AssetImage('/assets/images/default_user.png'),
       );
     }
+  }
+
+  Widget _showTutorReview() {
+    return const Padding(
+      padding: EdgeInsets.only(top: 8),
+      child: Text(
+        'Tutor haven\'t reviewed yet',
+        style: TextStyle(
+          fontSize: 14,
+          color: Colors.redAccent,
+          backgroundColor: Colors.white24,
+        ),
+      ),
+    );
   }
 
   @override
@@ -84,6 +103,9 @@ class ScheduleCard extends StatelessWidget {
                           ),
                         ],
                       ),
+                      schedule.hasEnded
+                          ? _showTutorReview()
+                          : const SizedBox.shrink(),
                     ],
                   )),
                 ],
@@ -91,43 +113,90 @@ class ScheduleCard extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                width: double.infinity,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: Colors.red,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
+              schedule.hasEnded
+                  ? SizedBox(
+                      width: double.infinity,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Expanded(
+                              flex: 1,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: Colors.blueAccent,
+                                  backgroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  // TODO: add button press logic here
+                                },
+                                child: const Text('Send Message'),
+                              )),
+                          const SizedBox(width: 10),
+                          Expanded(
+                              flex: 1,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.blue,
+                                  foregroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  // TODO: add button press logic here
+                                },
+                                child: const Text('Give Feedback'),
+                              )),
+                        ],
                       ),
-                      onPressed: () {
-                        // TODO: add button press logic here
-                      },
-                      child: const Text('Cancel'),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
+                    )
+                  : SizedBox(
+                      width: double.infinity,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors.white,
+                              backgroundColor: Colors.red,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                            onPressed: schedule.canCancelBooking
+                                ? () {
+                                    if (onCancelBookingClicked != null) {
+                                      onCancelBookingClicked!(schedule);
+                                    } else {
+                                      debugPrint(
+                                          "ScheduleCard.onCancelBookingClicked: $onCancelBookingClicked");
+                                    }
+                                  }
+                                : null,
+                            child: const Text('Cancel'),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                            onPressed: () {
+                              Get.toNamed(Routes.MEETING_VIDEO_CONFERENCE);
+                            },
+                            child: const Text('Go to Meeting'),
+                          ),
+                        ],
                       ),
-                      onPressed: () {
-                        Get.toNamed(Routes.MEETING_VIDEO_CONFERENCE);
-                      },
-                      child: const Text('Go to Meeting'),
                     ),
-                  ],
-                ),
-              ),
             ],
           ),
         ),

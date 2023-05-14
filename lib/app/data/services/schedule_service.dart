@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
+import 'package:lettutor_advanced_mobile/app/data/models/schedule/cancel_reason.dart';
 import 'package:lettutor_advanced_mobile/app/data/models/schedule/schedule.dart';
 import 'package:lettutor_advanced_mobile/app/data/providers/api_provider.dart';
 
@@ -25,6 +26,58 @@ class ScheduleService {
       perPage: perPage,
       dateTimeLte: DateTime.now(),
     );
+  }
+
+  Future<List<CancelReason>> getCancelReasons() async {
+    try {
+      dio.Response response = await APIHandlerImp.instance.get(
+        endpoint: BackendEnvironment.cancelReasons,
+        useToken: true,
+      );
+      if (response.statusCode == 200) {
+        List<dynamic> cancelReasonJSONs = response.data['rows'];
+        return cancelReasonJSONs.map<CancelReason>((cancelReasonJSON) {
+          return CancelReason.fromJson(cancelReasonJSON);
+        }).toList();
+      }
+      debugPrint(
+          "ScheduleService.getCancelReasons failed with status code: ${response.statusCode}");
+    } catch (e) {
+      debugPrint("ScheduleService.getCancelReasons: ${e.toString()}");
+    }
+    return [];
+  }
+
+  Future<bool> cancelBooking({
+    required String id,
+    required int cancelReasonId,
+    String note = '',
+  }) async {
+    try {
+      Map<String, dynamic> body = {
+        "scheduleDetailId": id,
+        "cancelInfo": {
+          "cancelReasonId": cancelReasonId,
+          "note": note,
+        }
+      };
+      debugPrint("ScheduleService.cancelBooking---------------------------");
+      debugPrint("body: ${body.toString()}");
+      dio.Response response = await APIHandlerImp.instance.delete(
+        endpoint: BackendEnvironment.cancelBooking,
+        useToken: true,
+        body: body,
+      );
+      if (response.statusCode == 200) {
+        return true;
+      }
+      debugPrint(
+          "ScheduleService.cancelBooking failed with status code: ${response.statusCode}");
+      debugPrint("Message: ${response.statusMessage}");
+    } catch (e) {
+      debugPrint("ScheduleService.cancelBooking: ${e.toString()}");
+    }
+    return false;
   }
 
   Future<List<Schedule>> _getSchedules({
@@ -69,27 +122,6 @@ class ScheduleService {
             'tutorName': scheduleJSON['scheduleDetailInfo']['scheduleInfo']
                 ['tutorInfo']['name'],
           };
-          debugPrint("id ${newSchedule['id'].runtimeType}");
-          debugPrint("userId ${newSchedule['userId'].runtimeType}");
-          debugPrint(
-              "scheduleDetailId ${newSchedule['scheduleDetailId'].runtimeType}");
-          debugPrint(
-              "tutorMeetingLink ${newSchedule['tutorMeetingLink'].runtimeType}");
-          debugPrint(
-              "studentMeetingLink ${newSchedule['studentMeetingLink'].runtimeType}");
-          debugPrint(
-              "studentRequest ${newSchedule['studentRequest'].runtimeType}");
-          debugPrint(
-              "startPeriodTimestamp ${newSchedule['startPeriodTimestamp'].runtimeType}");
-          debugPrint(
-              "endPeriodTimestamp ${newSchedule['endPeriodTimestamp'].runtimeType}");
-          debugPrint("tutorId ${newSchedule['tutorId'].runtimeType}");
-          debugPrint("tutorAvatar ${newSchedule['tutorAvatar'].runtimeType}");
-          debugPrint("tutorName ${newSchedule['tutorName'].runtimeType}");
-          debugPrint("__________________________________");
-          debugPrint(
-              "startPeriodTimestamp ${newSchedule['startPeriodTimestamp']}");
-          debugPrint("endPeriodTimestamp ${newSchedule['endPeriodTimestamp']}");
           return Schedule.fromJson(newSchedule);
         }).toList();
       }
