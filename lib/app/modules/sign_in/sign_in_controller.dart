@@ -31,7 +31,8 @@ class SignInController extends GetxController {
           // Navigate to the next screen after successful login
           // Get.offAll(() => MyTabBarView());
           // Get.offAllNamed(Routes.MY_TAB_BAR);
-          Get.offAllNamed(Routes.SCHEDULE);
+          // Get.offAllNamed(Routes.SCHEDULE);
+          Get.offAllNamed(Routes.SCHEDULE_HISTORY);
         } else if (responseStatusCode == 400) {
           Get.snackbar(
             "Sign in failed : Incorrect email or password",

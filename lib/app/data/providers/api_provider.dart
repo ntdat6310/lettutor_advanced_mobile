@@ -131,7 +131,6 @@ class APIHandlerImp implements APIHandlerInterface {
     useToken = false,
   }) async {
     String url = buildUrlWithQuery(endpoint, query).toString();
-
     Response response = await client.get(
       url,
       data: body != null ? jsonEncode(body) : null,

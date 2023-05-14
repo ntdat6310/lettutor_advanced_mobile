@@ -93,7 +93,7 @@ class ScheduleService {
         'sortBy': 'desc',
       };
       if (dateTimeLte != null) {
-        query['dateTimeLte'] = dateTimeLte;
+        query['dateTimeLte'] = "${dateTimeLte.millisecondsSinceEpoch}";
       }
 
       dio.Response response = await APIHandlerImp.instance.get(
@@ -126,9 +126,9 @@ class ScheduleService {
         }).toList();
       }
       debugPrint(
-          "ScheduleService.getUpcomingSchedules failed with status code: ${response.statusCode}");
+          "ScheduleService._getSchedules failed with status code: ${response.statusCode}");
     } catch (e) {
-      debugPrint("ScheduleService.getUpcomingSchedules: ${e.toString()}");
+      debugPrint("ScheduleService._getSchedules: ${e.toString()}");
     }
     return [];
   }

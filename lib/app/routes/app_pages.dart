@@ -17,6 +17,8 @@ import '../modules/profile_setting/profile_setting_view.dart';
 import '../modules/register/register_binding.dart';
 import '../modules/register/register_view.dart';
 import '../modules/schedule/schedule_view.dart';
+import '../modules/schedule_history/schedule_history_binding.dart';
+import '../modules/schedule_history/schedule_history_view.dart';
 import '../modules/setting/setting_binding.dart';
 import '../modules/setting/setting_view.dart';
 import '../modules/sign_in/sign_in_binding.dart';
@@ -70,11 +72,11 @@ class AppPages {
       page: () => SignInView(),
       binding: SignInBinding(),
     ),
-    // GetPage(
-    //   name: _Paths.SCHEDULE_HISTORY,
-    //   page: () => ScheduleHistoryView(),
-    //   binding: ScheduleHistoryBinding(),
-    // ),
+    GetPage(
+      name: _Paths.SCHEDULE_HISTORY,
+      page: () => ScheduleHistoryView(),
+      binding: ScheduleHistoryBinding(),
+    ),
     GetPage(
       name: _Paths.SCHEDULE,
       page: () => ScheduleView(),
