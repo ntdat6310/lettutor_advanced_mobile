@@ -110,7 +110,22 @@ class CourseDetailView extends GetView<CourseDetailController> {
               ],
             ),
             const SizedBox(height: 20),
-            Text("List Topics", style: heading1Style),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text("List Topics", style: heading1Style),
+                TextButton(
+                    onPressed: () {
+                      Map<String, dynamic> arguments = {
+                        'course': course,
+                        'selectedTopicIndex': 0,
+                      };
+                      Get.toNamed(Routes.COURSE_LESSON, arguments: arguments);
+                    },
+                    child: const Text("See detail", style: TextStyle(fontSize: 16),)),
+              ],
+            ),
             const SizedBox(height: 20),
             ListTopics(
               topics: course.topics ?? [],
