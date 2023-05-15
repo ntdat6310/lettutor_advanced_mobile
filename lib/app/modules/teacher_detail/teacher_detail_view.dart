@@ -9,7 +9,7 @@ import 'components/message_favorite_report.dart';
 import 'components/review_list.dart';
 import 'components/teacher_desc.dart';
 import 'components/teaching_experience.dart';
-import 'components/video_intro.dart';
+import 'components/video_intro_view.dart';
 import 'teacher_detail_controller.dart';
 
 class TeacherDetailView extends GetView<TeacherDetailController> {
@@ -30,7 +30,11 @@ class TeacherDetailView extends GetView<TeacherDetailController> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const VideoIntro(),
+                    VideoIntro(
+                      videoUrl: controller.teacher.video ??
+                          'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+                    ),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -99,16 +103,15 @@ class TeacherDetailView extends GetView<TeacherDetailController> {
                       height: 20,
                     ),
                     SectionWithTitleAndContent(
-                        content:
-                        controller.teacher.interests ?? 'No',
+                        content: controller.teacher.interests ?? 'No',
                         title: 'Interests'),
                     const SizedBox(
                       height: 20,
                     ),
                     SectionWithTitleAndContent(
                         title: 'Teaching Experience',
-                        content: controller.teacher.experience ??
-                            'No experience'),
+                        content:
+                            controller.teacher.experience ?? 'No experience'),
                     const SizedBox(
                       height: 20,
                     ),
