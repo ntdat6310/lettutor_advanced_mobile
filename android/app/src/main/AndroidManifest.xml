@@ -2,7 +2,7 @@
     package="com.example.lettutor_advanced_mobile">
    <application
         android:label="lettutor_advanced_mobile"
-        android:name="${applicationName}"
+        android:name="androidx.multidex.MultiDexApplication"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

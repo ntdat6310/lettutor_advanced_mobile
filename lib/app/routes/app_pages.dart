@@ -1,10 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/modules/course_lesson/course_lesson_view.dart';
 
+import '../data/models/course/course.dart';
 import '../modules/chat_with_ai/chat_with_ai_binding.dart';
 import '../modules/chat_with_ai/chat_with_ai_view.dart';
 import '../modules/course/course_view.dart';
 import '../modules/course_detail/course_detail_binding.dart';
 import '../modules/course_detail/course_detail_view.dart';
+import '../modules/course_lesson/course_lesson_binding.dart';
 import '../modules/forgot_password/forgot_password_binding.dart';
 import '../modules/forgot_password/forgot_password_view.dart';
 import '../modules/home/home_view.dart';
@@ -57,11 +61,21 @@ class AppPages {
       },
       binding: CourseDetailBinding(),
     ),
-    // GetPage(
-    //   name: _Paths.COURSE_LESSON,
-    //   page: () => CourseLessonView(),
-    //   binding: CourseLessonBinding(),
-    // ),
+    GetPage(
+      name: _Paths.COURSE_LESSON,
+      page: () {
+        Map<String, dynamic> arguments = Get.arguments;
+        debugPrint("PAGES: $arguments");
+        Course course = arguments['course'];
+        int selectedTopicIndex = arguments['selectedTopicIndex'];
+        debugPrint("PAGES: COURSE $course");
+        debugPrint("PAGES: TOPIC INDEX $selectedTopicIndex");
+
+        return CourseLessonView(
+            course: course, selectedTopicIndex: selectedTopicIndex);
+      },
+      binding: CourseLessonBinding(),
+    ),
     GetPage(
       name: _Paths.TEACHER_DETAIL,
       page: () => const TeacherDetailView(),
@@ -88,7 +102,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.REGISTER,
-      page: () => RegisterView(),
+      page: () => const RegisterView(),
       binding: RegisterBinding(),
     ),
     GetPage(
@@ -103,17 +117,17 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.FORGOT_PASSWORD,
-      page: () => ForgotPasswordView(),
+      page: () => const ForgotPasswordView(),
       binding: ForgotPasswordBinding(),
     ),
     GetPage(
       name: _Paths.SETTING,
-      page: () => const SettingView(),
+      page: () => SettingView(),
       binding: SettingBinding(),
     ),
     GetPage(
       name: _Paths.PROFILE_SETTING,
-      page: () => ProfileSettingView(),
+      page: () => const ProfileSettingView(),
       binding: ProfileSettingBinding(),
     ),
     GetPage(

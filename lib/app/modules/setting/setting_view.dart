@@ -8,7 +8,9 @@ import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 import 'setting_controller.dart';
 
 class SettingView extends GetView<SettingController> {
-  const SettingView({Key? key}) : super(key: key);
+  SettingView({Key? key}) : super(key: key);
+  final settingController = Get.put<SettingController>(SettingController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +27,7 @@ class SettingView extends GetView<SettingController> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const UserProfileItem(),
+                Obx(() => UserProfileItem(profile: settingController.profile.value)) ,
                 const SizedBox(height: 12),
                 SettingItem(
                   icon: Icons.chat_outlined,
@@ -44,7 +46,9 @@ class SettingView extends GetView<SettingController> {
                 SettingItem(
                   icon: Icons.history,
                   title: "History",
-                  onClick: () {},
+                  onClick: () {
+                    Get.toNamed(Routes.SCHEDULE_HISTORY);
+                  },
                   bottomSpace: 12,
                 ),
                 SettingItem(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 
 import '../../data/models/course/course.dart';
 import '../course/components/course_card.dart';
@@ -27,6 +28,14 @@ class CourseDetailView extends GetView<CourseDetailController> {
     fontSize: 16,
     color: Colors.black54,
   );
+
+  void _onTopicClicked({required int selectedTopicIndex}) {
+    Map<String, dynamic> arguments = {
+      'course': course,
+      'selectedTopicIndex': selectedTopicIndex,
+    };
+    Get.toNamed(Routes.COURSE_LESSON, arguments: arguments);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,6 +115,7 @@ class CourseDetailView extends GetView<CourseDetailController> {
             ListTopics(
               topics: course.topics ?? [],
               style: heading2Style,
+              onTap: _onTopicClicked,
             ),
           ],
         ),

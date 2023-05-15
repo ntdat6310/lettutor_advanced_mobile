@@ -5,6 +5,7 @@ import 'package:lettutor_advanced_mobile/app/modules/setting/setting_view.dart';
 
 import '../course/course_view.dart';
 import '../home/home_view.dart';
+import '../schedule/schedule_view.dart';
 import '../teachers/teachers_view.dart';
 import 'my_tab_bar_controller.dart';
 
@@ -13,8 +14,7 @@ class MyTabBarView extends GetView<MyTabBarController> {
 
   final List<Widget> _pages = [
     HomeView(),
-    // ScheduleHistoryView(),
-    // ScheduleView(),
+    ScheduleView(),
     TeachersView(),
     CourseView(),
     ChatWithAiView(),
@@ -37,10 +37,10 @@ class MyTabBarView extends GetView<MyTabBarController> {
                 icon: Icon(Icons.home),
                 label: 'Home',
               ),
-              // BottomNavigationBarItem(
-              //   icon: Icon(Icons.calendar_today),
-              //   label: 'Upcoming',
-              // ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.calendar_today),
+                label: 'Upcoming',
+              ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Teacher',

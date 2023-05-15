@@ -1,23 +1,20 @@
 import 'package:get/get.dart';
 
+import '../../data/models/profile/profile.dart';
+import '../../data/services/profile_service.dart';
+
 class SettingController extends GetxController {
-  //TODO: Implement SettingController
+  Rx<Profile?> profile = Rx<Profile?>(null);
+  final profileService = Get.put<ProfileService>(ProfileService());
 
-  final count = 0.obs;
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
+    profile.value = await profileService.getProfile();
   }
 
   @override
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

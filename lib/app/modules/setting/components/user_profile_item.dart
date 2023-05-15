@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
+
+import '../../../data/models/profile/profile.dart';
 
 class UserProfileItem extends StatelessWidget {
-  const UserProfileItem({Key? key}) : super(key: key);
+  const UserProfileItem({Key? key, this.profile}) : super(key: key);
 
+  final Profile? profile;
   final TextStyle nameStyle = const TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 18,
@@ -33,26 +38,28 @@ class UserProfileItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const CircleAvatar(
-            backgroundImage: NetworkImage(
-                "https://sandbox.api.lettutor.com/avatar/f569c202-7bbf-4620-af77-ecc1419a6b28avatar1683190179862.jpeg"),
+          CircleAvatar(
+            backgroundImage: NetworkImage(profile != null
+                ? profile?.avatar ??
+                    'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png'
+                : "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"),
             radius: 40,
           ),
           const SizedBox(height: 8),
           Text(
-            "Testing",
+            profile != null ? profile!.name! : 'No name',
             style: nameStyle,
           ),
           const SizedBox(height: 4),
-
           Text(
-            "student@lettutor.com",
+            profile != null ? profile!.email! : 'No email',
             style: emailStyle,
           ),
           const SizedBox(height: 8),
-
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(Routes.PROFILE_SETTING);
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue,
               shape: RoundedRectangleBorder(
