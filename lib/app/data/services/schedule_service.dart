@@ -1,10 +1,14 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:lettutor_advanced_mobile/app/data/models/schedule/cancel_reason.dart';
+import 'package:lettutor_advanced_mobile/app/data/models/schedule/daily_schedule_booking.dart';
 import 'package:lettutor_advanced_mobile/app/data/models/schedule/schedule.dart';
+import 'package:lettutor_advanced_mobile/app/data/models/schedule/schedule_booking.dart';
 import 'package:lettutor_advanced_mobile/app/data/providers/api_provider.dart';
 
 import '../../core/constants/backend_environment.dart';
+import '../../core/utils/helpers.dart';
 
 class ScheduleService {
   Future<List<Schedule>> getAllSchedules({
@@ -131,5 +135,123 @@ class ScheduleService {
       debugPrint("ScheduleService._getSchedules: ${e.toString()}");
     }
     return [];
+  }
+
+  Future<List<DailyScheduleBooking>> getSchedulesToBookByTutorId(
+      {required String tutorId,
+      required String startDay,
+      required String endDay}) async {
+    try {
+      Map<String, dynamic> query = {
+        'tutorId': tutorId,
+        'startTimestamp': Helper.parseDateFromString(startDay).millisecondsSinceEpoch.toString(),
+        'endTimestamp': Helper.parseDateFromString(endDay).millisecondsSinceEpoch.toString(),
+      };
+      debugPrint("AAA: $query");
+      dio.Response response = await APIHandlerImp.instance.get(
+        endpoint: BackendEnvironment.getSchedulesToBookByTutorId,
+        useToken: true,
+        query: query,
+      );
+      if (response.statusCode == 200) {
+        List<dynamic> jsons = response.data['scheduleOfTutor'];
+
+        List<ScheduleBooking> bookings = jsons.map<ScheduleBooking>((json) {
+          return ScheduleBooking.fromJson(json['scheduleDetails'][0]);
+        }).toList();
+
+        bookings = Helper.filterBookingSchedules(schedules: bookings);
+        bookings = Helper.sortBookingSchedules(
+            schedules: bookings, isOrderAscending: true);
+
+        debugPrint("SCHEDULE BOOKING LENGTH: ${bookings.length}");
+
+        for (int i = 0; i < bookings.length; i++) {
+          debugPrint("$i : ${bookings[i].startPeriodTimestamp}");
+        }
+
+        List<DailyScheduleBooking> dailyBookings =
+            DailyScheduleBooking.groupByDay(bookings: bookings);
+        debugPrint("-------------------------------------------");
+        debugPrint("DAILY SCHEDULE BOOKING LENGTH: ${dailyBookings.length}");
+        for (int i = 0; i < dailyBookings.length; i++) {
+          debugPrint("$i : ${dailyBookings[i].date.toString()}");
+        }
+        return dailyBookings;
+      }
+      debugPrint(
+          "ScheduleService.getSchedulesToBookByTutorId failed with status code: ${response.statusCode}");
+    } catch (e) {
+      debugPrint(
+          "ScheduleService.getSchedulesToBookByTutorId: ${e.toString()}");
+    }
+    return [];
+  }
+
+  // Future<List<DailyScheduleBooking>> getSchedulesToBookByTutorId(
+  //     {required String tutorId, required String startDay, required String endDay}) async {
+  //   try {
+  //     Map<String, dynamic> body = {'tutorId': tutorId};
+  //     dio.Response response = await APIHandlerImp.instance.post(
+  //       endpoint: BackendEnvironment.getSchedulesToBookByTutorId,
+  //       useToken: true,
+  //       body: body,
+  //     );
+  //     if (response.statusCode == 200) {
+  //       List<dynamic> jsons = response.data['data'];
+  //
+  //       List<ScheduleBooking> bookings = jsons.map<ScheduleBooking>((json) {
+  //         return ScheduleBooking.fromJson(json['scheduleDetails'][0]);
+  //       }).toList();
+  //
+  //       bookings = Helper.filterBookingSchedules(schedules: bookings);
+  //       bookings = Helper.sortBookingSchedules(
+  //           schedules: bookings, isOrderAscending: true);
+  //
+  //       debugPrint("SCHEDULE BOOKING LENGTH: ${bookings.length}");
+  //
+  //       for (int i = 0; i < bookings.length; i++) {
+  //         debugPrint("$i : ${bookings[i].startPeriodTimestamp}");
+  //       }
+  //
+  //       List<DailyScheduleBooking> dailyBookings = DailyScheduleBooking.groupByDay(bookings: bookings);
+  //       debugPrint("-------------------------------------------");
+  //       debugPrint("DAILY SCHEDULE BOOKING LENGTH: ${dailyBookings.length}");
+  //       for (int i = 0; i < dailyBookings.length; i++) {
+  //         debugPrint("$i : ${dailyBookings[i].date.toString()}");
+  //       }
+  //       return dailyBookings;
+  //     }
+  //     debugPrint(
+  //         "ScheduleService.getSchedulesToBookByTutorId failed with status code: ${response.statusCode}");
+  //   } catch (e) {
+  //     debugPrint(
+  //         "ScheduleService.getSchedulesToBookByTutorId: ${e.toString()}");
+  //   }
+  //   return [];
+  // }
+
+  Future<bool> bookASchedule(
+      {required String scheduleDetailId, String note = ''}) async {
+    try {
+      Map<String, dynamic> body = {
+        'scheduleDetailIds': [scheduleDetailId],
+        'note': note,
+      };
+
+      dio.Response response = await APIHandlerImp.instance.post(
+        endpoint: BackendEnvironment.bookASchedule,
+        useToken: true,
+        body: body,
+      );
+      if (response.statusCode == 200) {
+        return true;
+      }
+      debugPrint(
+          "ScheduleService.bookASchedule failed with status code: ${response.statusCode}");
+    } catch (e) {
+      debugPrint("ScheduleService.bookASchedule: ${e.toString()}");
+    }
+    return false;
   }
 }

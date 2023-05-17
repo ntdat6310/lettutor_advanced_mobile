@@ -2,6 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
+
+import '../../data/models/schedule/schedule_booking.dart';
 
 class Helper {
   static int roundHalfUp(double number) {
@@ -65,5 +68,42 @@ class Helper {
       debugPrint("Helper.convertDateStringToDateTime: $e");
       return DateTime.now();
     }
+  }
+
+  static List<ScheduleBooking> filterBookingSchedules(
+      {required List<ScheduleBooking> schedules}) {
+    final now = DateTime.now();
+    // Ignore time part of current DateTime.
+    final today = DateTime(now.year, now.month, now.day);
+    return schedules.where((schedule) {
+      // Check if schedule's startPeriodTimestamp is today or in the future
+      return schedule.startPeriodTimestamp != null &&
+          (schedule.startPeriodTimestamp!.isAfter(today) ||
+              schedule.startPeriodTimestamp!.isAtSameMomentAs(today));
+    }).toList();
+  }
+
+  static List<ScheduleBooking> sortBookingSchedules({
+    bool isOrderAscending = true,
+    required List<ScheduleBooking> schedules,
+  }) {
+    schedules.sort((a, b) {
+      if (a.startPeriodTimestamp == null) {
+        return 1;
+      } else if (b.startPeriodTimestamp == null) {
+        return -1;
+      } else {
+        return a.startPeriodTimestamp!.compareTo(b.startPeriodTimestamp!);
+      }
+    });
+
+    if (!isOrderAscending) {
+      schedules = schedules.reversed.toList();
+    }
+    return schedules;
+  }
+
+  static DateTime parseDateFromString(String date) {
+    return DateFormat("dd-MM-yyyy").parse(date);
   }
 }

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/modules/booking_schedule/booking_schedule_binding.dart';
+import 'package:lettutor_advanced_mobile/app/modules/booking_schedule/booking_schedule_controller.dart';
+import 'package:lettutor_advanced_mobile/app/modules/booking_schedule/booking_schedule_view.dart';
 import 'package:lettutor_advanced_mobile/app/modules/course_lesson/course_lesson_view.dart';
 
 import '../data/models/course/course.dart';
+import '../data/models/teacher/teacher.dart';
 import '../modules/chat_with_ai/chat_with_ai_binding.dart';
 import '../modules/chat_with_ai/chat_with_ai_view.dart';
 import '../modules/course/course_view.dart';
@@ -134,6 +138,11 @@ class AppPages {
       name: _Paths.CHAT_WITH_AI,
       page: () => ChatWithAiView(),
       binding: ChatWithAiBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOOKING_SCHEDULE,
+      page: () => const BookingScheduleView(),
+      binding: BookingScheduleBinding(),
     ),
   ];
 }

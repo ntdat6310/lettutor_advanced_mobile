@@ -6,6 +6,7 @@ import 'package:lettutor_advanced_mobile/app/data/models/profile/test_preparatio
 import 'package:lettutor_advanced_mobile/app/data/providers/api_provider.dart';
 
 import '../models/profile/profile.dart';
+import '../models/profile/wallet.dart';
 
 class ProfileService {
   Future<Profile?> getProfile() async {
@@ -90,5 +91,23 @@ class ProfileService {
       debugPrint("ProfileService.uploadImage: ${e.toString()}");
     }
     return false;
+  }
+
+  Future<Wallet?> getWallet() async {
+    try {
+      dio.Response response = await APIHandlerImp.instance.get(
+        endpoint: BackendEnvironment.getProfile,
+        useToken: true,
+      );
+      if (response.statusCode == 200) {
+        return Wallet.fromJson(response.data['user']['walletInfo']);
+      } else {
+        debugPrint(
+            "ProfileService.getWallet failed with statusCode: ${response.statusCode}");
+      }
+    } catch (e) {
+      debugPrint("ProfileService.getWallet: ${e.toString()}");
+    }
+    return null;
   }
 }

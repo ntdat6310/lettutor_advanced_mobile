@@ -18,6 +18,8 @@ class BackendEnvironment {
   static String getUpcomingSchedules = '/booking/list/student';
   static String cancelBooking = '/booking/schedule-detail';
   static String cancelReasons = '/booking/cancel-reason';
+  static String getSchedulesToBookByTutorId = '/schedule';
+  static String bookASchedule = '/booking';
 
   static Map<String, String> specialties = {
     'all': 'All',

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../data/models/teacher/teacher.dart';
+
 import '../widgets/custom_appbar.dart';
 import '../widgets/rating_star.dart';
 import 'components/booking_button.dart';
@@ -83,7 +83,7 @@ class TeacherDetailView extends GetView<TeacherDetailController> {
                         teacher: controller.teacher,
                       ),
                     ),
-                    BookingButton(),
+                    BookingButton(teacher: controller.teacher),
                     const SizedBox(height: 20),
                     TeacherDescription(
                       description: controller.teacher.bio ?? '',
