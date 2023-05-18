@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'schedule.g.dart';
@@ -65,5 +67,24 @@ class Schedule {
     } else {
       return false;
     }
+  }
+
+  static List<Schedule> sortScheduleByStartTime({
+    required List<Schedule> schedules,
+    bool isAscending = true,
+  }) {
+    // Order by ascending
+    schedules.sort((a, b) {
+      return a.startPeriodTimestamp!.compareTo(b.startPeriodTimestamp!);
+    });
+
+    if (isAscending == false) {
+      schedules = schedules.reversed.toList();
+    }
+
+    for (var schedule in schedules) {
+      debugPrint(DateFormat("dd MMM yy HH:mm").format(schedule.startPeriodTimestamp!));
+    }
+    return schedules;
   }
 }

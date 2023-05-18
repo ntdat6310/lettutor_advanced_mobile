@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
+import '../../data/models/profile/total_time.dart';
 import '../../data/models/schedule/schedule_booking.dart';
 
 class Helper {

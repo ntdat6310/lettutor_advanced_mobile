@@ -11,6 +11,55 @@ import '../../core/constants/backend_environment.dart';
 import '../../core/utils/helpers.dart';
 
 class ScheduleService {
+  Future<Schedule?> getUpcomingSchedule() async {
+    try {
+      Map<String, dynamic> query = {
+        'dateTime': DateTime.now().millisecondsSinceEpoch.toString(),
+      };
+
+      dio.Response response = await APIHandlerImp.instance.get(
+        endpoint: BackendEnvironment.getUpcomingSchedule,
+        useToken: true,
+        query: query,
+      );
+
+      if (response.statusCode == 200) {
+        List<dynamic> scheduleJSONs = response.data['data'];
+        List<Schedule> schedules = scheduleJSONs.map<Schedule>((scheduleJSON) {
+          Map<String, dynamic> newSchedule = {
+            'id': scheduleJSON['id'],
+            'userId': scheduleJSON['userId'],
+            'scheduleDetailId': scheduleJSON['scheduleDetailId'],
+            'tutorMeetingLink': scheduleJSON['tutorMeetingLink'],
+            'studentMeetingLink': scheduleJSON['studentMeetingLink'],
+            'studentRequest': scheduleJSON['studentRequest'],
+            'startPeriodTimestamp': scheduleJSON['scheduleDetailInfo']
+                ['startPeriodTimestamp'],
+            'endPeriodTimestamp': scheduleJSON['scheduleDetailInfo']
+                ['endPeriodTimestamp'],
+            'tutorId': scheduleJSON['scheduleDetailInfo']['scheduleInfo']
+                ['tutorId'],
+            'tutorAvatar': scheduleJSON['scheduleDetailInfo']['scheduleInfo']
+                ['tutorInfo']['avatar'],
+            'tutorName': scheduleJSON['scheduleDetailInfo']['scheduleInfo']
+                ['tutorInfo']['name'],
+          };
+          return Schedule.fromJson(newSchedule);
+        }).toList();
+
+        return Schedule.sortScheduleByStartTime(
+          schedules: schedules,
+          isAscending: true,
+        )[0];
+      }
+      debugPrint(
+          "ScheduleService.getUpcomingSchedule failed with status code: ${response.statusCode}");
+    } catch (e) {
+      debugPrint("ScheduleService.getUpcomingSchedule: ${e.toString()}");
+    }
+    return null;
+  }
+
   Future<List<Schedule>> getAllSchedules({
     int page = 1,
     int perPage = 12,
@@ -101,7 +150,7 @@ class ScheduleService {
       }
 
       dio.Response response = await APIHandlerImp.instance.get(
-        endpoint: BackendEnvironment.getUpcomingSchedules,
+        endpoint: BackendEnvironment.getSchedulesBooked,
         useToken: true,
         query: query,
       );
@@ -144,10 +193,13 @@ class ScheduleService {
     try {
       Map<String, dynamic> query = {
         'tutorId': tutorId,
-        'startTimestamp': Helper.parseDateFromString(startDay).millisecondsSinceEpoch.toString(),
-        'endTimestamp': Helper.parseDateFromString(endDay).millisecondsSinceEpoch.toString(),
+        'startTimestamp': Helper.parseDateFromString(startDay)
+            .millisecondsSinceEpoch
+            .toString(),
+        'endTimestamp': Helper.parseDateFromString(endDay)
+            .millisecondsSinceEpoch
+            .toString(),
       };
-      debugPrint("AAA: $query");
       dio.Response response = await APIHandlerImp.instance.get(
         endpoint: BackendEnvironment.getSchedulesToBookByTutorId,
         useToken: true,

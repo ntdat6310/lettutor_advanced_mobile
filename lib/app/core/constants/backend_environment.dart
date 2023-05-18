@@ -15,11 +15,13 @@ class BackendEnvironment {
   static String getProfile = '/user/info';
   static String getTestPreparation = '/test-preparation';
   static String uploadAvatar = '/user/uploadAvatar';
-  static String getUpcomingSchedules = '/booking/list/student';
+  static String getSchedulesBooked = '/booking/list/student';
+  static String getUpcomingSchedule = '/booking/next';
   static String cancelBooking = '/booking/schedule-detail';
   static String cancelReasons = '/booking/cancel-reason';
   static String getSchedulesToBookByTutorId = '/schedule';
   static String bookASchedule = '/booking';
+  static String getTotalTime = '/call/total';
 
   static Map<String, String> specialties = {
     'all': 'All',

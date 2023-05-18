@@ -6,6 +6,7 @@ import 'package:lettutor_advanced_mobile/app/data/models/profile/test_preparatio
 import 'package:lettutor_advanced_mobile/app/data/providers/api_provider.dart';
 
 import '../models/profile/profile.dart';
+import '../models/profile/total_time.dart';
 import '../models/profile/wallet.dart';
 
 class ProfileService {
@@ -109,5 +110,23 @@ class ProfileService {
       debugPrint("ProfileService.getWallet: ${e.toString()}");
     }
     return null;
+  }
+
+  Future<TotalTime> getTotalTime() async {
+    try {
+      dio.Response response = await APIHandlerImp.instance.get(
+        endpoint: BackendEnvironment.getTotalTime,
+        useToken: true,
+      );
+      if (response.statusCode == 200) {
+        return TotalTime(minutes: (response.data['total']).toInt());
+      } else {
+        debugPrint(
+            "ProfileService.getTotalTime failed with statusCode: ${response.statusCode}");
+      }
+    } catch (e) {
+      debugPrint("ProfileService.getTotalTime: ${e.toString()}");
+    }
+    return TotalTime(minutes: 0);
   }
 }

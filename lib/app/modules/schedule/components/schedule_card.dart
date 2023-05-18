@@ -16,7 +16,8 @@ class ScheduleCard extends StatelessWidget {
 
   final Schedule schedule;
   final Function(Schedule)? onCancelBookingClicked;
-  final Function({required Schedule schedule})? onJoinMeeting;
+  final Function({required Schedule schedule})?
+      onJoinMeeting;
   final String fromView;
   Widget _showAvatar() {
     if (schedule.tutorAvatar != null) {
@@ -197,7 +198,8 @@ class ScheduleCard extends StatelessWidget {
                               ),
                               onPressed: () {
                                 if (onJoinMeeting != null) {
-                                  onJoinMeeting!(schedule: schedule);
+                                  onJoinMeeting!(
+                                      schedule: schedule);
                                 }
                                 // Get.toNamed(Routes.MEETING_VIDEO_CONFERENCE);
                               },

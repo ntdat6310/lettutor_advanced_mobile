@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:lettutor_advanced_mobile/app/modules/widgets/upcomming/upcoming_view.dart';
 
 import '../../data/models/schedule/schedule.dart';
-import '../home/components/upcomming_lesson.dart';
 import '../widgets/custom_appbar.dart';
 import 'components/schedule_card.dart';
 import 'schedule_controller.dart';
@@ -20,8 +20,8 @@ class ScheduleView extends GetView<ScheduleController> {
       ),
       body: CustomScrollView(
         slivers: <Widget>[
-          const SliverToBoxAdapter(
-            child: SizedBox(width: double.infinity, child: UpcomingLesson()),
+          SliverToBoxAdapter(
+            child: SizedBox(width: double.infinity, child: UpcomingView()),
           ),
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
