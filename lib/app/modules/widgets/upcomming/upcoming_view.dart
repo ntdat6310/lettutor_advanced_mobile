@@ -20,7 +20,7 @@ class UpcomingView extends StatelessWidget {
             'Upcoming Lesson',
             style: TextStyle(color: Colors.white, fontSize: 24),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 20),
           Obx(() {
             if (upcomingController.schedule.value != null) {
               return Text(
@@ -32,6 +32,18 @@ class UpcomingView extends StatelessWidget {
             }
           }),
           const SizedBox(height: 8),
+          Obx(() {
+            if (upcomingController.countdown.value.isNotEmpty) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Text(
+                  upcomingController.countdown.value,
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              );
+            }
+            return const SizedBox.shrink();
+          }),
           Obx(() {
             if (upcomingController.totalTime.value != null) {
               String totalHours = upcomingController.totalTime.value!.hours > 9
@@ -54,7 +66,7 @@ class UpcomingView extends StatelessWidget {
                 'Total lesson time is $totalHours$totalMinutes',
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 14,
+                  fontSize: 16,
                 ),
               );
             }

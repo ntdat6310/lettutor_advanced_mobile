@@ -27,45 +27,68 @@ class JitsiController extends GetxController {
     }
     // Define meetings options here
     var options = JitsiMeetingOptions(
-      roomNameOrUrl: roomName,
-      serverUrl: "https://meet.lettutor.com",
-      token: token,
-      isAudioMuted: true,
-      isAudioOnly: true,
-      isVideoMuted: true,
-      userDisplayName: profile.name,
-      userEmail: profile.email,
-      userAvatarUrl: profile.avatar,
-      featureFlags: featureFlags,
-    );
-    _timer = Timer.periodic(const Duration(milliseconds: 1000), (timer) async {
-      if (schedule.startPeriodTimestamp!.millisecondsSinceEpoch <=
-          DateTime.now().millisecondsSinceEpoch) {
-        timer.cancel();
-      }
-      String strTimeUntil = getUntilTime(schedule.startPeriodTimestamp!);
-      await Fluttertoast.showToast(
-        msg:
-            "\n$strTimeUntil until lesson start",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        backgroundColor: Colors.transparent,
-        textColor: Colors.white,
-        timeInSecForIosWeb: 1,
-        fontSize: 18,
-      );
-      await Fluttertoast.cancel();
-    });
+        roomNameOrUrl: roomName,
+        serverUrl: "https://meet.lettutor.com",
+        token: token,
+        isAudioMuted: true,
+        isAudioOnly: true,
+        isVideoMuted: true,
+        userDisplayName: profile.name,
+        userEmail: profile.email,
+        userAvatarUrl: profile.avatar,
+        featureFlags: featureFlags,
+        subject: DateFormat("EEE, dd MMM (HH:mm)")
+            .format(schedule.startPeriodTimestamp!));
 
     await JitsiMeetWrapper.joinMeeting(
       options: options,
       listener: JitsiMeetingListener(
-          onOpened: () {},
+          onOpened: () {
+            _timer = Timer.periodic(const Duration(milliseconds: 1000),
+                (timer) async {
+              if (schedule.startPeriodTimestamp!.millisecondsSinceEpoch <=
+                  DateTime.now().millisecondsSinceEpoch) {
+                timer.cancel();
+              }
+              String strTimeUntil =
+                  getUntilTime(schedule.startPeriodTimestamp!);
+              await Fluttertoast.showToast(
+                msg: "\n\n$strTimeUntil until lesson start",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.CENTER,
+                backgroundColor: Colors.transparent,
+                textColor: Colors.white,
+                timeInSecForIosWeb: 1,
+                fontSize: 18,
+              );
+              await Fluttertoast.cancel();
+            });
+          },
           onConferenceWillJoin: (url) {
             debugPrint("onConferenceWillJoin: url: $url");
           },
           onConferenceJoined: (url) {
             debugPrint("onConferenceJoined: url: $url");
+            _timer?.cancel();
+            _timer = Timer.periodic(const Duration(milliseconds: 1000),
+                (timer) async {
+              if (schedule.startPeriodTimestamp!.millisecondsSinceEpoch <=
+                  DateTime.now().millisecondsSinceEpoch) {
+                timer.cancel();
+              }
+              String strTimeUntil =
+                  getUntilTime(schedule.startPeriodTimestamp!);
+              await Fluttertoast.showToast(
+                msg: "\n\n$strTimeUntil until lesson start",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.TOP,
+                backgroundColor: Colors.transparent,
+                textColor: Colors.white,
+                timeInSecForIosWeb: 1,
+                fontSize: 18,
+              );
+              await Fluttertoast.cancel();
+            });
           },
           onConferenceTerminated: (url, error) {
             debugPrint("onConferenceTerminated: url: $url, error: $error");
@@ -130,7 +153,7 @@ class JitsiController extends GetxController {
     final seconds = difference.inSeconds -
         days * HOURS_PER_DAY * MINUTES_PER_HOUR * SECONDS_PER_MINUTE -
         hours * MINUTES_PER_HOUR * SECONDS_PER_MINUTE -
-        minutes * SECONDS_PER_MINUTE  ;
+        minutes * SECONDS_PER_MINUTE;
     final hoursStr = hours > 9 ? "$hours" : "0$hours";
     final minutesStr = minutes > 9 ? "$minutes" : "0$minutes";
     final secondsStr = seconds > 9 ? "$seconds" : "0$seconds";
@@ -138,7 +161,9 @@ class JitsiController extends GetxController {
         ? "$days days"
         : days > 1
             ? "0$days days"
-            : "$days day";
+            : days == 1
+                ? "0$days day"
+                : "";
     return "$daysStr $hoursStr:$minutesStr:$secondsStr";
   }
 
