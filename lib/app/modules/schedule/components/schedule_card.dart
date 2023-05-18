@@ -11,10 +11,12 @@ class ScheduleCard extends StatelessWidget {
     required this.schedule,
     this.onCancelBookingClicked,
     this.fromView = "SCHEDULE",
+    this.onJoinMeeting,
   }) : super(key: key);
 
   final Schedule schedule;
   final Function(Schedule)? onCancelBookingClicked;
+  final Function({required Schedule schedule})? onJoinMeeting;
   final String fromView;
   Widget _showAvatar() {
     if (schedule.tutorAvatar != null) {
@@ -194,7 +196,10 @@ class ScheduleCard extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () {
-                                Get.toNamed(Routes.MEETING_VIDEO_CONFERENCE);
+                                if (onJoinMeeting != null) {
+                                  onJoinMeeting!(schedule: schedule);
+                                }
+                                // Get.toNamed(Routes.MEETING_VIDEO_CONFERENCE);
                               },
                               child: const Text('Go to Meeting'),
                             ),

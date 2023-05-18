@@ -54,6 +54,8 @@ dependencies:
   infinite_scroll_pagination: ^3.2.0
   video_player: ^2.6.1
   syncfusion_flutter_pdfviewer: ^21.2.4
+  jitsi_meet_wrapper: ^0.0.6
+  fluttertoast: ^8.2.1
 
 dev_dependencies:
   flutter_test:

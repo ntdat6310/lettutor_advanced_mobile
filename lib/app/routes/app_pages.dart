@@ -69,12 +69,8 @@ class AppPages {
       name: _Paths.COURSE_LESSON,
       page: () {
         Map<String, dynamic> arguments = Get.arguments;
-        debugPrint("PAGES: $arguments");
         Course course = arguments['course'];
         int selectedTopicIndex = arguments['selectedTopicIndex'];
-        debugPrint("PAGES: COURSE $course");
-        debugPrint("PAGES: TOPIC INDEX $selectedTopicIndex");
-
         return CourseLessonView(
             course: course, selectedTopicIndex: selectedTopicIndex);
       },

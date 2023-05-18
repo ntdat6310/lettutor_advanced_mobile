@@ -31,6 +31,7 @@ class ScheduleView extends GetView<ScheduleController> {
                 itemBuilder: (context, schedule, index) => ScheduleCard(
                   schedule: schedule,
                   onCancelBookingClicked: controller.showCancelDialog,
+                  onJoinMeeting: controller.jitsiController.joinMeeting,
                 ),
               ),
             ),

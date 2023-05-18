@@ -7,6 +7,7 @@ import 'package:lettutor_advanced_mobile/app/modules/profile_setting/components/
 
 import '../../data/models/schedule/cancel_reason.dart';
 import '../../data/models/schedule/schedule.dart';
+import '../jitsi/jitsi_controller.dart';
 
 class ScheduleController extends GetxController {
   static const _pageSize = 4;
@@ -17,6 +18,7 @@ class ScheduleController extends GetxController {
   List<CancelReason> cancelReasons = [];
   final cancelReasonController = TextEditingController();
   Rx<CancelReason?> selectedCancelReason = Rx<CancelReason?>(null);
+  final JitsiController jitsiController = Get.put<JitsiController>(JitsiController());
 
   @override
   void onInit() async {
