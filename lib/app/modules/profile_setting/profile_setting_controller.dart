@@ -73,10 +73,12 @@ class ProfileSettingController extends GetxController {
         'phone': profile.value?.phone ?? '',
         "birthday": DateFormat('yyyy-MM-dd')
             .format(datePickerController.selectedDate.value),
-        "level": profile.value?.level,
         "studySchedule": studyScheduleController.text,
         "testPreparations": testPreparationController.selectedItems.toList()
       };
+      if (profile.value?.level != null) {
+        body['level'] = profile.value?.level;
+      }
       int? response = await profileService.updateProfile(body: body);
       if (response == 200) {
         Get.snackbar(
@@ -95,6 +97,14 @@ class ProfileSettingController extends GetxController {
           duration: const Duration(seconds: 3),
         );
       }
+    } else {
+      Get.snackbar(
+        "Warning",
+        "Please enter all required fields.",
+        duration: const Duration(seconds: 3),
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
     }
   }
 

@@ -61,6 +61,11 @@ class BookingScheduleController extends GetxController {
   }
 
   void showBookAScheduleDialog({required ScheduleBooking scheduleBooking}) {
+    bool canBookASchedule = walletController.wallet != null &&
+        walletController.wallet!.amount != null &&
+        walletController.wallet!.isBlocked == false &&
+        double.parse(walletController.wallet!.amount!) >= 100000;
+
     Get.dialog(
       Dialog(
         child: Container(
@@ -199,14 +204,16 @@ class BookingScheduleController extends GetxController {
                   ),
                   const SizedBox(width: 8),
                   ElevatedButton(
-                    onPressed: () {
-                      bookASchedule(
-                        scheduleBooking: scheduleBooking,
-                        note: noteController.text,
-                      );
-                      noteController.clear();
-                      Get.back();
-                    },
+                    onPressed: canBookASchedule
+                        ? () {
+                            bookASchedule(
+                              scheduleBooking: scheduleBooking,
+                              note: noteController.text,
+                            );
+                            noteController.clear();
+                            Get.back();
+                          }
+                        : null,
                     child: const Text('Confirm'),
                   ),
                 ],

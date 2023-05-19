@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:lettutor_advanced_mobile/app/core/constants/backend_environment.dart';
 import 'package:lettutor_advanced_mobile/app/modules/sign_in/sign_in_view.dart';
+import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 
 import '../../core/constants/constants.dart';
 import '../../core/utils/secure_storage.dart';
@@ -110,6 +111,7 @@ class APIHandlerImp implements APIHandlerInterface {
     if (useToken) {
       String? token =
           useRefreshToken ? await getRefreshToken() : await getAccessToken();
+      debugPrint("TOKEN: $token");
       if (token != "") {
         baseHeader["Authorization"] = "Bearer $token";
       }
@@ -276,7 +278,7 @@ class APIHandlerImp implements APIHandlerInterface {
         return true;
       } else {
         //  refreshToken expires => Bắt user login lại.
-        _reSignIn();
+        reSignIn();
         return false;
       }
     } catch (e) {
@@ -318,8 +320,9 @@ class APIHandlerImp implements APIHandlerInterface {
     return response;
   }
 
-  void _reSignIn() {
-    Get.offAll(SignInView());
+  void reSignIn() {
+    deleteToken();
+    Get.offAllNamed(Routes.SIGN_IN);
   }
 
   @override

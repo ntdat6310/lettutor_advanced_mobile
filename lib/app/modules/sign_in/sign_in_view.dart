@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:lettutor_advanced_mobile/app/modules/my_tab_bar/my_tab_bar_view.dart';
 import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 
 import '../../utils/constants/assets.dart';
@@ -148,7 +147,9 @@ class SignInView extends GetView<SignInController> {
                                 'assets/icons/google_icon.svg',
                                 height: 45,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                controller.loginWithGoogle();
+                              },
                             ),
                           ],
                         ),

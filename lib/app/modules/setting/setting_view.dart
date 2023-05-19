@@ -72,7 +72,9 @@ class SettingView extends GetView<SettingController> {
                 SettingItem(
                   icon: Icons.logout,
                   title: "Logout",
-                  onClick: () {},
+                  onClick: () {
+                    controller.authService.logout();
+                  },
                   bottomSpace: 12,
                 ),
               ],
