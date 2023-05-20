@@ -23,7 +23,7 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile Setting'),
+        title: Text('edit_profile'.tr),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -44,10 +44,10 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
                       Obx(() {
                         if (controller.selectPhotoController.image.value ==
                             null) {
-                          debugPrint("AVATAR: ${controller.profile.value?.avatar}");
                           return CircleAvatar(
-                            backgroundImage:
-                                NetworkImage(controller.profile.value?.avatar ?? Constants.defaultUserAvatarUrl),
+                            backgroundImage: NetworkImage(
+                                controller.profile.value?.avatar ??
+                                    Constants.defaultUserAvatarUrl),
                             radius: 60,
                           );
                         } else {
@@ -78,8 +78,8 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
 
                 // NAME
                 CustomTextField(
-                  title: "Name",
-                  hintText: 'Enter your name',
+                  title: "name".tr,
+                  hintText: 'enter_your_name'.tr,
                   required: true,
                   textEditingController: controller.nameController,
                 ),
@@ -94,7 +94,7 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
 
                 // PHONE NUMBER
                 CustomTextField(
-                  title: 'Phone Number',
+                  title: 'phone_number'.tr,
                   textEditingController: controller.phoneController,
                   disable: true,
                   suffixIcon: Icon(Icons.verified, color: Colors.blue[300]),
@@ -103,10 +103,10 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
                 // COUNTRY
                 const SizedBox(height: 24),
                 RichText(
-                  text: const TextSpan(
+                  text: TextSpan(
                     children: <TextSpan>[
-                      TextSpan(
-                        text: '*',
+                      const TextSpan(
+                        text: '* ',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.red,
@@ -114,8 +114,8 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
                         ),
                       ),
                       TextSpan(
-                        text: ' Country',
-                        style: TextStyle(
+                        text: 'country'.tr,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                           fontSize: 18,
@@ -130,10 +130,10 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
                 // BIRTHDAY
                 const SizedBox(height: 24),
                 RichText(
-                  text: const TextSpan(
+                  text: TextSpan(
                     children: <TextSpan>[
-                      TextSpan(
-                        text: '*',
+                      const TextSpan(
+                        text: '* ',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.red,
@@ -141,8 +141,8 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
                         ),
                       ),
                       TextSpan(
-                        text: ' Birthday',
-                        style: TextStyle(
+                        text: 'birthday'.tr,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                           fontSize: 18,
@@ -157,10 +157,10 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
                 // TEST PREPARATION
                 const SizedBox(height: 24),
                 RichText(
-                  text: const TextSpan(
+                  text: TextSpan(
                     children: <TextSpan>[
-                      TextSpan(
-                        text: '*',
+                      const TextSpan(
+                        text: '* ',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.red,
@@ -168,8 +168,8 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
                         ),
                       ),
                       TextSpan(
-                        text: ' Test Preparation',
-                        style: TextStyle(
+                        text: 'test_preparation'.tr,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                           fontSize: 18,
@@ -183,7 +183,7 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
 
                 // STUDY SCHEDULE
                 CustomTextField(
-                  title: "Study Schedule",
+                  title: "study_schedule".tr,
                   textEditingController: controller.studyScheduleController,
                   minLines: 3,
                   maxLines: 10,
@@ -196,9 +196,9 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
                   height: 36,
                   child: ElevatedButton(
                     onPressed: _onSubmit,
-                    child: const Text(
-                      "Submit",
-                      style: TextStyle(fontSize: 16),
+                    child: Text(
+                      "submit".tr,
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ),
                 ),

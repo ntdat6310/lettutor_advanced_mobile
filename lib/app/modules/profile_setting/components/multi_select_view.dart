@@ -13,7 +13,7 @@ class MultiSelectView extends StatelessWidget {
       children: [
         Obx(() => MultiSelectDialogField(
               items: controller.items,
-              title: const Text("Select Options"),
+              title: Text("select_options".tr),
               selectedColor: Colors.blue,
               initialValue: controller.selectedItems.value,
               decoration: BoxDecoration(
@@ -33,9 +33,9 @@ class MultiSelectView extends StatelessWidget {
             )),
         Obx(() => Visibility(
             visible: controller.isValid.value == false,
-            child: const Text(
-              'Please select at least one option.',
-              style: TextStyle(
+            child: Text(
+              'please_select_at_least_one_option'.tr,
+              style: const TextStyle(
                 color: Colors.red,
               ),
             ))),

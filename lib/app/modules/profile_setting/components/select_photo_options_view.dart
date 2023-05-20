@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'select_photo_button.dart';
 
 class SelectPhotoOptionsView extends StatelessWidget {
-  const SelectPhotoOptionsView({Key? key, required this.onTap}) : super(key: key);
+  const SelectPhotoOptionsView({Key? key, required this.onTap})
+      : super(key: key);
   final Function(ImageSource source) onTap;
-
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +36,15 @@ class SelectPhotoOptionsView extends StatelessWidget {
             SelectPhoto(
               onTap: () => onTap(ImageSource.gallery),
               icon: Icons.image,
-              textLabel: 'Browse Gallery',
+              textLabel: 'browse_gallery'.tr,
             ),
             const SizedBox(
               height: 10,
             ),
-            const Center(
+            Center(
               child: Text(
-                'OR',
-                style: TextStyle(fontSize: 18),
+                'or'.tr,
+                style: const TextStyle(fontSize: 18),
               ),
             ),
             const SizedBox(
@@ -52,7 +53,7 @@ class SelectPhotoOptionsView extends StatelessWidget {
             SelectPhoto(
               onTap: () => onTap(ImageSource.camera),
               icon: Icons.camera_alt_outlined,
-              textLabel: 'Use a Camera',
+              textLabel: 'use_a_camera'.tr,
             ),
           ])
         ],

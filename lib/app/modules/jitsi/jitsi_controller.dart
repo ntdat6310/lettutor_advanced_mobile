@@ -53,7 +53,7 @@ class JitsiController extends GetxController {
               String strTimeUntil =
                   getUntilTime(schedule.startPeriodTimestamp!);
               await Fluttertoast.showToast(
-                msg: "\n\n$strTimeUntil until lesson start",
+                msg: "\n\n$strTimeUntil ${"until_lesson_start".tr}",
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.CENTER,
                 backgroundColor: Colors.transparent,
@@ -79,7 +79,7 @@ class JitsiController extends GetxController {
               String strTimeUntil =
                   getUntilTime(schedule.startPeriodTimestamp!);
               await Fluttertoast.showToast(
-                msg: "\n\n$strTimeUntil until lesson start",
+                msg: "\n\n$strTimeUntil ${"until_lesson_start".tr}",
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.TOP,
                 backgroundColor: Colors.transparent,
@@ -158,11 +158,11 @@ class JitsiController extends GetxController {
     final minutesStr = minutes > 9 ? "$minutes" : "0$minutes";
     final secondsStr = seconds > 9 ? "$seconds" : "0$seconds";
     String daysStr = days > 9
-        ? "$days days"
+        ? "$days ${"days".tr}"
         : days > 1
-            ? "0$days days"
+            ? "0$days ${"days".tr}"
             : days == 1
-                ? "0$days day"
+                ? "01 ${"day".tr}"
                 : "";
     return "$daysStr $hoursStr:$minutesStr:$secondsStr";
   }

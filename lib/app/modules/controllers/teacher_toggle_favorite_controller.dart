@@ -9,11 +9,6 @@ class TeacherToggleFavoriteController extends GetxController {
   final TeachersController _teachersController =
       Get.put<TeachersController>(TeachersController());
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
   void toggleFavorite({required String teacherId}) {
     _homeController.teacherController
         .toggleFavoriteTeacherApi(teacherId: teacherId);

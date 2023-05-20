@@ -11,8 +11,9 @@ class SettingController extends GetxController {
   Rx<Profile?> profile = Rx<Profile?>(null);
   final profileService = Get.put<ProfileService>(ProfileService());
   final authService = Get.put(AuthService());
-  RxString selectedLanguageCode =
-      RxString(LocalizationService.fallbackLocale.languageCode);
+  RxString selectedLanguageCode = RxString(
+      LocalizationService.locale?.languageCode ??
+          LocalizationService.fallbackLocale.languageCode);
 
   @override
   void onInit() async {
@@ -35,7 +36,8 @@ class SettingController extends GetxController {
                 child: Text(
                   "select_language".tr,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
               ...List.generate(LocalizationService.languagesSupport.length,

@@ -18,8 +18,8 @@ class TeachersView extends GetView<TeachersController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: 'Teachers',
+      appBar: CustomAppBar(
+        title: 'teachers'.tr,
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -35,7 +35,7 @@ class TeachersView extends GetView<TeachersController> {
                   // Handle search here
                   _teachersController.searchTeachers(key: value);
                 },
-                searchHint: 'Enter tutor\'s name',
+                searchHint: 'enter_tutor_name'.tr,
               ),
               const SizedBox(height: 20),
               const FindATutor(),

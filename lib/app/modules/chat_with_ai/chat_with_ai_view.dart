@@ -76,7 +76,7 @@ class ChatWithAiView extends GetView<ChatWithAiController> {
               contentPadding: const EdgeInsets.all(20),
               isDense: true,
               counterText: "",
-              hintText: "Type your message",
+              hintText: "type_your_question".tr,
               hintStyle: const TextStyle(color: Colors.grey),
               suffixIcon: !_chatWithAiController.isLoading.value
                   ? IconButton(

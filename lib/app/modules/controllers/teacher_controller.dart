@@ -55,18 +55,6 @@ class TeacherController extends GetxController {
     searchTeachers();
   }
 
-  @override
-  void onReady() {
-    debugPrint("TeacherController.onReady");
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    debugPrint("TeacherController.onClose");
-    super.onClose();
-  }
-
   void toggleFavoriteTeacherLocal({required String teacherId}) {
     bool hasTeacherId = false;
     for (var teacher in teachers) {

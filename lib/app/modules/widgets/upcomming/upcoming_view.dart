@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lettutor_advanced_mobile/app/modules/widgets/upcomming/upcoming_controller.dart';
 
-import '../../../routes/app_pages.dart';
-
 class UpcomingView extends StatelessWidget {
   UpcomingView({Key? key}) : super(key: key);
   final upcomingController = Get.put<UpcomingController>(UpcomingController());
@@ -16,9 +14,9 @@ class UpcomingView extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          const Text(
-            'Upcoming Lesson',
-            style: TextStyle(color: Colors.white, fontSize: 24),
+          Text(
+            'upcoming_lesson'.tr,
+            style: const TextStyle(color: Colors.white, fontSize: 24),
           ),
           const SizedBox(height: 20),
           Obx(() {
@@ -47,23 +45,23 @@ class UpcomingView extends StatelessWidget {
           Obx(() {
             if (upcomingController.totalTime.value != null) {
               String totalHours = upcomingController.totalTime.value!.hours > 9
-                  ? "${upcomingController.totalTime.value!.hours} hours "
+                  ? "${upcomingController.totalTime.value!.hours} ${'hours'.tr} "
                   : upcomingController.totalTime.value!.hours > 1
-                      ? "0${upcomingController.totalTime.value!.hours} hours "
+                      ? "0${upcomingController.totalTime.value!.hours} ${'hours'.tr} "
                       : upcomingController.totalTime.value!.hours == 1
-                          ? "01 hour "
+                          ? "01 ${'hour'.tr} "
                           : "";
               String totalMinutes = upcomingController
                           .totalTime.value!.minutes >
                       9
-                  ? "${upcomingController.totalTime.value!.minutes} minutes"
+                  ? "${upcomingController.totalTime.value!.minutes} ${'minutes'.tr}"
                   : upcomingController.totalTime.value!.minutes > 1
-                      ? "0${upcomingController.totalTime.value!.minutes} minutes"
+                      ? "0${upcomingController.totalTime.value!.minutes} ${'minutes'.tr}"
                       : upcomingController.totalTime.value!.minutes == 1
-                          ? "01 minute"
-                          : "0 minute";
+                          ? "01 ${'minute'.tr}"
+                          : "0 ${'minute'.tr}";
               return Text(
-                'Total lesson time is $totalHours$totalMinutes',
+                '${"total_lesson_time_is".tr} $totalHours$totalMinutes',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -90,12 +88,12 @@ class UpcomingView extends StatelessWidget {
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              children: const [
-                Icon(Icons.video_collection, color: Colors.blue),
-                SizedBox(width: 10),
+              children: [
+                const Icon(Icons.video_collection, color: Colors.blue),
+                const SizedBox(width: 10),
                 Text(
-                  'Enter lesson room',
-                  style: TextStyle(
+                  'enter_lesson_room'.tr,
+                  style: const TextStyle(
                     color: Colors.blue,
                   ),
                 )

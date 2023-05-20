@@ -14,7 +14,7 @@ class BookingScheduleView extends GetView<BookingScheduleController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BookingScheduleView'),
+        title: Text('booking_schedule'.tr),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -25,19 +25,21 @@ class BookingScheduleView extends GetView<BookingScheduleController> {
               TeacherBriefInfo(teacher: controller.teacher),
               Obx(() {
                 if (controller.isLoading.value) {
-                  return const CircularProgressIndicator(color: Colors.blueAccent);
+                  return const CircularProgressIndicator(
+                      color: Colors.blueAccent);
                 }
                 if (controller.dailyScheduleBookings.isEmpty) {
                   return const NoDataFound();
                 }
                 return Column(
-                  children: List.generate(controller.dailyScheduleBookings.length,
-                          (index) {
-                        return DailyBookingScheduleWidget(
-                          dailyScheduleBooking: controller.dailyScheduleBookings[index],
-                          onTap: controller.showBookAScheduleDialog,
-                        );
-                      }),
+                  children: List.generate(
+                      controller.dailyScheduleBookings.length, (index) {
+                    return DailyBookingScheduleWidget(
+                      dailyScheduleBooking:
+                          controller.dailyScheduleBookings[index],
+                      onTap: controller.showBookAScheduleDialog,
+                    );
+                  }),
                 );
               }),
             ],

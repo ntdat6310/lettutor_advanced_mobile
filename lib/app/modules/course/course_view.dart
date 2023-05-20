@@ -19,8 +19,8 @@ class CourseView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: 'Courses',
+      appBar: CustomAppBar(
+        title: 'courses'.tr,
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -37,11 +37,11 @@ class CourseView extends StatelessWidget {
                       initValue: _courseController.searchKey,
                       onChanged: (value) {},
                       onSubmit: _onSearchSubmitted,
-                      searchHint: 'Enter course name'),
+                      searchHint: 'enter_course_name'.tr),
                   const SizedBox(height: 20),
-                  const Text(
-                    "Filter courses",
-                    style: TextStyle(
+                  Text(
+                    "filter_courses".tr,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),

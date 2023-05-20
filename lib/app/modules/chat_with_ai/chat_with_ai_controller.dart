@@ -50,26 +50,11 @@ class ChatWithAiController extends GetxController {
       if (botMessage.isNotEmpty) {
         addBotMessageToList(botMessage);
       } else {
-        addBotMessageToList("Đã có lỗi xảy ra, xin vui lòng thử lại.");
+        addBotMessageToList("an_error_has_occurred_please_try_again".tr);
       }
     } catch (e) {
       _disableLoading();
-      addBotMessageToList("Đã có lỗi xảy ra, xin vui lòng thử lại.");
+      addBotMessageToList("an_error_has_occurred_please_try_again".tr);
     }
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
   }
 }

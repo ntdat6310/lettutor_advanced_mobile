@@ -59,7 +59,7 @@ class CourseLessonView extends GetView<CourseLessonController> {
   Widget build(BuildContext context) {
     controller.setInitValue(index: selectedTopicIndex, fileUrl: course.topics![selectedTopicIndex].nameFile!);
     return Scaffold(
-      appBar: const CustomAppBar(title: "Course Lesson"),
+      appBar: CustomAppBar(title: "course_lesson".tr),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         scrollDirection: Axis.vertical,
@@ -83,7 +83,7 @@ class CourseLessonView extends GetView<CourseLessonController> {
             const SizedBox(height: 10),
             Text(course.description ?? '', style: textStyle),
             const SizedBox(height: 20),
-            Text("List Topics", style: headingStyle),
+            Text("list_topics".tr, style: headingStyle),
             const SizedBox(height: 20),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,

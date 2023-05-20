@@ -17,7 +17,8 @@ class ScheduleController extends GetxController {
   List<CancelReason> cancelReasons = [];
   final cancelReasonController = TextEditingController();
   Rx<CancelReason?> selectedCancelReason = Rx<CancelReason?>(null);
-  final JitsiController jitsiController = Get.put<JitsiController>(JitsiController());
+  final JitsiController jitsiController =
+      Get.put<JitsiController>(JitsiController());
 
   @override
   void onInit() async {
@@ -45,10 +46,10 @@ class ScheduleController extends GetxController {
 
       _pagingController.itemList = newItemsList;
 
-      Get.snackbar("Cancel Booking Successfully", '',
+      Get.snackbar("cancel_booking_successfully".tr, '',
           duration: const Duration(seconds: 2));
     } else {
-      Get.snackbar("Cancel Booking Failed", '',
+      Get.snackbar("cancel_booking_failed".tr, '',
           duration: const Duration(seconds: 2));
     }
   }
@@ -59,14 +60,15 @@ class ScheduleController extends GetxController {
     Get.dialog(
       Dialog(
         child: Container(
-          padding: const EdgeInsets.only(top: 16, right: 20, left: 20, bottom: 12),
+          padding:
+              const EdgeInsets.only(top: 16, right: 20, left: 20, bottom: 12),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'What was the reason you cancel this booking?',
-                style: TextStyle(
+              Text(
+                'what_was_the_reason_you_cancel_this_booking'.tr,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
@@ -99,7 +101,7 @@ class ScheduleController extends GetxController {
               ),
               CustomTextField(
                 textEditingController: cancelReasonController,
-                hintText: 'Additional notes:',
+                hintText: '${"additional_notes".tr}:',
                 minLines: 3,
                 maxLines: 10,
                 topSpacing: 0,
@@ -117,7 +119,7 @@ class ScheduleController extends GetxController {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey[700],
                     ),
-                    child: const Text('Later'),
+                    child: Text('later'.tr),
                   ),
                   const SizedBox(width: 8),
                   ElevatedButton(
@@ -130,7 +132,7 @@ class ScheduleController extends GetxController {
                       cancelReasonController.clear();
                       Get.back();
                     },
-                    child: const Text('Confirm'),
+                    child: Text('confirm'.tr),
                   ),
                 ],
               ),
@@ -143,7 +145,6 @@ class ScheduleController extends GetxController {
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      debugPrint("PAGEKEY: $pageKey");
       final newItems = await scheduleService.getAllSchedules(
         page: pageKey,
         perPage: _pageSize,

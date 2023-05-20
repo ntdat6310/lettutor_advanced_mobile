@@ -82,7 +82,7 @@ class ProfileSettingController extends GetxController {
       int? response = await profileService.updateProfile(body: body);
       if (response == 200) {
         Get.snackbar(
-          "Update profile successfully",
+          "update_profile_successfully".tr,
           "",
           backgroundColor: Colors.green,
           colorText: Colors.white,
@@ -90,8 +90,8 @@ class ProfileSettingController extends GetxController {
         );
       } else {
         Get.snackbar(
-          "Update profile failed",
-          "PLease review your code",
+          "update_profile_failed".tr,
+          "please_review_your_code".tr,
           backgroundColor: Colors.red,
           colorText: Colors.white,
           duration: const Duration(seconds: 3),
@@ -99,8 +99,8 @@ class ProfileSettingController extends GetxController {
       }
     } else {
       Get.snackbar(
-        "Warning",
-        "Please enter all required fields.",
+        "warning".tr,
+        "please_enter_all_required_fields".tr,
         duration: const Duration(seconds: 3),
         backgroundColor: Colors.red,
         colorText: Colors.white,

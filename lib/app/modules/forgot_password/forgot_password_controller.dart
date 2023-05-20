@@ -19,16 +19,16 @@ class ForgotPasswordController extends GetxController {
           // Register success
           emailController.clear();
           Get.snackbar(
-            "Reset password success",
-            "Please check email for resetting password",
+            "reset_password_success".tr,
+            "please_check_email_for_resetting_password".tr,
             backgroundColor: Colors.green,
             colorText: Colors.white,
             duration: const Duration(seconds: 3),
           );
         } else {
           Get.snackbar(
-            "Email doesn't exist",
-            "Please enter another email",
+            "email_does_not_exist".tr,
+            "please_enter_another_email".tr,
             duration: const Duration(seconds: 5),
             backgroundColor: Colors.green,
             colorText: Colors.white,
@@ -47,7 +47,7 @@ class ForgotPasswordController extends GetxController {
     bool isValid = true;
 
     if (!EmailValidator.validate(emailController.text.trim())) {
-      emailError.value = 'Vui lòng nhập email hợp lệ';
+      emailError.value = 'please_enter_a_valid_email'.tr;
       isValid = false;
     } else {
       emailError.value = '';

@@ -43,16 +43,16 @@ class BookingScheduleController extends GetxController {
       scheduleBooking.isBooked.value = !scheduleBooking.isBooked.value;
       walletController.fetchWallet();
       Get.snackbar(
-        "Congratulation",
-        'Book a class successfully',
+        "congratulation".tr,
+        'book_a_class_successfully'.tr,
         backgroundColor: Colors.green,
         colorText: Colors.white,
         duration: const Duration(seconds: 3),
       );
     } else {
       Get.snackbar(
-        "Something went wrong!",
-        'Book a class failed, please check out your code!',
+        "something_went_wrong".tr,
+        'book_a_class_failed_please_check_out_your_code'.tr,
         backgroundColor: Colors.red,
         colorText: Colors.white,
         duration: const Duration(seconds: 3),
@@ -79,9 +79,9 @@ class BookingScheduleController extends GetxController {
               Container(
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(bottom: 10),
-                child: const Text(
-                  'Booking Details',
-                  style: TextStyle(
+                child: Text(
+                  'booking_details'.tr,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                     color: Colors.black,
@@ -93,9 +93,9 @@ class BookingScheduleController extends GetxController {
               RichText(
                 textAlign: TextAlign.right,
                 text: TextSpan(children: [
-                  const TextSpan(
-                    text: 'Date: ',
-                    style: TextStyle(
+                  TextSpan(
+                    text: '${"date".tr}: ',
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                       color: Colors.black,
@@ -114,9 +114,9 @@ class BookingScheduleController extends GetxController {
               const SizedBox(height: 10),
               RichText(
                 text: TextSpan(children: [
-                  const TextSpan(
-                    text: 'Booking Time: ',
-                    style: TextStyle(
+                  TextSpan(
+                    text: '${"booking_time".tr}: ',
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                       color: Colors.black,
@@ -135,9 +135,9 @@ class BookingScheduleController extends GetxController {
               const SizedBox(height: 10),
               RichText(
                 text: TextSpan(children: [
-                  const TextSpan(
-                    text: 'Balance: ',
-                    style: TextStyle(
+                  TextSpan(
+                    text: '${"balance".tr}: ',
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                       color: Colors.black,
@@ -154,16 +154,16 @@ class BookingScheduleController extends GetxController {
               ),
               const SizedBox(height: 10),
               RichText(
-                text: const TextSpan(children: [
+                text: TextSpan(children: [
                   TextSpan(
-                    text: 'Price: ',
-                    style: TextStyle(
+                    text: '${"price".tr}: ',
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                       color: Colors.black,
                     ),
                   ),
-                  TextSpan(
+                  const TextSpan(
                     text: '100.000 VNĐ',
                     style: TextStyle(
                       fontSize: 18,
@@ -173,16 +173,16 @@ class BookingScheduleController extends GetxController {
                 ]),
               ),
               const SizedBox(height: 10),
-              const Text(
-                'Note',
-                style: TextStyle(
+              Text(
+                'note'.tr,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
               ),
               CustomTextField(
                 textEditingController: noteController,
-                hintText: 'Additional notes:',
+                hintText: 'additional_notes'.tr,
                 minLines: 3,
                 maxLines: 10,
                 topSpacing: 8,
@@ -200,7 +200,7 @@ class BookingScheduleController extends GetxController {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey[700],
                     ),
-                    child: const Text('Later'),
+                    child: Text('later'.tr),
                   ),
                   const SizedBox(width: 8),
                   ElevatedButton(
@@ -214,7 +214,7 @@ class BookingScheduleController extends GetxController {
                             Get.back();
                           }
                         : null,
-                    child: const Text('Confirm'),
+                    child: Text('confirm'.tr),
                   ),
                 ],
               ),

@@ -32,30 +32,30 @@ class MyTabBarView extends GetView<MyTabBarController> {
             onTap: (index) {
               controller.onItemTapped(index);
             },
-            items: const <BottomNavigationBarItem>[
+            items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
+                icon: const Icon(Icons.home),
+                label: 'home'.tr,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_today),
-                label: 'Upcoming',
+                icon: const Icon(Icons.calendar_today),
+                label: 'upcoming'.tr,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'Teacher',
+                icon: const Icon(Icons.person),
+                label: 'teacher'.tr,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.book),
-                label: 'Course',
+                icon: const Icon(Icons.book),
+                label: 'course'.tr,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.chat_outlined),
-                label: 'Chat',
+                icon: const Icon(Icons.chat_outlined),
+                label: 'chat'.tr,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: 'Setting',
+                icon: const Icon(Icons.settings),
+                label: 'setting'.tr,
               ),
             ],
           ),

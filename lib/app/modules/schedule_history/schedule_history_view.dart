@@ -14,8 +14,8 @@ class ScheduleHistoryView extends GetView<ScheduleHistoryController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: "Schedule History",
+      appBar: CustomAppBar(
+        title: "history_schedule".tr,
       ),
       body: CustomScrollView(
         slivers: <Widget>[

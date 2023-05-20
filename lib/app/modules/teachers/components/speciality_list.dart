@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lettutor_advanced_mobile/app/data/models/teacher/specialties.dart';
-import 'package:lettutor_advanced_mobile/app/modules/controllers/specialties_controller.dart';
 
 class SpecialityList extends StatelessWidget {
   SpecialityList({

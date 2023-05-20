@@ -28,7 +28,7 @@ class ReviewList extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          "Reviews (${reviews.length})",
+          "${"reviews".tr} (${reviews.length})",
           style: titleStyle,
         ),
         const SizedBox(height: 10),

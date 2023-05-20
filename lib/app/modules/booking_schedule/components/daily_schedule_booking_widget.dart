@@ -32,7 +32,7 @@ class DailyBookingScheduleWidget extends StatelessWidget {
               width: 100,
               child: ElevatedButton(
                 onPressed: null,
-                child: Text("Booked", style: contentStyle),
+                child: Text("booked".tr, style: contentStyle),
               ),
             );
           } else {
@@ -44,7 +44,7 @@ class DailyBookingScheduleWidget extends StatelessWidget {
                           scheduleBooking:
                               dailyScheduleBooking.schedules[index]);
                     },
-                    child: const Text("Book")));
+                    child: Text("book".tr)));
           }
         })
       ],

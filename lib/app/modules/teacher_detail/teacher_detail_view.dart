@@ -89,29 +89,29 @@ class TeacherDetailView extends GetView<TeacherDetailController> {
                       description: controller.teacher.bio ?? '',
                     ),
                     ChipInfo(
-                      title: "Languages",
+                      title: "languages".tr,
                       chipList: controller.languageNames,
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     ChipInfo(
-                      title: "Specialties",
+                      title: "specialties".tr,
                       chipList: controller.specialtyValues,
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     SectionWithTitleAndContent(
-                        content: controller.teacher.interests ?? 'No',
-                        title: 'Interests'),
+                        content: controller.teacher.interests ?? 'no'.tr,
+                        title: 'interests'.tr),
                     const SizedBox(
                       height: 20,
                     ),
                     SectionWithTitleAndContent(
-                        title: 'Teaching Experience',
+                        title: 'teaching_experience'.tr,
                         content:
-                            controller.teacher.experience ?? 'No experience'),
+                            controller.teacher.experience ?? 'no'.tr),
                     const SizedBox(
                       height: 20,
                     ),

@@ -1,12 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lettutor_advanced_mobile/app/modules/booking_schedule/booking_schedule_binding.dart';
-import 'package:lettutor_advanced_mobile/app/modules/booking_schedule/booking_schedule_controller.dart';
 import 'package:lettutor_advanced_mobile/app/modules/booking_schedule/booking_schedule_view.dart';
 import 'package:lettutor_advanced_mobile/app/modules/course_lesson/course_lesson_view.dart';
 
 import '../data/models/course/course.dart';
-import '../data/models/teacher/teacher.dart';
 import '../modules/chat_with_ai/chat_with_ai_binding.dart';
 import '../modules/chat_with_ai/chat_with_ai_view.dart';
 import '../modules/course/course_view.dart';
@@ -16,8 +13,6 @@ import '../modules/course_lesson/course_lesson_binding.dart';
 import '../modules/forgot_password/forgot_password_binding.dart';
 import '../modules/forgot_password/forgot_password_view.dart';
 import '../modules/home/home_view.dart';
-import '../modules/meeting_video_conference/meeting_video_conference_binding.dart';
-import '../modules/meeting_video_conference/meeting_video_conference_view.dart';
 import '../modules/my_tab_bar/my_tab_bar_binding.dart';
 import '../modules/my_tab_bar/my_tab_bar_view.dart';
 import '../modules/profile_setting/profile_setting_binding.dart';
@@ -34,8 +29,6 @@ import '../modules/sign_in/sign_in_view.dart';
 import '../modules/teacher_detail/teacher_detail_binding.dart';
 import '../modules/teacher_detail/teacher_detail_view.dart';
 import '../modules/teachers/teachers_view.dart';
-import '../modules/test_api/test_api_binding.dart';
-import '../modules/test_api/test_api_view.dart';
 
 part 'app_routes.dart';
 
@@ -96,11 +89,6 @@ class AppPages {
       page: () => ScheduleView(),
     ),
     GetPage(
-      name: _Paths.MEETING_VIDEO_CONFERENCE,
-      page: () => const MeetingVideoConferenceView(),
-      binding: MeetingVideoConferenceBinding(),
-    ),
-    GetPage(
       name: _Paths.REGISTER,
       page: () => const RegisterView(),
       binding: RegisterBinding(),
@@ -109,11 +97,6 @@ class AppPages {
       name: _Paths.MY_TAB_BAR,
       page: () => MyTabBarView(),
       binding: MyTabBarBinding(),
-    ),
-    GetPage(
-      name: _Paths.TEST_API,
-      page: () => TestApiView(),
-      binding: TestApiBinding(),
     ),
     GetPage(
       name: _Paths.FORGOT_PASSWORD,

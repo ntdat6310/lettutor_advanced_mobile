@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class TeacherDescription extends StatefulWidget {
   const TeacherDescription({Key? key, required this.description})
@@ -47,7 +48,7 @@ class _TeacherDescriptionState extends State<TeacherDescription> {
                 _toggleText();
               },
               child: Text(
-                _isShowFullText ? "Hide" : "Show",
+                _isShowFullText ? "hide".tr : "show".tr,
                 style: toggleStyle,
               )),
         )

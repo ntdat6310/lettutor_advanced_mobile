@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lettutor_advanced_mobile/app/data/services/teacher_service.dart';
 import 'package:lettutor_advanced_mobile/app/modules/controllers/message_favorite_report_controller.dart';
 
 import '../../../data/models/teacher/teacher.dart';
@@ -33,9 +32,9 @@ class MessageFavoriteReport extends StatelessWidget {
                   color: Colors.blueAccent,
                   size: 36,
                 )),
-            const Text(
-              "Message",
-              style: TextStyle(color: Colors.blueAccent, fontSize: 18),
+            Text(
+              "message".tr,
+              style: const TextStyle(color: Colors.blueAccent, fontSize: 18),
             )
           ],
         ),
@@ -50,9 +49,9 @@ class MessageFavoriteReport extends StatelessWidget {
                   color: Colors.blueAccent,
                   size: 36,
                 ))),
-            const Text(
-              "Favorite",
-              style: TextStyle(color: Colors.blueAccent, fontSize: 18),
+            Text(
+              "favorite".tr,
+              style: const TextStyle(color: Colors.blueAccent, fontSize: 18),
             )
           ],
         ),
@@ -65,9 +64,9 @@ class MessageFavoriteReport extends StatelessWidget {
                   color: Colors.blueAccent,
                   size: 36,
                 )),
-            const Text(
-              "Report",
-              style: TextStyle(color: Colors.blueAccent, fontSize: 18),
+            Text(
+              "report".tr,
+              style: const TextStyle(color: Colors.blueAccent, fontSize: 18),
             )
           ],
         ),

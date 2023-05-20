@@ -17,7 +17,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
       },
       child: Scaffold(
           appBar: AppBar(
-            title: const Text('Forgot Password'),
+            title: Text('forgot_password'.tr),
             centerTitle: true,
           ),
           body: SafeArea(
@@ -63,10 +63,10 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                             return ElevatedButton(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: const <Widget>[
-                                  Icon(Icons.login),
-                                  SizedBox(width: 10),
-                                  Text("Submit"),
+                                children: <Widget>[
+                                  const Icon(Icons.login),
+                                  const SizedBox(width: 10),
+                                  Text("submit".tr),
                                 ],
                               ),
                               onPressed: () {
@@ -78,9 +78,9 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text('Already have an account?'),
+                            Text('already_have_an_account'.tr),
                             TextButton(
-                              child: const Text('Sign in'),
+                              child: Text('sign_in'.tr),
                               onPressed: () {
                                 Get.back();
                               },

@@ -16,8 +16,7 @@ class ScheduleCard extends StatelessWidget {
 
   final Schedule schedule;
   final Function(Schedule)? onCancelBookingClicked;
-  final Function({required Schedule schedule})?
-      onJoinMeeting;
+  final Function({required Schedule schedule})? onJoinMeeting;
   final String fromView;
   Widget _showAvatar() {
     if (schedule.tutorAvatar != null) {
@@ -34,11 +33,11 @@ class ScheduleCard extends StatelessWidget {
   }
 
   Widget _showTutorReview() {
-    return const Padding(
-      padding: EdgeInsets.only(top: 8),
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
       child: Text(
-        'Tutor haven\'t reviewed yet',
-        style: TextStyle(
+        'tutor_have_not_reviewed_yet'.tr,
+        style: const TextStyle(
           fontSize: 14,
           color: Colors.redAccent,
           backgroundColor: Colors.white24,
@@ -139,7 +138,7 @@ class ScheduleCard extends StatelessWidget {
                                   onPressed: () {
                                     // TODO: add button press logic here
                                   },
-                                  child: const Text('Send Message'),
+                                  child: Text('send_message'.tr),
                                 )),
                             const SizedBox(width: 10),
                             Expanded(
@@ -152,10 +151,8 @@ class ScheduleCard extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(4),
                                     ),
                                   ),
-                                  onPressed: () {
-                                    // TODO: add button press logic here
-                                  },
-                                  child: const Text('Give Feedback'),
+                                  onPressed: () {},
+                                  child: Text('give_feedback'.tr),
                                 )),
                           ],
                         ),
@@ -183,7 +180,7 @@ class ScheduleCard extends StatelessWidget {
                                       }
                                     }
                                   : null,
-                              child: const Text('Cancel'),
+                              child: Text('cancel'.tr),
                             ),
                             const SizedBox(
                               width: 10,
@@ -198,12 +195,11 @@ class ScheduleCard extends StatelessWidget {
                               ),
                               onPressed: () {
                                 if (onJoinMeeting != null) {
-                                  onJoinMeeting!(
-                                      schedule: schedule);
+                                  onJoinMeeting!(schedule: schedule);
                                 }
                                 // Get.toNamed(Routes.MEETING_VIDEO_CONFERENCE);
                               },
-                              child: const Text('Go to Meeting'),
+                              child: Text('go_to_meeting'.tr),
                             ),
                           ],
                         ),

@@ -12,7 +12,6 @@ class DropdownButtonFromFieldView extends StatelessWidget {
     return Obx(() => DropdownButtonFormField<String>(
       onChanged: (String? newValue) {
         _controller.setValue(value: newValue);
-        debugPrint("DropdownButtonFormField $newValue");
       },
       value: _controller.dropdownValue.value,
       icon: const Icon(Icons.arrow_drop_down),

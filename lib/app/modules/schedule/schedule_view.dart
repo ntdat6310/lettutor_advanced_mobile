@@ -15,8 +15,8 @@ class ScheduleView extends GetView<ScheduleController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: 'Schedule',
+      appBar:  CustomAppBar(
+        title: 'schedule'.tr,
       ),
       body: CustomScrollView(
         slivers: <Widget>[
