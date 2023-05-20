@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../../utils/constants/assets.dart';
+import '../../core/constants/assets.dart';
 import '../widgets/custom_suffix_icon.dart';
 import 'forgot_password_controller.dart';
 

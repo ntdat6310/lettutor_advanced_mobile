@@ -68,10 +68,10 @@ class UserProfileItem extends StatelessWidget {
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              children: const [
-                Text('Edit profile'),
-                SizedBox(width: 5),
-                Icon(Icons.chevron_right),
+              children: [
+                Text('edit_profile'.tr),
+                const SizedBox(width: 5),
+                const Icon(Icons.chevron_right),
               ],
             ),
           ),

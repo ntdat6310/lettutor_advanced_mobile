@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 
-import '../../utils/constants/assets.dart';
+import '../../core/constants/assets.dart';
 import '../widgets/custom_suffix_icon.dart';
 import 'register_controller.dart';
 

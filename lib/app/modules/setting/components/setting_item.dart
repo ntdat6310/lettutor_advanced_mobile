@@ -7,11 +7,13 @@ class SettingItem extends StatelessWidget {
     required this.title,
     required this.onClick,
     this.bottomSpace = 0,
+    this.value,
   }) : super(key: key);
   final IconData icon;
   final String title;
   final VoidCallback onClick;
   final double bottomSpace;
+  final String? value;
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +34,10 @@ class SettingItem extends StatelessWidget {
             Row(
               children: [
                 const SizedBox(width: 8),
-                Icon(icon,
-                    color: Colors.black87, size: 24),
+                Icon(icon, color: Colors.black87, size: 24),
                 const SizedBox(width: 12),
                 Text(
-                  title,
+                  value != null ? "$title: $value" : title,
                   style: const TextStyle(
                     color: Colors.black87,
                     fontSize: 18,
@@ -46,8 +47,7 @@ class SettingItem extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(right: 8),
-              child: const Icon(Icons.arrow_forward_ios,
-                  color: Colors.black54),
+              child: const Icon(Icons.arrow_forward_ios, color: Colors.black54),
             ),
           ],
         ),
