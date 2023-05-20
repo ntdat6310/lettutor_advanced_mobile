@@ -109,7 +109,8 @@ const Map<String, String> vi = {
   'booking_time': "Thời gian đặt lịch",
   'balance': "Số dư tài khoản",
   'price': "Giá",
-  'book_a_class_failed_please_check_out_your_code': "Đặt lịch không thành công, vui lòng kiểm tra mã của bạn!",
+  'book_a_class_failed_please_check_out_your_code':
+      "Đặt lịch không thành công, vui lòng kiểm tra mã của bạn!",
   'something_went_wrong': "Đã xảy ra lỗi!",
   'book_a_class_successfully': "Đặt lịch thành công",
   'congratulation': "Xin chúc mừng",
@@ -125,4 +126,5 @@ const Map<String, String> vi = {
   'course_length': "Thời lượng khóa học",
   'see_detail': "Xem chi tiết",
   'chat': "Trò chuyện",
+  'class_in_progress': "Lớp học đang diễn ra",
 };

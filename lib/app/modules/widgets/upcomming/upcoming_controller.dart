@@ -29,15 +29,13 @@ class UpcomingController extends GetxController {
       _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         if (schedule.value!.startPeriodTimestamp!.millisecondsSinceEpoch <=
             DateTime.now().millisecondsSinceEpoch) {
-
-          debugPrint("TIMER CANCEL");
-          debugPrint(schedule.value!.startPeriodTimestamp!.millisecondsSinceEpoch.toString());
-          debugPrint(DateTime.now().millisecondsSinceEpoch.toString());
+          countdown.value = "class_in_progress".tr;
           timer.cancel();
+        } else {
+          countdown.value =
+              "${"starts_in".tr} ${JitsiController.getUntilTime(schedule.value!.startPeriodTimestamp!)}";
+          debugPrint("COUNTDOWN: ${countdown.value}");
         }
-        countdown.value =
-            "Starts in ${JitsiController.getUntilTime(schedule.value!.startPeriodTimestamp!)}";
-        debugPrint("COUNTDOWN: ${countdown.value}");
       });
     }
   }

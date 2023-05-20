@@ -122,4 +122,5 @@ const Map<String, String> en = {
   'course_length': "Course Length",
   'see_detail': "See detail",
   'chat': "Chat",
+  'class_in_progress': "Class in progress",
 };

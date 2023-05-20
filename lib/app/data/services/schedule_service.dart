@@ -47,8 +47,25 @@ class ScheduleService {
           return Schedule.fromJson(newSchedule);
         }).toList();
 
+        DateTime now = DateTime.now();
+        // Get the first class are in progress.
+        for (Schedule schedule in schedules) {
+          if (now.isAfter(schedule.startPeriodTimestamp!) &&
+              now.isBefore(schedule.endPeriodTimestamp!)) {
+            return schedule;
+          }
+        }
+
+        now = DateTime.now();
+        List<Schedule> upcomingSchedules = [];
+        // Get all upcoming schedules
+        for (Schedule schedule in schedules) {
+          if (now.isBefore(schedule.startPeriodTimestamp!)) {
+            upcomingSchedules.add(schedule);
+          }
+        }
         return Schedule.sortScheduleByStartTime(
-          schedules: schedules,
+          schedules: upcomingSchedules,
           isAscending: true,
         )[0];
       }
