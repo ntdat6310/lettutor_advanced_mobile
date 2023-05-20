@@ -1,46 +1,55 @@
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:lettutor_advanced_mobile/app/data/services/course_service.dart';
 
 import '../../data/models/course/course.dart';
 
 class CourseController extends GetxController {
-  CourseService _courseService = Get.put(CourseService());
-  RxList<Course> courses = RxList<Course>([]);
-  RxBool isLoading = false.obs;
+  static const _pageSize = 4;
+  final PagingController<int, Course> _pagingController =
+      PagingController(firstPageKey: 1);
+  PagingController<int, Course> get pagingController => _pagingController;
+
+  final CourseService _courseService = Get.put(CourseService());
   String searchKey = '';
 
-  Future<bool> searchCourses({String searchKey = ''}) async {
+  void updateSearchKey({String searchKey = ''}) {
     this.searchKey = searchKey;
-    isLoading.value = true;
-    List<Course>? results = await _courseService
-        .getListCourseWithSearchAndFilterAndPagination(searchKey: searchKey);
-    if (results != null) {
-      courses.clear();
-      courses.addAll(results);
-      isLoading.value = false;
-      return true;
-    } else {
-      isLoading.value = false;
-      return false;
-    }
-  }
-  Course? getCourseById(String courseId){
-    for(Course course in courses){
-      if(course.id == courseId){
-        return course;
-      }
-    }
-    return null;
+    _pagingController.refresh();
   }
 
   @override
   void onInit() {
     super.onInit();
-    searchCourses();
+    _pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
+  }
+
+  Future<void> _fetchPage(int pageKey) async {
+    try {
+      List<Course> newItems =
+          await _courseService.getListCourseWithSearchAndFilterAndPagination(
+        searchKey: searchKey,
+        page: pageKey,
+        size: _pageSize,
+      );
+
+      final isLastPage = newItems.length < _pageSize;
+      if (isLastPage) {
+        _pagingController.appendLastPage(newItems);
+      } else {
+        final nextPageKey = pageKey + 1;
+        _pagingController.appendPage(newItems, nextPageKey);
+      }
+    } catch (error) {
+      _pagingController.error = error;
+    }
   }
 
   @override
   void onClose() {
+    _pagingController.dispose();
     super.onClose();
   }
 }

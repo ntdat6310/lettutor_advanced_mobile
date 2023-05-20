@@ -34,7 +34,6 @@ class UpcomingController extends GetxController {
         } else {
           countdown.value =
               "${"starts_in".tr} ${JitsiController.getUntilTime(schedule.value!.startPeriodTimestamp!)}";
-          debugPrint("COUNTDOWN: ${countdown.value}");
         }
       });
     }
