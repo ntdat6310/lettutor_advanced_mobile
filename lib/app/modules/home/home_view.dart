@@ -62,10 +62,12 @@ class HomeView extends StatelessWidget {
                               (index) => TeacherCard(
                                     teacher: _homeController
                                         .teacherController.teachers[index],
-                                    teacherCardController:
-                                        teacherCardController,
                                     specialtiesController:
                                         _homeController.specialtiesController,
+                                    teacherService:
+                                        _homeController.teacherService,
+                                    toggleFavorite:
+                                        _homeController.toggleFavorite,
                                   )),
                         );
                       }

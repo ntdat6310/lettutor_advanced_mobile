@@ -6,19 +6,22 @@ import 'package:lettutor_advanced_mobile/app/modules/teachers/components/special
 import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 
 import '../../../data/models/teacher/teacher.dart';
+import '../../../data/services/teacher_service.dart';
 import '../../widgets/rating_star.dart';
 
 class TeacherCard extends StatelessWidget {
   const TeacherCard({
     Key? key,
     required this.teacher,
-    required this.teacherCardController,
     required this.specialtiesController,
+    required this.teacherService,
+    required this.toggleFavorite,
   }) : super(key: key);
 
   final Teacher teacher;
-  final TeacherToggleFavoriteController teacherCardController;
   final SpecialtiesController specialtiesController;
+  final TeacherService teacherService;
+  final Function({required Teacher teacher}) toggleFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -79,19 +82,18 @@ class TeacherCard extends StatelessWidget {
                   )
                 ],
               ),
-              IconButton(
-                icon: Icon(
-                  teacher.isFavorite.value == true
-                      ? Icons.favorite
-                      : Icons.favorite_outline,
-                  color: Colors.redAccent,
-                  size: 35,
-                ),
-                onPressed: () {
-                  teacherCardController.toggleFavorite(
-                      teacherId: teacher.userId ?? '');
-                },
-              ),
+              Obx(() => IconButton(
+                    icon: Icon(
+                      teacher.isFavorite.value == true
+                          ? Icons.favorite
+                          : Icons.favorite_outline,
+                      color: Colors.redAccent,
+                      size: 35,
+                    ),
+                    onPressed: () {
+                      toggleFavorite(teacher: teacher);
+                    },
+                  )),
             ],
           ),
         ),

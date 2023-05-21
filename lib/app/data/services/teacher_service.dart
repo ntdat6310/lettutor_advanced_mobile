@@ -26,7 +26,7 @@ class TeacherService {
     return false;
   }
 
-  void sortTeachersByFavoriteAndRating({required RxList<Teacher> teachers}) {
+  void sortTeachersByFavoriteAndRating({required List<Teacher> teachers}) {
     teachers.sort((a, b) {
       if (a.isFavorite != b.isFavorite) {
         return a.isFavorite.value ? -1 : 1;
@@ -60,8 +60,8 @@ class TeacherService {
         List<dynamic> feedbacksJson = response.data['data']['rows'];
         List<RatingComment>? feedbacks =
             feedbacksJson.map<RatingComment>((feedbackJson) {
-              feedbackJson['name'] = feedbackJson['firstInfo']['name'];
-              feedbackJson['avatar'] = feedbackJson['firstInfo']['avatar'];
+          feedbackJson['name'] = feedbackJson['firstInfo']['name'];
+          feedbackJson['avatar'] = feedbackJson['firstInfo']['avatar'];
           return RatingComment.fromJson(feedbackJson);
         }).toList();
         return feedbacks;
@@ -79,7 +79,7 @@ class TeacherService {
     return null;
   }
 
-  Future<List<Teacher>?> getListTutorWithSearchAndFilterAndPagination({
+  Future<List<Teacher>> getListTutorWithSearchAndFilterAndPagination({
     int perPage = 12,
     int page = 1,
     String searchKey = '',
@@ -87,8 +87,8 @@ class TeacherService {
   }) async {
     Map<String, dynamic> body = {
       "search": searchKey,
-      "page": 1,
-      "perPage": 12,
+      "page": '$page',
+      "perPage": '$perPage',
     };
     if (specialties != null) {
       body['filters'] = {"specialties": specialties};
@@ -111,17 +111,13 @@ class TeacherService {
           return Teacher.fromJson(teacherJson);
         })).toList();
         return teachers;
-      } else if (response.statusCode == 401) {
-        // Login again!
-        return null;
       } else {
         debugPrint(
             "TeacherService.getListTutorWithPagination: Failed with status code ${response.statusCode}");
-        return null;
       }
     } catch (e) {
       debugPrint("TeacherService.getListTutorWithPagination: ${e.toString()}");
-      return null;
     }
+    return [];
   }
 }
