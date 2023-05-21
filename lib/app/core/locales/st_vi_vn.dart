@@ -127,4 +127,8 @@ const Map<String, String> vi = {
   'see_detail': "Xem chi tiết",
   'chat': "Trò chuyện",
   'class_in_progress': "Lớp học đang diễn ra",
+  'report_content': "Nội dung báo cáo",
+  'report_success': "Báo cáo thành công",
+  'report_failed': "Thất bại",
+  'required': "Bắt buộc",
 };

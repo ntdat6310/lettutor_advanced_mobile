@@ -44,6 +44,28 @@ class TeacherService {
     });
   }
 
+  Future<bool> reportTeacher({
+    required String tutorId,
+    required String content,
+  }) async {
+    try {
+      dio.Response response = await APIHandlerImp.instance.post(
+        body: {"tutorId": tutorId, "content": content},
+        endpoint: BackendEnvironment.reportTeacher,
+        useToken: true,
+      );
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        debugPrint(
+            "TeacherService.reportTeacher: Failed with status code ${response.statusCode}");
+      }
+    } catch (e) {
+      debugPrint("TeacherService.reportTeacher: ${e.toString()}");
+    }
+    return false;
+  }
+
   Future<List<RatingComment>?> getFeedbacksByTeacherId({
     required String teacherId,
     int perPage = 12,
@@ -91,7 +113,7 @@ class TeacherService {
         "search": searchKey,
         "page": '$page',
         "perPage": '$perPage',
-        'filters':{}
+        'filters': {}
       };
       if (specialties != null) {
         body['filters'] = {"specialties": specialties};

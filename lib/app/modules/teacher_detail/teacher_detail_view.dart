@@ -81,6 +81,7 @@ class TeacherDetailView extends GetView<TeacherDetailController> {
                       margin: const EdgeInsets.symmetric(vertical: 20),
                       child: MessageFavoriteReport(
                         teacher: controller.teacher,
+                        onReportTap: controller.showReportDialog,
                       ),
                     ),
                     BookingButton(teacher: controller.teacher),
@@ -110,8 +111,7 @@ class TeacherDetailView extends GetView<TeacherDetailController> {
                     ),
                     SectionWithTitleAndContent(
                         title: 'teaching_experience'.tr,
-                        content:
-                            controller.teacher.experience ?? 'no'.tr),
+                        content: controller.teacher.experience ?? 'no'.tr),
                     const SizedBox(
                       height: 20,
                     ),

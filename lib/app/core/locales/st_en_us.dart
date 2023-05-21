@@ -123,4 +123,8 @@ const Map<String, String> en = {
   'see_detail': "See detail",
   'chat': "Chat",
   'class_in_progress': "Class in progress",
+  'report_content': "Report content",
+  'report_success': "Report successfully",
+  'report_failed': "Report failed",
+  'required': "Required",
 };

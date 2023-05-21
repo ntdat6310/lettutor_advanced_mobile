@@ -6,9 +6,14 @@ import 'package:lettutor_advanced_mobile/app/modules/controllers/teachers_and_ho
 import '../../../data/models/teacher/teacher.dart';
 
 class MessageFavoriteReport extends StatelessWidget {
-  MessageFavoriteReport({Key? key, required this.teacher}) : super(key: key);
+  MessageFavoriteReport({
+    Key? key,
+    required this.teacher,
+    required this.onReportTap,
+  }) : super(key: key);
   final Teacher teacher;
   final TeacherService _teacherService = Get.find();
+  final VoidCallback onReportTap;
 
   void _onMessageButtonPressed() {}
 
@@ -18,8 +23,6 @@ class MessageFavoriteReport extends StatelessWidget {
     final TeachersAndHomeController teachersAndHomeController = Get.find();
     teachersAndHomeController.refreshAll();
   }
-
-  void _onReportButtonPressed() {}
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +64,7 @@ class MessageFavoriteReport extends StatelessWidget {
         Column(
           children: [
             IconButton(
-                onPressed: _onReportButtonPressed,
+                onPressed: onReportTap,
                 icon: const Icon(
                   Icons.report_outlined,
                   color: Colors.blueAccent,
