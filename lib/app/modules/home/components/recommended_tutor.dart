@@ -11,9 +11,9 @@ class RecommendedTutor extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
-          'Favorite tutors',
-          style: TextStyle(
+        Text(
+          'favorite_tutors'.tr,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
@@ -22,7 +22,7 @@ class RecommendedTutor extends StatelessWidget {
           onPressed: () {
             Get.toNamed(Routes.TEACHER);
           },
-          child: const Text('See all tutors'),
+          child: Text('see_all_tutors'.tr),
         ),
       ],
     );

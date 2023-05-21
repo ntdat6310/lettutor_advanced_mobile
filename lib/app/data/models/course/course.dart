@@ -37,4 +37,15 @@ class Course {
   factory Course.fromJson(Map<String, dynamic> json) => _$CourseFromJson(json);
 
   Map<String, dynamic> toJson() => _$CourseToJson(this);
+
+  CourseTopic? getTopicById({required String topicId}) {
+    if (topics != null) {
+      for (var topic in topics!) {
+        if (topic.id == topicId) {
+          return topic;
+        }
+      }
+    }
+    return null;
+  }
 }

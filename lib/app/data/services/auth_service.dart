@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/cupertino.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lettutor_advanced_mobile/app/core/constants/backend_environment.dart';
 import 'package:lettutor_advanced_mobile/app/data/models/auth/login_email_request.dart';
 
@@ -8,14 +9,20 @@ import '../models/auth/register_email_request.dart';
 import '../providers/api_provider.dart';
 
 class AuthService {
-  Future<int> login({required LoginByEmailRequest body}) async {
+  Future<int> login({
+    required String endpoint,
+    required Map<String, dynamic> body,
+  }) async {
+    int statusCode = 400;
     try {
       dio.Response response = await APIHandlerImp.instance.post(
-        body: body.toJson(),
-        endpoint: BackendEnvironment.loginByEmailEndpoint,
+        body: body,
+        endpoint: endpoint,
       );
-      debugPrint("response: ${response.toString()}");
-      if (response.statusCode == 200) {
+      if (response.statusCode != null) {
+        statusCode = response.statusCode!;
+      }
+      if (statusCode == 200) {
         Map<String, dynamic> jsonResponse = {
           'accountId': response.data['user']['id'],
           'accessToken': response.data['tokens']['access']['token'],
@@ -23,19 +30,30 @@ class AuthService {
           'accessTokenExpires': response.data['tokens']['access']['expires'],
           'refreshTokenExpires': response.data['tokens']['refresh']['expires'],
         };
-        debugPrint("jsonResponse: ${jsonResponse.toString()}");
         LoginResponseBody body = LoginResponseBody.fromJson(jsonResponse);
         await _storeAllIdentity(body);
-        return 200;
       } else {
         debugPrint(
             "LOGIN: FAILED - response.statusCode ${response.statusCode}, ${response.data.toString()}");
       }
     } catch (e) {
       debugPrint("LOGIN: FAILED ${e.toString()}");
-      return 500;
     }
-    return 400;
+    return statusCode;
+  }
+
+  Future<int> loginWithEmail({required LoginByEmailRequest body}) async {
+    return login(
+      endpoint: BackendEnvironment.loginByEmailEndpoint,
+      body: body.toJson(),
+    );
+  }
+
+  Future<int> loginWithGoogle({required Map<String, String> body}) async {
+    return login(
+      endpoint: BackendEnvironment.loginWithGoogle,
+      body: body,
+    );
   }
 
   Future<int> registerByEmail({required RegisterByEmailRequest body}) async {
@@ -75,6 +93,11 @@ class AuthService {
     }
     return 400;
   }
+
+  Future<void> logout() async {
+    await GoogleSignInApi.logout();
+    APIHandlerImp.instance.reSignIn();
+  }
 }
 
 Future<void> _storeAllIdentity(LoginResponseBody body) async {
@@ -84,4 +107,15 @@ Future<void> _storeAllIdentity(LoginResponseBody body) async {
   await APIHandlerImp.instance.storeAccessTokenExpires(body.accessTokenExpires);
   await APIHandlerImp.instance
       .storeRefreshTokenExpires(body.refreshTokenExpires);
+}
+
+class GoogleSignInApi {
+  static final _googleSignIn = GoogleSignIn();
+  static Future<GoogleSignInAccount?> login() async {
+    return await _googleSignIn.signIn();
+  }
+
+  static Future<void> logout() async {
+    await _googleSignIn.signOut();
+  }
 }

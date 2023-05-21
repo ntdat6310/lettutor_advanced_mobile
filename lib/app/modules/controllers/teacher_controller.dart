@@ -17,12 +17,12 @@ class TeacherController extends GetxController {
     List<String>? specialties,
   }) async {
     isLoadingTeachers.value = true;
-    List<Teacher>? results =
+    List<Teacher> results =
         await _teacherService.getListTutorWithSearchAndFilterAndPagination(
       searchKey: searchKey,
       specialties: specialties,
     );
-    if (results != null && results.isNotEmpty) {
+    if (results.isNotEmpty) {
       teachers.clear();
       teachers.addAll(results);
       _teacherService.sortTeachersByFavoriteAndRating(teachers: teachers);
@@ -53,18 +53,6 @@ class TeacherController extends GetxController {
     super.onInit();
     debugPrint("TeacherController.onInit");
     searchTeachers();
-  }
-
-  @override
-  void onReady() {
-    debugPrint("TeacherController.onReady");
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    debugPrint("TeacherController.onClose");
-    super.onClose();
   }
 
   void toggleFavoriteTeacherLocal({required String teacherId}) {

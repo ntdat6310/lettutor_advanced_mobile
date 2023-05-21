@@ -1,12 +1,10 @@
 import 'package:email_validator/email_validator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lettutor_advanced_mobile/app/data/models/auth/login_email_request.dart';
 import 'package:lettutor_advanced_mobile/app/data/services/auth_service.dart';
 import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
-
-import '../my_tab_bar/my_tab_bar_view.dart';
 
 class SignInController extends GetxController {
   final AuthService authService = Get.put(AuthService());
@@ -22,16 +20,16 @@ class SignInController extends GetxController {
       isLoading.value = true;
 
       try {
-        int responseStatusCode = await authService.login(
+        int responseStatusCode = await authService.loginWithEmail(
             body: LoginByEmailRequest(
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         ));
         if (responseStatusCode == 200) {
           // Navigate to the next screen after successful login
-          // Get.offAll(() => MyTabBarView());
-          // Get.offAllNamed(Routes.MY_TAB_BAR);
-          Get.offAllNamed(Routes.PROFILE_SETTING);
+          Get.offAllNamed(Routes.MY_TAB_BAR);
+          // Get.offAllNamed(Routes.SCHEDULE);
+          // Get.offAllNamed(Routes.SCHEDULE_HISTORY);
         } else if (responseStatusCode == 400) {
           Get.snackbar(
             "Sign in failed : Incorrect email or password",
@@ -79,14 +77,41 @@ class SignInController extends GetxController {
     return isValid;
   }
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  void loginWithGoogle() async {
+    try {
+      await GoogleSignInApi.logout();
+    } catch (e) {
+      debugPrint("SignInController.loginWithGoogle ${e.toString()}");
+    }
 
-  @override
-  void onReady() {
-    super.onReady();
+    GoogleSignInAccount? gUser = await GoogleSignInApi.login();
+    if (gUser == null) return;
+    isLoading.value = true;
+    GoogleSignInAuthentication gAuth = await gUser.authentication;
+    if (gAuth.accessToken == null) return;
+
+    try {
+      int responseStatusCode = await authService.loginWithGoogle(
+        body: {
+          "access_token": gAuth.accessToken!,
+        },
+      );
+      if (responseStatusCode == 200) {
+        // Navigate to the next screen after successful login
+        Get.offAllNamed(Routes.MY_TAB_BAR);
+      } else if (responseStatusCode == 500) {
+        Get.snackbar(
+          "Login by Google failed",
+          "Please check out your code",
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 5),
+        );
+      }
+    } catch (e) {
+      Get.snackbar('Error', e.toString());
+    }
+    isLoading.value = false;
   }
 
   @override

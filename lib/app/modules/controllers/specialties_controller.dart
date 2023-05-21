@@ -17,6 +17,12 @@ class SpecialtiesController extends GetxController {
     specialtiesMap.forEach((key, value) {
       specialtiesList.add(Specialties(key: key, value: value));
     });
+
+    for (var element in specialtiesList) {
+      if (element.key == 'all') {
+        element.isSelected.value = true;
+      }
+    }
   }
 
   List<Specialties> getSpecialtiesListTeacherCard(
@@ -35,7 +41,7 @@ class SpecialtiesController extends GetxController {
       }
     }
 
-    for (String specialtyKey in copySpecialtiesOfTeacher){
+    for (String specialtyKey in copySpecialtiesOfTeacher) {
       results.add(Specialties(key: specialtyKey, value: specialtyKey));
     }
 

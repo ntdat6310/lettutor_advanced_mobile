@@ -23,6 +23,25 @@ class Constants {
     "toeic": "Toeic",
   };
 
+  static Map<String, String> courseLevelMap = {
+    '0': 'Any Level',
+    '1': 'Beginner',
+    '2': 'Upper-Beginner',
+    '3': 'Pre-Intermediate',
+    '4': 'Intermediate',
+    '5': 'Upper-Intermediate',
+    '6': 'Pre-advanced',
+    '7': 'Advanced',
+    '8': 'Very advanced',
+  };
+
+  static final Map<String, String> nationalityMap = {
+    'ANY_NATIONALITY': 'Any Nationality',
+    'FOREIGN_TUTOR': 'Foreign Tutor',
+    'VIETNAMESE_TUTOR': 'Vietnamese Tutor',
+    'NATIVE_TUTOR': 'Native Tutor',
+  };
+
   static Map<String, String> countriesMap = {
     'AF': 'Afghanistan',
     'AL': 'Albania',
@@ -253,4 +272,7 @@ class Constants {
     'ZM': 'Zambia',
     'ZW': 'Zimbabwe',
   };
+
+  static String defaultUserAvatarUrl =
+      "https://sandbox.api.lettutor.com/avatar/f569c202-7bbf-4620-af77-ecc1419a6b28avatar1683990830859.jpg";
 }

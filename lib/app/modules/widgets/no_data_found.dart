@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NoDataFound extends StatelessWidget {
   const NoDataFound({Key? key}) : super(key: key);
@@ -9,10 +10,11 @@ class NoDataFound extends StatelessWidget {
       children: [
         Image.network(
           'https://cdn.iconscout.com/icon/free/png-256/free-data-not-found-1965034-1662569.png?f=webp&w=256',
-          height: 150,),
-        const Text(
-          'No data found !',
-          style: TextStyle(
+          height: 150,
+        ),
+        Text(
+          'no_data_found'.tr,
+          style: const TextStyle(
             fontSize: 18,
           ),
         )

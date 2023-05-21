@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/core/utils/localization.dart';
 import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 
 void main() {
@@ -15,6 +16,9 @@ class MyApp extends StatelessWidget {
       title: 'Let-tutor',
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
+      locale: LocalizationService.locale,
+      fallbackLocale: LocalizationService.fallbackLocale,
+      translations: LocalizationService(),
     );
   }
 }

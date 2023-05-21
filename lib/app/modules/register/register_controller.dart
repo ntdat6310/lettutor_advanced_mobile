@@ -33,8 +33,8 @@ class RegisterController extends GetxController {
           Get.dialog(const RegisterSuccessDialog());
         } else {
           Get.snackbar(
-            "Register failed : Email is exist",
-            "Please enter another email",
+            "register_failed_email_is_exist".tr,
+            "please_enter_another_email".tr,
             duration: const Duration(seconds: 5),
             backgroundColor: Colors.green,
             colorText: Colors.white,
@@ -53,7 +53,7 @@ class RegisterController extends GetxController {
     bool isValid = true;
 
     if (!EmailValidator.validate(emailController.text.trim())) {
-      emailError.value = 'Vui lòng nhập email hợp lệ';
+      emailError.value = 'please_enter_a_valid_email'.tr;
       isValid = false;
     } else {
       emailError.value = '';
@@ -61,7 +61,7 @@ class RegisterController extends GetxController {
 
     if (passwordController.text.trim().isEmpty ||
         passwordController.text.trim().length < 6) {
-      passwordError.value = 'Mật khẩu phải có ít nhất 6 ký tự';
+      passwordError.value = 'passwords_must_be_at_least_6_characters'.tr;
       isValid = false;
     } else {
       passwordError.value = '';
@@ -69,7 +69,7 @@ class RegisterController extends GetxController {
 
     if (confirmPasswordController.text.trim() !=
         passwordController.text.trim()) {
-      confirmPasswordError.value = 'Mật khẩu không khớp';
+      confirmPasswordError.value = 'password_and_confirm_do_not_match'.tr;
       isValid = false;
     } else {
       confirmPasswordError.value = '';
@@ -93,7 +93,6 @@ class RegisterController extends GetxController {
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
-    // Có cần phải delete không?
     Get.delete<RegisterController>();
     super.onClose();
   }

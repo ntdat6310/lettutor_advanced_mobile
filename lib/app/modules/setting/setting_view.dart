@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/core/utils/localization.dart';
 import 'package:lettutor_advanced_mobile/app/modules/setting/components/setting_item.dart';
 import 'package:lettutor_advanced_mobile/app/modules/setting/components/user_profile_item.dart';
 import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
@@ -8,12 +9,14 @@ import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 import 'setting_controller.dart';
 
 class SettingView extends GetView<SettingController> {
-  const SettingView({Key? key}) : super(key: key);
+  SettingView({Key? key}) : super(key: key);
+  final settingController = Get.put<SettingController>(SettingController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Setting"),
+        title: Text("setting".tr),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -25,11 +28,12 @@ class SettingView extends GetView<SettingController> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const UserProfileItem(),
+                Obx(() =>
+                    UserProfileItem(profile: settingController.profile.value)),
                 const SizedBox(height: 12),
                 SettingItem(
                   icon: Icons.chat_outlined,
-                  title: "Chat with AI",
+                  title: "chat_with_ai".tr,
                   onClick: () {
                     Get.toNamed(Routes.CHAT_WITH_AI);
                   },
@@ -37,38 +41,48 @@ class SettingView extends GetView<SettingController> {
                 ),
                 SettingItem(
                   icon: Icons.verified_user_outlined,
-                  title: "Become a tutor",
-                  onClick: () {},
+                  title: "become_a_tutor".tr,
+                  onClick: () {
+                    Get.toNamed(Routes.BECOME_TUTOR);
+                  },
                   bottomSpace: 12,
                 ),
                 SettingItem(
                   icon: Icons.history,
-                  title: "History",
-                  onClick: () {},
+                  title: "history_schedule".tr,
+                  onClick: () {
+                    Get.toNamed(Routes.SCHEDULE_HISTORY);
+                  },
                   bottomSpace: 12,
                 ),
                 SettingItem(
                   icon: Icons.dark_mode,
-                  title: "Theme",
+                  title: "theme".tr,
                   onClick: () {},
                   bottomSpace: 12,
                 ),
-                SettingItem(
-                  icon: Icons.language_outlined,
-                  title: "Select language",
-                  onClick: () {},
-                  bottomSpace: 12,
-                ),
+                Obx(() => SettingItem(
+                      icon: Icons.language_outlined,
+                      title: "select_language".tr,
+                      value: LocalizationService.languagesSupport[
+                          settingController.selectedLanguageCode.value],
+                      onClick: () {
+                        settingController.showPickLanguageDialog();
+                      },
+                      bottomSpace: 12,
+                    )),
                 SettingItem(
                   icon: Icons.change_circle_outlined,
-                  title: "Change password",
+                  title: "change_password".tr,
                   onClick: () {},
                   bottomSpace: 12,
                 ),
                 SettingItem(
                   icon: Icons.logout,
-                  title: "Logout",
-                  onClick: () {},
+                  title: "logout".tr,
+                  onClick: () {
+                    controller.authService.logout();
+                  },
                   bottomSpace: 12,
                 ),
               ],

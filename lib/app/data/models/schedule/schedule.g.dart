@@ -13,12 +13,10 @@ Schedule _$ScheduleFromJson(Map<String, dynamic> json) => Schedule(
       tutorMeetingLink: json['tutorMeetingLink'] as String?,
       studentMeetingLink: json['studentMeetingLink'] as String?,
       studentRequest: json['studentRequest'] as String?,
-      startPeriodTimestamp: json['startPeriodTimestamp'] == null
-          ? null
-          : DateTime.parse(json['startPeriodTimestamp'] as String),
-      endPeriodTimestamp: json['endPeriodTimestamp'] == null
-          ? null
-          : DateTime.parse(json['endPeriodTimestamp'] as String),
+      startPeriodTimestamp:
+          Schedule._fromTimestamp(json['startPeriodTimestamp'] as int?),
+      endPeriodTimestamp:
+          Schedule._fromTimestamp(json['endPeriodTimestamp'] as int?),
       tutorId: json['tutorId'] as String?,
       tutorAvatar: json['tutorAvatar'] as String?,
       tutorName: json['tutorName'] as String?,
@@ -31,8 +29,9 @@ Map<String, dynamic> _$ScheduleToJson(Schedule instance) => <String, dynamic>{
       'tutorMeetingLink': instance.tutorMeetingLink,
       'studentMeetingLink': instance.studentMeetingLink,
       'studentRequest': instance.studentRequest,
-      'startPeriodTimestamp': instance.startPeriodTimestamp?.toIso8601String(),
-      'endPeriodTimestamp': instance.endPeriodTimestamp?.toIso8601String(),
+      'startPeriodTimestamp':
+          Schedule._toTimestamp(instance.startPeriodTimestamp),
+      'endPeriodTimestamp': Schedule._toTimestamp(instance.endPeriodTimestamp),
       'tutorId': instance.tutorId,
       'tutorAvatar': instance.tutorAvatar,
       'tutorName': instance.tutorName,

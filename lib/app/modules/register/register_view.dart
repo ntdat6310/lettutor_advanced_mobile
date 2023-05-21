@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 
-import '../../utils/constants/assets.dart';
+import '../../core/constants/assets.dart';
 import '../widgets/custom_suffix_icon.dart';
 import 'register_controller.dart';
 
@@ -18,7 +16,7 @@ class RegisterView extends GetView<RegisterController> {
       },
       child: Scaffold(
           appBar: AppBar(
-            title: const Text('Register'),
+            title: Text('register'.tr),
             centerTitle: true,
           ),
           body: SafeArea(
@@ -61,11 +59,11 @@ class RegisterView extends GetView<RegisterController> {
                           margin: const EdgeInsets.only(bottom: 20),
                           child: TextField(
                             controller: controller.passwordController,
-                            decoration: const InputDecoration(
-                                labelText: 'Password',
+                            decoration: InputDecoration(
+                                labelText: 'password'.tr,
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.auto,
-                                suffixIcon: CustomSuffixIcon(
+                                suffixIcon: const CustomSuffixIcon(
                                     icon: Icons.password_rounded)),
                             obscureText: true,
                           ),
@@ -82,11 +80,11 @@ class RegisterView extends GetView<RegisterController> {
                           margin: const EdgeInsets.only(bottom: 20),
                           child: TextField(
                             controller: controller.confirmPasswordController,
-                            decoration: const InputDecoration(
-                                labelText: 'Confirm password',
+                            decoration: InputDecoration(
+                                labelText: 'confirm_password'.tr,
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.auto,
-                                suffixIcon: CustomSuffixIcon(
+                                suffixIcon: const CustomSuffixIcon(
                                     icon: Icons.password_rounded)),
                             obscureText: true,
                           ),
@@ -111,10 +109,10 @@ class RegisterView extends GetView<RegisterController> {
                             return ElevatedButton(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: const <Widget>[
-                                  Icon(Icons.login),
-                                  SizedBox(width: 10),
-                                  Text("Register"),
+                                children: <Widget>[
+                                  const  Icon(Icons.login),
+                                  const SizedBox(width: 10),
+                                  Text("register".tr),
                                 ],
                               ),
                               onPressed: () {
@@ -129,9 +127,9 @@ class RegisterView extends GetView<RegisterController> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Text('Already have an account?'),
+                                Text('already_have_an_account'.tr),
                                 TextButton(
-                                  child: const Text('Sign in'),
+                                  child: Text('sign_in'.tr),
                                   onPressed: () {
                                     Get.back();
                                   },

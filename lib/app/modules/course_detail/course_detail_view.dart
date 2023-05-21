@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 
 import '../../data/models/course/course.dart';
 import '../course/components/course_card.dart';
@@ -28,10 +29,18 @@ class CourseDetailView extends GetView<CourseDetailController> {
     color: Colors.black54,
   );
 
+  void _onTopicClicked({required int selectedTopicIndex}) {
+    Map<String, dynamic> arguments = {
+      'course': course,
+      'selectedTopicIndex': selectedTopicIndex,
+    };
+    Get.toNamed(Routes.COURSE_LESSON, arguments: arguments);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Course Detail"),
+      appBar: CustomAppBar(title: "course_detail".tr),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         scrollDirection: Axis.vertical,
@@ -43,7 +52,7 @@ class CourseDetailView extends GetView<CourseDetailController> {
               course: course,
             ),
             const SizedBox(height: 10),
-            Text("Overview", style: heading1Style),
+            Text("overview".tr, style: heading1Style),
             const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -53,7 +62,7 @@ class CourseDetailView extends GetView<CourseDetailController> {
                   color: Colors.deepOrange,
                 ),
                 const SizedBox(width: 10),
-                Text("Why take this course?", style: heading2Style),
+                Text("why_take_this_course".tr, style: heading2Style),
               ],
             ),
             const SizedBox(height: 10),
@@ -67,13 +76,13 @@ class CourseDetailView extends GetView<CourseDetailController> {
                   color: Colors.deepOrange,
                 ),
                 const SizedBox(width: 10),
-                Text("What you will be able to do?", style: heading2Style),
+                Text("what_you_will_be_able_to_do".tr, style: heading2Style),
               ],
             ),
             const SizedBox(height: 10),
             Text(course.whatWillYouBeAbleToDo ?? '', style: textStyle),
             const SizedBox(height: 20),
-            Text("Experience Level", style: heading1Style),
+            Text("experience_level".tr, style: heading1Style),
             const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -87,7 +96,7 @@ class CourseDetailView extends GetView<CourseDetailController> {
               ],
             ),
             const SizedBox(height: 20),
-            Text("Course Length", style: heading1Style),
+            Text("course_length".tr, style: heading1Style),
             const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -101,11 +110,27 @@ class CourseDetailView extends GetView<CourseDetailController> {
               ],
             ),
             const SizedBox(height: 20),
-            Text("List Topics", style: heading1Style),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text("list_topics".tr, style: heading1Style),
+                TextButton(
+                    onPressed: () {
+                      Map<String, dynamic> arguments = {
+                        'course': course,
+                        'selectedTopicIndex': 0,
+                      };
+                      Get.toNamed(Routes.COURSE_LESSON, arguments: arguments);
+                    },
+                    child: Text("see_detail".tr, style: const TextStyle(fontSize: 16),)),
+              ],
+            ),
             const SizedBox(height: 20),
             ListTopics(
               topics: course.topics ?? [],
               style: heading2Style,
+              onTap: _onTopicClicked,
             ),
           ],
         ),

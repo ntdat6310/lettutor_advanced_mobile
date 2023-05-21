@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'schedule.g.dart';
 
 @JsonSerializable()
-class Schedule{
+class Schedule {
   String? id;
   @JsonKey(name: 'userId')
   String? studentId;
@@ -11,7 +13,9 @@ class Schedule{
   String? tutorMeetingLink;
   String? studentMeetingLink;
   String? studentRequest;
+  @JsonKey(fromJson: _fromTimestamp, toJson: _toTimestamp)
   DateTime? startPeriodTimestamp;
+  @JsonKey(fromJson: _fromTimestamp, toJson: _toTimestamp)
   DateTime? endPeriodTimestamp;
   String? tutorId;
   String? tutorAvatar;
@@ -29,9 +33,58 @@ class Schedule{
     this.tutorId,
     this.tutorAvatar,
     this.tutorName,
-});
-  factory Schedule.fromJson(Map<String, dynamic> json)
-  => _$ScheduleFromJson(json);
+  });
+  factory Schedule.fromJson(Map<String, dynamic> json) =>
+      _$ScheduleFromJson(json);
 
   Map<String, dynamic> toJson() => _$ScheduleToJson(this);
+
+  static DateTime? _fromTimestamp(int? timestamp) {
+    return timestamp != null
+        ? DateTime.fromMillisecondsSinceEpoch(timestamp)
+        : null;
+  }
+
+  static int? _toTimestamp(DateTime? dateTime) {
+    return dateTime?.millisecondsSinceEpoch;
+  }
+
+  /// Booking can only be canceled if the start time
+  /// is at least 2 hours longer than the current time.
+  bool get canCancelBooking {
+    final currentDateTime = DateTime.now();
+    if (startPeriodTimestamp!.isAfter(currentDateTime)) {
+      final difference = startPeriodTimestamp!.difference(currentDateTime);
+      return difference.inHours >= 2;
+    }
+    return false;
+  }
+
+  bool get hasEnded {
+    final currentDateTime = DateTime.now();
+    if (endPeriodTimestamp != null) {
+      return currentDateTime.isAfter(endPeriodTimestamp!);
+    } else {
+      return false;
+    }
+  }
+
+  static List<Schedule> sortScheduleByStartTime({
+    required List<Schedule> schedules,
+    bool isAscending = true,
+  }) {
+    // Order by ascending
+    schedules.sort((a, b) {
+      return a.startPeriodTimestamp!.compareTo(b.startPeriodTimestamp!);
+    });
+
+    if (isAscending == false) {
+      schedules = schedules.reversed.toList();
+    }
+
+    for (var schedule in schedules) {
+      debugPrint(DateFormat("dd MMM yy HH:mm").format(schedule.startPeriodTimestamp!));
+    }
+    return schedules;
+  }
 }

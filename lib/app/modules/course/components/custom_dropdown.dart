@@ -1,25 +1,15 @@
 import 'package:flutter/material.dart';
 
-class CustomDropdown extends StatefulWidget {
-  final List<String> dropdownItems;
-  final String dropdownValue;
-
+class CustomDropdown extends StatelessWidget {
   const CustomDropdown(
-      {Key? key, required this.dropdownItems, required this.dropdownValue})
+      {Key? key,
+      required this.dropdownItems,
+      this.selectedKey,
+      required this.onSelectedChange})
       : super(key: key);
-
-  @override
-  State<CustomDropdown> createState() => _CustomDropdownState();
-}
-
-class _CustomDropdownState extends State<CustomDropdown> {
-  late String dropdownValue;
-
-  @override
-  void initState() {
-    super.initState();
-    dropdownValue = widget.dropdownValue;
-  }
+  final Map<String, String> dropdownItems;
+  final String? selectedKey;
+  final void Function({String? newValue}) onSelectedChange;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +26,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
           ),
         ),
         child: DropdownButton<String>(
-          value: dropdownValue,
+          value: selectedKey,
           menuMaxHeight: 200,
           icon: const Icon(Icons.keyboard_arrow_down),
           iconSize: 24,
@@ -46,19 +36,18 @@ class _CustomDropdownState extends State<CustomDropdown> {
             height: 0,
           ),
           onChanged: (String? newValue) {
-            setState(() {
-              dropdownValue = newValue!;
-            });
+            if (newValue != null) {
+              onSelectedChange(newValue: newValue);
+            }
           },
-          items: widget.dropdownItems.map<DropdownMenuItem<String>>((String value) {
+          items: dropdownItems.entries.map<DropdownMenuItem<String>>((item) {
             return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
+              value: item.key,
+              child: Text(item.value),
             );
           }).toList(),
         ),
-      )
-      ,
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/core/constants/constants.dart';
 import 'package:lettutor_advanced_mobile/app/modules/profile_setting/components/custom_text_field.dart';
 import 'package:lettutor_advanced_mobile/app/modules/profile_setting/components/date_picker_view.dart';
 import 'package:lettutor_advanced_mobile/app/modules/profile_setting/components/dropdown_button_from_field_view.dart';
@@ -14,11 +15,15 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
     controller.submitProfile();
   }
 
+  void _onSelectPhotoClick(BuildContext context) {
+    controller.selectPhotoController.showSelectPhotoOptions(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile Setting'),
+        title: Text('edit_profile'.tr),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -36,17 +41,29 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
                   alignment: Alignment.center,
                   child: Stack(
                     children: [
-                      const CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            "https://sandbox.api.lettutor.com/avatar/f569c202-7bbf-4620-af77-ecc1419a6b28avatar1683190179862.jpeg"),
-                        radius: 60,
-                      ),
+                      Obx(() {
+                        if (controller.selectPhotoController.image.value ==
+                            null) {
+                          return CircleAvatar(
+                            backgroundImage: NetworkImage(
+                                controller.profile.value?.avatar ??
+                                    Constants.defaultUserAvatarUrl),
+                            radius: 60,
+                          );
+                        } else {
+                          return CircleAvatar(
+                            backgroundImage: FileImage(
+                                controller.selectPhotoController.image.value!),
+                            radius: 60,
+                          );
+                        }
+                      }),
                       Positioned(
                         right: -3,
                         bottom: -3,
                         child: InkWell(
                           onTap: () {
-                            debugPrint("CAMERA CLICKED");
+                            _onSelectPhotoClick(context);
                           },
                           child: const Icon(
                             Icons.camera_alt,
@@ -61,8 +78,8 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
 
                 // NAME
                 CustomTextField(
-                  title: "Name",
-                  hintText: 'Enter your name',
+                  title: "name".tr,
+                  hintText: 'enter_your_name'.tr,
                   required: true,
                   textEditingController: controller.nameController,
                 ),
@@ -77,7 +94,7 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
 
                 // PHONE NUMBER
                 CustomTextField(
-                  title: 'Phone Number',
+                  title: 'phone_number'.tr,
                   textEditingController: controller.phoneController,
                   disable: true,
                   suffixIcon: Icon(Icons.verified, color: Colors.blue[300]),
@@ -86,10 +103,10 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
                 // COUNTRY
                 const SizedBox(height: 24),
                 RichText(
-                  text: const TextSpan(
+                  text: TextSpan(
                     children: <TextSpan>[
-                      TextSpan(
-                        text: '*',
+                      const TextSpan(
+                        text: '* ',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.red,
@@ -97,8 +114,8 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
                         ),
                       ),
                       TextSpan(
-                        text: ' Country',
-                        style: TextStyle(
+                        text: 'country'.tr,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                           fontSize: 18,
@@ -113,10 +130,10 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
                 // BIRTHDAY
                 const SizedBox(height: 24),
                 RichText(
-                  text: const TextSpan(
+                  text: TextSpan(
                     children: <TextSpan>[
-                      TextSpan(
-                        text: '*',
+                      const TextSpan(
+                        text: '* ',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.red,
@@ -124,8 +141,8 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
                         ),
                       ),
                       TextSpan(
-                        text: ' Birthday',
-                        style: TextStyle(
+                        text: 'birthday'.tr,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                           fontSize: 18,
@@ -140,10 +157,10 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
                 // TEST PREPARATION
                 const SizedBox(height: 24),
                 RichText(
-                  text: const TextSpan(
+                  text: TextSpan(
                     children: <TextSpan>[
-                      TextSpan(
-                        text: '*',
+                      const TextSpan(
+                        text: '* ',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.red,
@@ -151,8 +168,8 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
                         ),
                       ),
                       TextSpan(
-                        text: ' Test Preparation',
-                        style: TextStyle(
+                        text: 'test_preparation'.tr,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                           fontSize: 18,
@@ -166,7 +183,7 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
 
                 // STUDY SCHEDULE
                 CustomTextField(
-                  title: "Study Schedule",
+                  title: "study_schedule".tr,
                   textEditingController: controller.studyScheduleController,
                   minLines: 3,
                   maxLines: 10,
@@ -179,9 +196,9 @@ class ProfileSettingView extends GetView<ProfileSettingController> {
                   height: 36,
                   child: ElevatedButton(
                     onPressed: _onSubmit,
-                    child: const Text(
-                      "Submit",
-                      style: TextStyle(fontSize: 16),
+                    child: Text(
+                      "submit".tr,
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ),
                 ),

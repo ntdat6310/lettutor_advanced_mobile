@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:lettutor_advanced_mobile/app/modules/my_tab_bar/my_tab_bar_view.dart';
 import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 
-import '../../utils/constants/assets.dart';
+import '../../core/constants/assets.dart';
 import '../widgets/custom_suffix_icon.dart';
 import 'sign_in_controller.dart';
 
@@ -19,7 +18,7 @@ class SignInView extends GetView<SignInController> {
       },
       child: Scaffold(
           appBar: AppBar(
-            title: const Text('Sign In'),
+            title: Text('sign_in'.tr),
             centerTitle: true,
           ),
           body: SafeArea(
@@ -64,11 +63,11 @@ class SignInView extends GetView<SignInController> {
                           margin: const EdgeInsets.only(bottom: 20),
                           child: TextField(
                             controller: controller.passwordController,
-                            decoration: const InputDecoration(
-                                labelText: 'Password',
+                            decoration: InputDecoration(
+                                labelText: 'password'.tr,
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.auto,
-                                suffixIcon: CustomSuffixIcon(
+                                suffixIcon: const CustomSuffixIcon(
                                     icon: Icons.password_rounded)),
                             obscureText: true,
                           ),
@@ -85,7 +84,7 @@ class SignInView extends GetView<SignInController> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextButton(
-                              child: const Text('Forgot Password?'),
+                              child: Text("${'forgot_password'.tr}?"),
                               onPressed: () {
                                 Get.toNamed(Routes.FORGOT_PASSWORD);
                               },
@@ -93,9 +92,9 @@ class SignInView extends GetView<SignInController> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Text('Not a member yet? '),
+                                Text('not_a_member_yet'.tr),
                                 TextButton(
-                                  child: const Text('Sign up'),
+                                  child: Text('sign_up'.tr),
                                   onPressed: () {
                                     Get.toNamed(Routes.REGISTER);
                                   },
@@ -116,10 +115,10 @@ class SignInView extends GetView<SignInController> {
                             return ElevatedButton(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: const <Widget>[
-                                  Icon(Icons.login),
-                                  SizedBox(width: 10),
-                                  Text("Sign In"),
+                                children: <Widget>[
+                                  const Icon(Icons.login),
+                                  const SizedBox(width: 10),
+                                  Text("sign_in".tr),
                                 ],
                               ),
                               onPressed: () {
@@ -130,7 +129,7 @@ class SignInView extends GetView<SignInController> {
                         }),
                         Container(
                           margin: const EdgeInsets.symmetric(vertical: 20),
-                          child: const Text('Or continue with'),
+                          child: Text('or_continue_with'.tr),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -148,7 +147,9 @@ class SignInView extends GetView<SignInController> {
                                 'assets/icons/google_icon.svg',
                                 height: 45,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                controller.loginWithGoogle();
+                              },
                             ),
                           ],
                         ),

@@ -26,7 +26,7 @@ class TeacherService {
     return false;
   }
 
-  void sortTeachersByFavoriteAndRating({required RxList<Teacher> teachers}) {
+  void sortTeachersByFavoriteAndRating({required List<Teacher> teachers}) {
     teachers.sort((a, b) {
       if (a.isFavorite != b.isFavorite) {
         return a.isFavorite.value ? -1 : 1;
@@ -42,6 +42,28 @@ class TeacherService {
         }
       }
     });
+  }
+
+  Future<bool> reportTeacher({
+    required String tutorId,
+    required String content,
+  }) async {
+    try {
+      dio.Response response = await APIHandlerImp.instance.post(
+        body: {"tutorId": tutorId, "content": content},
+        endpoint: BackendEnvironment.reportTeacher,
+        useToken: true,
+      );
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        debugPrint(
+            "TeacherService.reportTeacher: Failed with status code ${response.statusCode}");
+      }
+    } catch (e) {
+      debugPrint("TeacherService.reportTeacher: ${e.toString()}");
+    }
+    return false;
   }
 
   Future<List<RatingComment>?> getFeedbacksByTeacherId({
@@ -60,8 +82,8 @@ class TeacherService {
         List<dynamic> feedbacksJson = response.data['data']['rows'];
         List<RatingComment>? feedbacks =
             feedbacksJson.map<RatingComment>((feedbackJson) {
-              feedbackJson['name'] = feedbackJson['firstInfo']['name'];
-              feedbackJson['avatar'] = feedbackJson['firstInfo']['avatar'];
+          feedbackJson['name'] = feedbackJson['firstInfo']['name'];
+          feedbackJson['avatar'] = feedbackJson['firstInfo']['avatar'];
           return RatingComment.fromJson(feedbackJson);
         }).toList();
         return feedbacks;
@@ -79,21 +101,54 @@ class TeacherService {
     return null;
   }
 
-  Future<List<Teacher>?> getListTutorWithSearchAndFilterAndPagination({
+  Future<List<Teacher>> getListTutorWithSearchAndFilterAndPagination({
     int perPage = 12,
     int page = 1,
     String searchKey = '',
     List<String>? specialties,
+    String nationalityKey = 'ANY_NATIONALITY',
   }) async {
-    Map<String, dynamic> body = {
-      "search": searchKey,
-      "page": 1,
-      "perPage": 12,
-    };
-    if (specialties != null) {
-      body['filters'] = {"specialties": specialties};
-    }
     try {
+      Map<String, dynamic> body = {
+        "search": searchKey,
+        "page": '$page',
+        "perPage": '$perPage',
+        'filters': {}
+      };
+      if (specialties != null) {
+        body['filters'] = {"specialties": specialties};
+      }
+      switch (nationalityKey) {
+        case 'FOREIGN_TUTOR':
+          {
+            body['filters']['nationality'] = {
+              'isVietNamese': false,
+              'isNative': false,
+            };
+            break;
+          }
+        case 'VIETNAMESE_TUTOR':
+          {
+            body['filters']['nationality'] = {
+              'isVietNamese': true,
+            };
+            break;
+          }
+        case 'NATIVE_TUTOR':
+          {
+            body['filters']['nationality'] = {
+              'isNative': true,
+            };
+            break;
+          }
+        default:
+          {
+            break;
+          }
+      }
+
+      debugPrint("CALL API: ${body.toString()}");
+
       dio.Response response = await APIHandlerImp.instance.post(
         body: body,
         endpoint:
@@ -111,17 +166,13 @@ class TeacherService {
           return Teacher.fromJson(teacherJson);
         })).toList();
         return teachers;
-      } else if (response.statusCode == 401) {
-        // Login again!
-        return null;
       } else {
         debugPrint(
             "TeacherService.getListTutorWithPagination: Failed with status code ${response.statusCode}");
-        return null;
       }
     } catch (e) {
       debugPrint("TeacherService.getListTutorWithPagination: ${e.toString()}");
-      return null;
     }
+    return [];
   }
 }

@@ -1,55 +1,43 @@
-// import 'package:flutter/material.dart';
-//
-// import 'package:get/get.dart';
-// import '../../data/fake_data.dart';
-// import '../../data/models/schedule.dart';
-// import '../home/components/upcomming_lesson.dart';
-// import '../widgets/custom_appbar.dart';
-// import '../widgets/custom_search_bar.dart';
-// import 'components/schedule_card.dart';
-// import 'schedule_controller.dart';
-//
-// class ScheduleView extends GetView<ScheduleController> {
-//  ScheduleView({Key? key}) : super(key: key);
-//
-//   final List<Schedule> scheduleList = FakeData().getSchedules();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: const CustomAppBar(
-//         title: 'Schedule',
-//       ),
-//       body: SingleChildScrollView(
-//         scrollDirection: Axis.vertical,
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.start,
-//           children: [
-//             const SizedBox(width: double.infinity, child: UpcomingLesson()),
-//             Padding(
-//               padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-//               child: Column(
-//                 mainAxisAlignment: MainAxisAlignment.start,
-//                 children: [
-//                   CustomSearchBar(
-//                       onChanged: (value) {
-//                         print(value);
-//                       },
-//                       searchHint: 'Enter tutor\'s name'),
-//                   const SizedBox(
-//                     height: 20,
-//                   ),
-//                   Column(
-//                     mainAxisAlignment: MainAxisAlignment.start,
-//                     children: List.generate(scheduleList.length,
-//                             (index) => ScheduleCard(schedule: scheduleList[index])),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:lettutor_advanced_mobile/app/modules/widgets/upcomming/upcoming_view.dart';
+
+import '../../data/models/schedule/schedule.dart';
+import '../widgets/custom_appbar.dart';
+import 'components/schedule_card.dart';
+import 'schedule_controller.dart';
+
+class ScheduleView extends GetView<ScheduleController> {
+  ScheduleView({Key? key}) : super(key: key);
+  final scheduleController = Get.put<ScheduleController>(ScheduleController());
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar:  CustomAppBar(
+        title: 'schedule'.tr,
+      ),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverToBoxAdapter(
+            child: SizedBox(width: double.infinity, child: UpcomingView()),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+            sliver: PagedSliverList<int, Schedule>(
+              pagingController: controller.pagingController,
+              builderDelegate: PagedChildBuilderDelegate<Schedule>(
+                itemBuilder: (context, schedule, index) => ScheduleCard(
+                  schedule: schedule,
+                  onCancelBookingClicked: controller.showCancelDialog,
+                  onJoinMeeting: controller.jitsiController.joinMeeting,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

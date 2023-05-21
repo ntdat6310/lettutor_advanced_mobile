@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:lettutor_advanced_mobile/app/core/constants/backend_environment.dart';
 import 'package:lettutor_advanced_mobile/app/modules/sign_in/sign_in_view.dart';
+import 'package:lettutor_advanced_mobile/app/routes/app_pages.dart';
 
 import '../../core/constants/constants.dart';
 import '../../core/utils/secure_storage.dart';
@@ -30,6 +31,13 @@ abstract class APIHandlerInterface {
   });
 
   Future<Response> put({
+    var body,
+    required String endpoint,
+    Map<String, dynamic>? query,
+    useToken = false,
+  });
+
+  Future<Response> delete({
     var body,
     required String endpoint,
     Map<String, dynamic>? query,
@@ -103,6 +111,7 @@ class APIHandlerImp implements APIHandlerInterface {
     if (useToken) {
       String? token =
           useRefreshToken ? await getRefreshToken() : await getAccessToken();
+      debugPrint("TOKEN: $token");
       if (token != "") {
         baseHeader["Authorization"] = "Bearer $token";
       }
@@ -124,7 +133,6 @@ class APIHandlerImp implements APIHandlerInterface {
     useToken = false,
   }) async {
     String url = buildUrlWithQuery(endpoint, query).toString();
-
     Response response = await client.get(
       url,
       data: body != null ? jsonEncode(body) : null,
@@ -221,6 +229,40 @@ class APIHandlerImp implements APIHandlerInterface {
     return response;
   }
 
+  @override
+  Future<Response> delete({
+    body,
+    required String endpoint,
+    Map<String, dynamic>? query,
+    useToken = false,
+  }) async {
+    Response response = await client.delete(
+      host + endpoint,
+      data: json.encode(body),
+      queryParameters: query,
+      options: Options(headers: await _buildHeader(useToken: useToken)),
+    );
+    if (response.statusCode == 401) {
+      if (useToken) {
+        bool refreshTokenResult = await refreshToken();
+        if (refreshTokenResult) {
+          Response response = await client.post(
+            host + endpoint,
+            data: json.encode(body),
+            queryParameters: query,
+            options: Options(headers: await _buildHeader(useToken: useToken)),
+          );
+          return response;
+        } else {
+          // Login again!
+          // Nếu ở ngoài mà check có 401 nghĩa là refreshToken failed rồi => Cần login lại...
+          return response;
+        }
+      }
+    }
+    return response;
+  }
+
   // Chưa check với API
   Future<bool> refreshToken() async {
     final refreshToken = await getRefreshToken();
@@ -236,7 +278,7 @@ class APIHandlerImp implements APIHandlerInterface {
         return true;
       } else {
         //  refreshToken expires => Bắt user login lại.
-        _reSignIn();
+        reSignIn();
         return false;
       }
     } catch (e) {
@@ -245,8 +287,42 @@ class APIHandlerImp implements APIHandlerInterface {
     }
   }
 
-  void _reSignIn() {
-    Get.offAll(SignInView());
+  Future<Response> postFormData({
+    required String endpoint,
+    bool useToken = false,
+    Map<String, dynamic>? query,
+    required FormData formData,
+  }) async {
+    Response response = await client.post(
+      host + endpoint,
+      data: formData,
+      queryParameters: query,
+      options: Options(headers: await _buildHeader(useToken: useToken)),
+    );
+    if (response.statusCode == 401) {
+      if (useToken) {
+        bool refreshTokenResult = await refreshToken();
+        if (refreshTokenResult) {
+          Response response = await client.post(
+            host + endpoint,
+            data: formData,
+            queryParameters: query,
+            options: Options(headers: await _buildHeader(useToken: useToken)),
+          );
+          return response;
+        } else {
+          // Login again!
+          // Nếu ở ngoài mà check có 401 nghĩa là refreshToken failed rồi => Cần login lại...
+          return response;
+        }
+      }
+    }
+    return response;
+  }
+
+  void reSignIn() {
+    deleteToken();
+    Get.offAllNamed(Routes.SIGN_IN);
   }
 
   @override

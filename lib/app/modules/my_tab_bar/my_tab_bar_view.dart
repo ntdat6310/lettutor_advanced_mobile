@@ -5,6 +5,7 @@ import 'package:lettutor_advanced_mobile/app/modules/setting/setting_view.dart';
 
 import '../course/course_view.dart';
 import '../home/home_view.dart';
+import '../schedule/schedule_view.dart';
 import '../teachers/teachers_view.dart';
 import 'my_tab_bar_controller.dart';
 
@@ -13,8 +14,7 @@ class MyTabBarView extends GetView<MyTabBarController> {
 
   final List<Widget> _pages = [
     HomeView(),
-    // ScheduleHistoryView(),
-    // ScheduleView(),
+    ScheduleView(),
     TeachersView(),
     CourseView(),
     ChatWithAiView(),
@@ -32,30 +32,30 @@ class MyTabBarView extends GetView<MyTabBarController> {
             onTap: (index) {
               controller.onItemTapped(index);
             },
-            items: const <BottomNavigationBarItem>[
+            items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
-              // BottomNavigationBarItem(
-              //   icon: Icon(Icons.calendar_today),
-              //   label: 'Upcoming',
-              // ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'Teacher',
+                icon: const Icon(Icons.home),
+                label: 'home'.tr,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.book),
-                label: 'Course',
+                icon: const Icon(Icons.calendar_today),
+                label: 'upcoming'.tr,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.chat_outlined),
-                label: 'Chat',
+                icon: const Icon(Icons.person),
+                label: 'teacher'.tr,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: 'Setting',
+                icon: const Icon(Icons.book),
+                label: 'course'.tr,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.chat_outlined),
+                label: 'chat'.tr,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.settings),
+                label: 'setting'.tr,
               ),
             ],
           ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../data/models/teacher/teacher.dart';
+
 import '../widgets/custom_appbar.dart';
 import '../widgets/rating_star.dart';
 import 'components/booking_button.dart';
@@ -9,7 +9,7 @@ import 'components/message_favorite_report.dart';
 import 'components/review_list.dart';
 import 'components/teacher_desc.dart';
 import 'components/teaching_experience.dart';
-import 'components/video_intro.dart';
+import 'components/video_intro_view.dart';
 import 'teacher_detail_controller.dart';
 
 class TeacherDetailView extends GetView<TeacherDetailController> {
@@ -30,7 +30,11 @@ class TeacherDetailView extends GetView<TeacherDetailController> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const VideoIntro(),
+                    VideoIntro(
+                      videoUrl: controller.teacher.video ??
+                          'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+                    ),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -77,38 +81,37 @@ class TeacherDetailView extends GetView<TeacherDetailController> {
                       margin: const EdgeInsets.symmetric(vertical: 20),
                       child: MessageFavoriteReport(
                         teacher: controller.teacher,
+                        onReportTap: controller.showReportDialog,
                       ),
                     ),
-                    BookingButton(),
+                    BookingButton(teacher: controller.teacher),
                     const SizedBox(height: 20),
                     TeacherDescription(
                       description: controller.teacher.bio ?? '',
                     ),
                     ChipInfo(
-                      title: "Languages",
+                      title: "languages".tr,
                       chipList: controller.languageNames,
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     ChipInfo(
-                      title: "Specialties",
+                      title: "specialties".tr,
                       chipList: controller.specialtyValues,
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     SectionWithTitleAndContent(
-                        content:
-                        controller.teacher.interests ?? 'No',
-                        title: 'Interests'),
+                        content: controller.teacher.interests ?? 'no'.tr,
+                        title: 'interests'.tr),
                     const SizedBox(
                       height: 20,
                     ),
                     SectionWithTitleAndContent(
-                        title: 'Teaching Experience',
-                        content: controller.teacher.experience ??
-                            'No experience'),
+                        title: 'teaching_experience'.tr,
+                        content: controller.teacher.experience ?? 'no'.tr),
                     const SizedBox(
                       height: 20,
                     ),

@@ -19,6 +19,7 @@ class Profile {
   bool? isPhoneActivated;
   String? level;
   List<TestPreparation>? testPreparations;
+  @JsonKey(name: 'tutorInfo')
   BecomeTutor? becomeTutor;
 
   Profile({

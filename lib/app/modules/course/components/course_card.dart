@@ -10,7 +10,6 @@ class CourseCard extends StatelessWidget {
   final Course course;
 
   void _onCourseCardTap() {
-    debugPrint("CourseCard tap");
     Get.toNamed(Routes.COURSE_DETAIL,
         arguments: CourseDetailView(course: course));
   }
@@ -55,9 +54,8 @@ class CourseCard extends StatelessWidget {
                     const SizedBox(height: 8),
                     Text(course.description ?? ''),
                     const SizedBox(height: 8),
-                    // const Text("Beginner - 5 lessons"),
                     Text(
-                        "${course.level} - ${course.topics != null ? course.topics!.length : '0'} lessons"),
+                        "${course.level} - ${course.topics != null ? course.topics!.length : '0'} ${"lessons".tr}"),
                   ],
                 ),
               ),

@@ -1,21 +1,29 @@
 import 'package:get/get.dart';
+import 'package:lettutor_advanced_mobile/app/modules/booking_schedule/booking_schedule_binding.dart';
+import 'package:lettutor_advanced_mobile/app/modules/booking_schedule/booking_schedule_view.dart';
+import 'package:lettutor_advanced_mobile/app/modules/course_lesson/course_lesson_view.dart';
 
+import '../data/models/course/course.dart';
+import '../modules/become_tutor/become_tutor_binding.dart';
+import '../modules/become_tutor/become_tutor_view.dart';
 import '../modules/chat_with_ai/chat_with_ai_binding.dart';
 import '../modules/chat_with_ai/chat_with_ai_view.dart';
 import '../modules/course/course_view.dart';
 import '../modules/course_detail/course_detail_binding.dart';
 import '../modules/course_detail/course_detail_view.dart';
+import '../modules/course_lesson/course_lesson_binding.dart';
 import '../modules/forgot_password/forgot_password_binding.dart';
 import '../modules/forgot_password/forgot_password_view.dart';
 import '../modules/home/home_view.dart';
-import '../modules/meeting_video_conference/meeting_video_conference_binding.dart';
-import '../modules/meeting_video_conference/meeting_video_conference_view.dart';
 import '../modules/my_tab_bar/my_tab_bar_binding.dart';
 import '../modules/my_tab_bar/my_tab_bar_view.dart';
 import '../modules/profile_setting/profile_setting_binding.dart';
 import '../modules/profile_setting/profile_setting_view.dart';
 import '../modules/register/register_binding.dart';
 import '../modules/register/register_view.dart';
+import '../modules/schedule/schedule_view.dart';
+import '../modules/schedule_history/schedule_history_binding.dart';
+import '../modules/schedule_history/schedule_history_view.dart';
 import '../modules/setting/setting_binding.dart';
 import '../modules/setting/setting_view.dart';
 import '../modules/sign_in/sign_in_binding.dart';
@@ -23,8 +31,6 @@ import '../modules/sign_in/sign_in_view.dart';
 import '../modules/teacher_detail/teacher_detail_binding.dart';
 import '../modules/teacher_detail/teacher_detail_view.dart';
 import '../modules/teachers/teachers_view.dart';
-import '../modules/test_api/test_api_binding.dart';
-import '../modules/test_api/test_api_view.dart';
 
 part 'app_routes.dart';
 
@@ -54,11 +60,17 @@ class AppPages {
       },
       binding: CourseDetailBinding(),
     ),
-    // GetPage(
-    //   name: _Paths.COURSE_LESSON,
-    //   page: () => CourseLessonView(),
-    //   binding: CourseLessonBinding(),
-    // ),
+    GetPage(
+      name: _Paths.COURSE_LESSON,
+      page: () {
+        Map<String, dynamic> arguments = Get.arguments;
+        Course course = arguments['course'];
+        int selectedTopicIndex = arguments['selectedTopicIndex'];
+        return CourseLessonView(
+            course: course, selectedTopicIndex: selectedTopicIndex);
+      },
+      binding: CourseLessonBinding(),
+    ),
     GetPage(
       name: _Paths.TEACHER_DETAIL,
       page: () => const TeacherDetailView(),
@@ -69,24 +81,18 @@ class AppPages {
       page: () => SignInView(),
       binding: SignInBinding(),
     ),
-    // GetPage(
-    //   name: _Paths.SCHEDULE_HISTORY,
-    //   page: () => ScheduleHistoryView(),
-    //   binding: ScheduleHistoryBinding(),
-    // ),
-    // GetPage(
-    //   name: _Paths.SCHEDULE,
-    //   page: () => ScheduleView(),
-    //   binding: ScheduleBinding(),
-    // ),
     GetPage(
-      name: _Paths.MEETING_VIDEO_CONFERENCE,
-      page: () => const MeetingVideoConferenceView(),
-      binding: MeetingVideoConferenceBinding(),
+      name: _Paths.SCHEDULE_HISTORY,
+      page: () => ScheduleHistoryView(),
+      binding: ScheduleHistoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.SCHEDULE,
+      page: () => ScheduleView(),
     ),
     GetPage(
       name: _Paths.REGISTER,
-      page: () => RegisterView(),
+      page: () => const RegisterView(),
       binding: RegisterBinding(),
     ),
     GetPage(
@@ -95,29 +101,34 @@ class AppPages {
       binding: MyTabBarBinding(),
     ),
     GetPage(
-      name: _Paths.TEST_API,
-      page: () => TestApiView(),
-      binding: TestApiBinding(),
-    ),
-    GetPage(
       name: _Paths.FORGOT_PASSWORD,
-      page: () => ForgotPasswordView(),
+      page: () => const ForgotPasswordView(),
       binding: ForgotPasswordBinding(),
     ),
     GetPage(
       name: _Paths.SETTING,
-      page: () => const SettingView(),
+      page: () => SettingView(),
       binding: SettingBinding(),
     ),
     GetPage(
       name: _Paths.PROFILE_SETTING,
-      page: () => ProfileSettingView(),
+      page: () => const ProfileSettingView(),
       binding: ProfileSettingBinding(),
     ),
     GetPage(
       name: _Paths.CHAT_WITH_AI,
       page: () => ChatWithAiView(),
       binding: ChatWithAiBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOOKING_SCHEDULE,
+      page: () => const BookingScheduleView(),
+      binding: BookingScheduleBinding(),
+    ),
+    GetPage(
+      name: _Paths.BECOME_TUTOR,
+      page: () => const BecomeTutorView(),
+      binding: BecomeTutorBinding(),
     ),
   ];
 }

@@ -1,6 +1,6 @@
 ## 🛫 English LetTutor App
 
-This project is a mobile application developed in Flutter for the Advanced Mobile course at HCMUS.
+This project is a mobile application developed by Flutter for the Advanced Mobile course at HCMUS.
 
 **Teacher** : Phạm Hoàng Hải, Trương Phước Lộc, Bùi Tấn Lộc
 
@@ -35,3 +35,12 @@ This project is a mobile application developed in Flutter for the Advanced Mobil
 ### Video Demo :
 
 *   Link video demo : [https://youtu.be/cIkJJl1_PZw](https://youtu.be/cIkJJl1_PZw)
+
+---
+
+## 🛫 Milestone 3 : Advanced online app
+
+### Video Demo :
+
+*   Link video demo : [https://youtu.be/CWE01amf2RI](https://youtu.be/CWE01amf2RI)
+*   Em có đánh timestamp ở phần description và comment của video thầy bấm vô xem cho dễ nha thầy 😁

@@ -13,6 +13,9 @@ class CustomTextField extends StatelessWidget {
     this.required = false,
     this.minLines = 1,
     this.maxLines = 20,
+    this.topSpacing = 24,
+    this.bottomSpacing = 0,
+    this.fontSize = 18,
   }) : super(key: key);
   final String title;
   final bool disable;
@@ -22,6 +25,9 @@ class CustomTextField extends StatelessWidget {
   final bool required;
   final int minLines;
   final int maxLines;
+  final double topSpacing;
+  final double bottomSpacing;
+  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -29,34 +35,36 @@ class CustomTextField extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 24),
-        RichText(
-          text: TextSpan(
-            children: <TextSpan>[
-              TextSpan(
-                text: required ? '* ' : '',
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.red,
-                  fontSize: 18,
+        SizedBox(height: topSpacing),
+        title.isNotEmpty
+            ? RichText(
+                text: TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: required ? '* ' : '',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red,
+                        fontSize: 18,
+                      ),
+                    ),
+                    TextSpan(
+                      text: title,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              TextSpan(
-                text: title,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                  fontSize: 18,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 8),
+              )
+            : const SizedBox.shrink(),
+        title.isNotEmpty ? const SizedBox(height: 8) : const SizedBox.shrink(),
         TextField(
           controller: textEditingController,
           style: TextStyle(
-            fontSize: 18,
+            fontSize: fontSize,
             color: disable ? Colors.grey : Colors.black,
           ),
           minLines: minLines,
@@ -79,6 +87,7 @@ class CustomTextField extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(height: bottomSpacing),
       ],
     );
   }
