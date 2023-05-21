@@ -23,6 +23,18 @@ class Constants {
     "toeic": "Toeic",
   };
 
+  static Map<String, String> courseLevelMap = {
+    '0': 'Any Level',
+    '1': 'Beginner',
+    '2': 'Upper-Beginner',
+    '3': 'Pre-Intermediate',
+    '4': 'Intermediate',
+    '5': 'Upper-Intermediate',
+    '6': 'Pre-advanced',
+    '7': 'Advanced',
+    '8': 'Very advanced',
+  };
+
   static Map<String, String> countriesMap = {
     'AF': 'Afghanistan',
     'AL': 'Albania',

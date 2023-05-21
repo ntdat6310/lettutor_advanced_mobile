@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:lettutor_advanced_mobile/app/core/constants/constants.dart';
 import 'package:lettutor_advanced_mobile/app/data/models/course/course.dart';
 import 'package:lettutor_advanced_mobile/app/modules/widgets/no_data_found.dart';
 
@@ -55,40 +56,21 @@ class CourseView extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    CustomDropdown(
-                      dropdownItems: [
-                        "Select Level",
-                        'Beginner',
-                        'Upper-Beginner',
-                        'Pre-Intermediate',
-                        'Intermediate',
-                        'Upper-Intermediate',
-                        'Pre-advanced',
-                        'Advanced',
-                        'Very advanced',
-                      ],
-                      dropdownValue: "Select Level",
+                  children: [
+                    Obx(
+                      () => CustomDropdown(
+                        dropdownItems: Constants.courseLevelMap,
+                        selectedKey: _courseController.selectedLevelKey.value,
+                        onSelectedChange: _courseController.updateFilterLevel,
+                      ),
                     ),
-                    CustomDropdown(
-                      dropdownItems: [
-                        'Select Category',
-                        'For Studying Abroad',
-                        'English For Traveling',
-                        'Conversational English',
-                        'English For Beginners',
-                        'Business English',
-                        'STARTERS',
-                        'English For Kid',
-                        'PET',
-                        'KET',
-                        'MOVERS',
-                        'FLYERS',
-                        'TOEFL',
-                        'TOEIC',
-                        'IELTS',
-                      ],
-                      dropdownValue: "Select Category",
+                    Obx(
+                      () => CustomDropdown(
+                        dropdownItems: _courseController.categoryMap,
+                        selectedKey: _courseController.selectedCategoryId.value,
+                        onSelectedChange:
+                            _courseController.updateFilterCategory,
+                      ),
                     ),
                   ],
                 ),

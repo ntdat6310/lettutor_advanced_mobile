@@ -23,6 +23,7 @@ class BackendEnvironment {
   static String getSchedulesToBookByTutorId = '/schedule';
   static String bookASchedule = '/booking';
   static String getTotalTime = '/call/total';
+  static String getCourseCategory = '/content-category';
 
   static Map<String, String> specialties = {
     'all': 'All',

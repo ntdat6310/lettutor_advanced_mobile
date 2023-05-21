@@ -9,12 +9,20 @@ class CourseService {
     int page = 1,
     int size = 100,
     String searchKey = '',
+    String levelKey = '0',
+    String? categoryId,
   }) async {
     Map<String, dynamic> query = {
       'page': '$page',
       'size': '$size',
       'q': searchKey,
     };
+    if (levelKey != '0') {
+      query['level[]'] = levelKey;
+    }
+    if (categoryId != null && categoryId != '') {
+      query['categoryId[]'] = categoryId;
+    }
     try {
       debugPrint("QUERY $query");
       dio.Response response = await APIHandlerImp.instance.get(
@@ -37,5 +45,30 @@ class CourseService {
           "CourseService.getListCourseWithSearchAndFilterAndPagination: ${e.toString()}");
     }
     return [];
+  }
+
+  Future<Map<String, String>> getCourseCategory() async {
+    Map<String, String> result = {
+      '': 'Any Category',
+    };
+
+    try {
+      dio.Response response = await APIHandlerImp.instance.get(
+        endpoint: BackendEnvironment.getCourseCategory,
+        useToken: true,
+      );
+      if (response.statusCode == 200) {
+        final List<dynamic> jsons = response.data['rows'];
+        for (var json in jsons) {
+          result[json['id']] = json['title'];
+        }
+      } else {
+        debugPrint(
+            "CourseService.getCourseCategory: Failed with status code ${response.statusCode}");
+      }
+    } catch (e) {
+      debugPrint("CourseService.getCourseCategory: ${e.toString()}");
+    }
+    return result;
   }
 }

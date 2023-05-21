@@ -12,15 +12,33 @@ class CourseController extends GetxController {
 
   final CourseService _courseService = Get.put(CourseService());
   String searchKey = '';
+  RxString selectedLevelKey = '0'.obs;
+  Rx<String?> selectedCategoryId = ''.obs;
+  Map<String, String> categoryMap = {};
 
   void updateSearchKey({String searchKey = ''}) {
     this.searchKey = searchKey;
     _pagingController.refresh();
   }
 
+  void updateFilterLevel({String? newValue}) {
+    if (newValue != null) {
+      selectedLevelKey.value = newValue;
+    }
+    _pagingController.refresh();
+  }
+
+  void updateFilterCategory({String? newValue}) {
+    if (newValue != null) {
+      selectedCategoryId.value = newValue;
+    }
+    _pagingController.refresh();
+  }
+
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    categoryMap = await _courseService.getCourseCategory();
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });
@@ -30,9 +48,11 @@ class CourseController extends GetxController {
     try {
       List<Course> newItems =
           await _courseService.getListCourseWithSearchAndFilterAndPagination(
-        searchKey: searchKey,
         page: pageKey,
         size: _pageSize,
+        searchKey: searchKey,
+        levelKey: selectedLevelKey.value,
+        categoryId: selectedCategoryId.value,
       );
 
       final isLastPage = newItems.length < _pageSize;
