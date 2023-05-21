@@ -21,9 +21,9 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       testPreparations: (json['testPreparations'] as List<dynamic>?)
           ?.map((e) => TestPreparation.fromJson(e as Map<String, dynamic>))
           .toList(),
-      becomeTutor: json['becomeTutor'] == null
+      becomeTutor: json['tutorInfo'] == null
           ? null
-          : BecomeTutor.fromJson(json['becomeTutor'] as Map<String, dynamic>),
+          : BecomeTutor.fromJson(json['tutorInfo'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
@@ -39,5 +39,5 @@ Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'isPhoneActivated': instance.isPhoneActivated,
       'level': instance.level,
       'testPreparations': instance.testPreparations,
-      'becomeTutor': instance.becomeTutor,
+      'tutorInfo': instance.becomeTutor,
     };

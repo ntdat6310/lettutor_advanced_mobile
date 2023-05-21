@@ -131,4 +131,13 @@ const Map<String, String> vi = {
   'report_success': "Báo cáo thành công",
   'report_failed': "Thất bại",
   'required': "Bắt buộc",
+  'become_tutor': "Đăng ký làm giáo viên",
+  'experience': "Kinh nghiệm",
+  'education': "Học vấn",
+  'bio': "Tiểu sử",
+  'become_tutor_successfully': "Đăng ký giáo viên thành công",
+  'become_tutor_failed': "Đăng ký giáo viên thất bại",
+  'you_have_done_all_the_steps': "Bạn đã hoàn thành đăng ký",
+  'please_wait_for_the_operator_approval': "Vui lòng đợi phê duyệt",
+  'back': "Quay về",
 };

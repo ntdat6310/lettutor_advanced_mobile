@@ -129,4 +129,24 @@ class ProfileService {
     }
     return TotalTime(minutes: 0);
   }
+
+  Future<bool> becomeTutor({required Map<String, dynamic> body}) async {
+    try {
+      dio.FormData formData = dio.FormData.fromMap(body);
+      dio.Response response = await APIHandlerImp.instance.postFormData(
+        endpoint: BackendEnvironment.becomeTutor,
+        formData: formData,
+        useToken: true,
+      );
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        debugPrint(
+            "ProfileService.becomeTutor failed with statusCode: ${response.statusCode}");
+      }
+    } catch (e) {
+      debugPrint("ProfileService.becomeTutor: ${e.toString()}");
+    }
+    return false;
+  }
 }

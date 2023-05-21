@@ -42,7 +42,9 @@ class SettingView extends GetView<SettingController> {
                 SettingItem(
                   icon: Icons.verified_user_outlined,
                   title: "become_a_tutor".tr,
-                  onClick: () {},
+                  onClick: () {
+                    Get.toNamed(Routes.BECOME_TUTOR);
+                  },
                   bottomSpace: 12,
                 ),
                 SettingItem(

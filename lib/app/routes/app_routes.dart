@@ -21,6 +21,7 @@ abstract class Routes {
   static const PROFILE_SETTING = _Paths.PROFILE_SETTING;
   static const CHAT_WITH_AI = _Paths.CHAT_WITH_AI;
   static const BOOKING_SCHEDULE = _Paths.BOOKING_SCHEDULE;
+  static const BECOME_TUTOR = _Paths.BECOME_TUTOR;
 }
 
 abstract class _Paths {
@@ -43,4 +44,5 @@ abstract class _Paths {
   static const PROFILE_SETTING = '/profile-setting';
   static const CHAT_WITH_AI = '/chat-with-ai';
   static const BOOKING_SCHEDULE = '/booking-schedule';
+  static const BECOME_TUTOR = '/become-tutor';
 }

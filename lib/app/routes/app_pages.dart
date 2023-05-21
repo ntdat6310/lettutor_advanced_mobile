@@ -4,6 +4,8 @@ import 'package:lettutor_advanced_mobile/app/modules/booking_schedule/booking_sc
 import 'package:lettutor_advanced_mobile/app/modules/course_lesson/course_lesson_view.dart';
 
 import '../data/models/course/course.dart';
+import '../modules/become_tutor/become_tutor_binding.dart';
+import '../modules/become_tutor/become_tutor_view.dart';
 import '../modules/chat_with_ai/chat_with_ai_binding.dart';
 import '../modules/chat_with_ai/chat_with_ai_view.dart';
 import '../modules/course/course_view.dart';
@@ -122,6 +124,11 @@ class AppPages {
       name: _Paths.BOOKING_SCHEDULE,
       page: () => const BookingScheduleView(),
       binding: BookingScheduleBinding(),
+    ),
+    GetPage(
+      name: _Paths.BECOME_TUTOR,
+      page: () => const BecomeTutorView(),
+      binding: BecomeTutorBinding(),
     ),
   ];
 }

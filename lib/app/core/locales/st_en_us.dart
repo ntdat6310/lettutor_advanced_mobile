@@ -92,11 +92,13 @@ const Map<String, String> en = {
   'see_all_tutors': "See all tutors",
   'email_does_not_exist': "Email doesn't exist",
   'reset_password_success': "Reset password success",
-  'please_check_email_for_resetting_password': "Please check email for resetting password",
+  'please_check_email_for_resetting_password':
+      "Please check email for resetting password",
   'course_lesson': "Course Lesson",
   'course_detail': "Course Detail",
   'list_topics': "List Topics",
-  'an_error_has_occurred_please_try_again': "An error has occurred, please try again.",
+  'an_error_has_occurred_please_try_again':
+      "An error has occurred, please try again.",
   'type_your_question': "Type your question",
   'book': "Book",
   'booked': "Booked",
@@ -106,7 +108,8 @@ const Map<String, String> en = {
   'booking_time': "Booking Time",
   'balance': "Balance",
   'price': "Price",
-  'book_a_class_failed_please_check_out_your_code': "Book a class failed, please check out your code!",
+  'book_a_class_failed_please_check_out_your_code':
+      "Book a class failed, please check out your code!",
   'something_went_wrong': "Something went wrong!",
   'book_a_class_successfully': "Book a class successfully",
   'congratulation': "Congratulation",
@@ -127,4 +130,11 @@ const Map<String, String> en = {
   'report_success': "Report successfully",
   'report_failed': "Report failed",
   'required': "Required",
+  'become_tutor': "Become Tutor",
+  'experience': "Experience",
+  'education': "Education",
+  'bio': "Bio",
+  'you_have_done_all_the_steps': "You have done all the steps",
+  'please_wait_for_the_operator_approval': "Please, wait for the operator's approval",
+  'back': "Back",
 };
