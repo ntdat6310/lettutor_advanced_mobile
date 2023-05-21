@@ -4,6 +4,7 @@ import 'package:lettutor_advanced_mobile/app/data/models/teacher/teacher.dart';
 import 'package:lettutor_advanced_mobile/app/data/services/teacher_service.dart';
 
 import '../controllers/specialties_controller.dart';
+import '../controllers/teachers_and_home_controller.dart';
 
 class TeachersController extends GetxController {
   static const _pageSize = 12;
@@ -31,6 +32,11 @@ class TeachersController extends GetxController {
 
   void toggleFavorite({required Teacher teacher}) async {
     await teacherService.toggleFavoriteTutor(tutorId: teacher.userId!);
+    TeachersAndHomeController teachersAndHomeController = Get.find();
+    teachersAndHomeController.refreshAll();
+  }
+
+  void refreshTeachers(){
     _pagingController.refresh();
   }
 

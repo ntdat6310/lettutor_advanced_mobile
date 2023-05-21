@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:lettutor_advanced_mobile/app/data/services/teacher_service.dart';
 import 'package:lettutor_advanced_mobile/app/modules/controllers/specialties_controller.dart';
 import 'package:lettutor_advanced_mobile/app/modules/controllers/teacher_controller.dart';
+import 'package:lettutor_advanced_mobile/app/modules/controllers/teachers_and_home_controller.dart';
 
 import '../../data/models/teacher/teacher.dart';
 
@@ -17,9 +18,16 @@ class HomeController extends GetxController {
     tag: "HOME",
   );
 
-  void toggleFavorite({required Teacher teacher}) {
-    teacherService.toggleFavoriteTutor(tutorId: teacher.userId!);
-    teacher.isFavorite.value = !teacher.isFavorite.value;
+  void toggleFavorite({required Teacher teacher}) async {
+    await teacherService.toggleFavoriteTutor(tutorId: teacher.userId!);
+    // teacher.isFavorite.value = !teacher.isFavorite.value;
+    // teacherController.filterFavoriteTeachers();
+    TeachersAndHomeController teachersAndHomeController = Get.find();
+    teachersAndHomeController.refreshAll();
+  }
+
+  void refreshTeachers() async {
+    await teacherController.searchTeachers();
     teacherController.filterFavoriteTeachers();
   }
 

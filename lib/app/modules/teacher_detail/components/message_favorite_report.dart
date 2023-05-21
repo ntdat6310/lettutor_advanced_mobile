@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lettutor_advanced_mobile/app/modules/controllers/message_favorite_report_controller.dart';
+import 'package:lettutor_advanced_mobile/app/data/services/teacher_service.dart';
+import 'package:lettutor_advanced_mobile/app/modules/controllers/teachers_and_home_controller.dart';
 
 import '../../../data/models/teacher/teacher.dart';
 
 class MessageFavoriteReport extends StatelessWidget {
   MessageFavoriteReport({Key? key, required this.teacher}) : super(key: key);
   final Teacher teacher;
-  late final MessageFavoriteReportController controller =
-      Get.put(MessageFavoriteReportController());
+  final TeacherService _teacherService = Get.find();
 
   void _onMessageButtonPressed() {}
 
-  void _onFavoriteButtonPressed() {
-    controller.toggleFavorite(teacherId: teacher.userId ?? '');
+  void _onFavoriteButtonPressed() async {
+    await _teacherService.toggleFavoriteTutor(tutorId: teacher.userId!);
+    teacher.isFavorite.value = !teacher.isFavorite.value;
+    final TeachersAndHomeController teachersAndHomeController = Get.find();
+    teachersAndHomeController.refreshAll();
   }
 
   void _onReportButtonPressed() {}
