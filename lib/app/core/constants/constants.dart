@@ -35,6 +35,13 @@ class Constants {
     '8': 'Very advanced',
   };
 
+  static final Map<String, String> nationalityMap = {
+    'ANY_NATIONALITY': 'Any Nationality',
+    'FOREIGN_TUTOR': 'Foreign Tutor',
+    'VIETNAMESE_TUTOR': 'Vietnamese Tutor',
+    'NATIVE_TUTOR': 'Native Tutor',
+  };
+
   static Map<String, String> countriesMap = {
     'AF': 'Afghanistan',
     'AL': 'Albania',

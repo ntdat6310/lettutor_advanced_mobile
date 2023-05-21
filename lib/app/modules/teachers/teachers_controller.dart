@@ -19,10 +19,18 @@ class TeachersController extends GetxController {
     tag: "TEACHERS",
   );
   String searchKey = '';
+  RxString nationalityKey = 'ANY_NATIONALITY'.obs;
 
   void updateSearch({required String newValue}) {
     searchKey = newValue;
     _pagingController.refresh();
+  }
+
+  void updateNationality({String? newValue}) {
+    if (newValue != null) {
+      nationalityKey.value = newValue;
+      _pagingController.refresh();
+    }
   }
 
   void updateSpecialty({required String key}) async {
@@ -36,7 +44,7 @@ class TeachersController extends GetxController {
     teachersAndHomeController.refreshAll();
   }
 
-  void refreshTeachers(){
+  void refreshTeachers() {
     _pagingController.refresh();
   }
 
@@ -57,6 +65,7 @@ class TeachersController extends GetxController {
         perPage: _pageSize,
         searchKey: searchKey,
         specialties: specialties.isEmpty ? null : specialties,
+        nationalityKey: nationalityKey.value,
       );
       teacherService.sortTeachersByFavoriteAndRating(teachers: newItems);
       final isLastPage = newItems.length < _pageSize;

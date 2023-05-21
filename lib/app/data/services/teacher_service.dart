@@ -84,16 +84,49 @@ class TeacherService {
     int page = 1,
     String searchKey = '',
     List<String>? specialties,
+    String nationalityKey = 'ANY_NATIONALITY',
   }) async {
-    Map<String, dynamic> body = {
-      "search": searchKey,
-      "page": '$page',
-      "perPage": '$perPage',
-    };
-    if (specialties != null) {
-      body['filters'] = {"specialties": specialties};
-    }
     try {
+      Map<String, dynamic> body = {
+        "search": searchKey,
+        "page": '$page',
+        "perPage": '$perPage',
+        'filters':{}
+      };
+      if (specialties != null) {
+        body['filters'] = {"specialties": specialties};
+      }
+      switch (nationalityKey) {
+        case 'FOREIGN_TUTOR':
+          {
+            body['filters']['nationality'] = {
+              'isVietNamese': false,
+              'isNative': false,
+            };
+            break;
+          }
+        case 'VIETNAMESE_TUTOR':
+          {
+            body['filters']['nationality'] = {
+              'isVietNamese': true,
+            };
+            break;
+          }
+        case 'NATIVE_TUTOR':
+          {
+            body['filters']['nationality'] = {
+              'isNative': true,
+            };
+            break;
+          }
+        default:
+          {
+            break;
+          }
+      }
+
+      debugPrint("CALL API: ${body.toString()}");
+
       dio.Response response = await APIHandlerImp.instance.post(
         body: body,
         endpoint:

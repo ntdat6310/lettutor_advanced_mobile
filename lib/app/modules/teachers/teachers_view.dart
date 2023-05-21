@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:lettutor_advanced_mobile/app/data/models/teacher/teacher.dart';
-import 'package:lettutor_advanced_mobile/app/modules/controllers/teacher_toggle_favorite_controller.dart';
+import 'package:lettutor_advanced_mobile/app/modules/course/components/custom_dropdown.dart';
 
-import '../home/components/find_tutor.dart';
+import '../../core/constants/constants.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_divider.dart';
 import '../widgets/custom_search_bar.dart';
@@ -40,10 +40,27 @@ class TeachersView extends GetView<TeachersController> {
                 ),
               ),
             ),
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.only(bottom: 10),
-                child: FindATutor(),
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      'find_a_tutor'.tr,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Obx(() => CustomDropdown(
+                          dropdownItems: Constants.nationalityMap,
+                          onSelectedChange:
+                              _teachersController.updateNationality,
+                          selectedKey: _teachersController.nationalityKey.value,
+                        )),
+                  ],
+                ),
               ),
             ),
             SliverToBoxAdapter(
